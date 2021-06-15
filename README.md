@@ -1,2 +1,3 @@
 # Uni-Weapon-System
-Generic FPS Weapon  for Unity
+Generic FPS/TPS Weapon  for Unity
+
