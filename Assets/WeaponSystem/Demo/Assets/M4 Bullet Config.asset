@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dca04eb58a48457e998606a29a387421, type: 3}
   m_Name: M4 Bullet Config
   m_EditorClassIdentifier: 
-  maxDistance: 15
+  maxDistance: 50
   damageExtinctionCurve:
     serializedVersion: 2
     m_Curve:

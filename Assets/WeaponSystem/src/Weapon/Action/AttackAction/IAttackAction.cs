@@ -1,7 +1,9 @@
-﻿namespace WeaponSystem.Weapon.Action.AttackAction
+﻿using WeaponSystem.Movement;
+
+namespace WeaponSystem.Weapon.Action.AttackAction
 {
     public interface IAttackAction : IWeaponAction
     {
-        void Action(bool isAction);
+        void Action(bool isAction, IPlayerContext context);
     }
 }

@@ -7,18 +7,16 @@ using WeaponSystem.Weapon.Magazine;
 
 namespace WeaponSystem.Weapon.Action.AltAttackAction
 {
-    [Serializable, AddTypeMenu("ZoomOnlyAim")]
+    [Serializable, AddTypeMenu("Zoom")]
     public class ZoomOnlyAimAction : IAltAttackAction
     {
         [SerializeField] private float duration;
+        public void Injection(Transform parent, Animator animator, IMagazine magazine) { }
 
-        private IPlayerContext _context;
-        public void Injection(Transform parent, Animator animator, IMagazine magazine, IPlayerContext context) { }
-
-        public void Action(bool isAction)
+        public void Action(bool isAction, IPlayerContext context)
         {
-            var camera = Locator<IReferenceCamera>.Instance.Current;
-            _context.IsAiming = isAction;
+            context.IsAiming = isAction;
+            
         }
     }
 }

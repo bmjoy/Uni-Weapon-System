@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using WeaponSystem.Movement;
 
 namespace WeaponSystem.Weapon.Muzzle
 {
@@ -8,6 +9,6 @@ namespace WeaponSystem.Weapon.Muzzle
         public Vector3 Direction { get; }
 
         public Quaternion Rotation { get; }
-        public void Defuse();
+        public void Defuse(IPlayerContext context);
     }
 }

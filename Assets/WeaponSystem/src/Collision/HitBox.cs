@@ -5,18 +5,19 @@ namespace WeaponSystem.Collision
     [RequireComponent(typeof(Collider))]
     public class HitBox : MonoBehaviour, IDamageable
     {
-        public HitType HitType => hitType;
         [SerializeField] private HitType hitType;
-        private IHitPoint _hitPoint;
-        
-        private void Awake()
-        {
-            _hitPoint = transform.GetComponentInParent<IHitPoint>();
-        }
+        [SerializeField] private DamageCollision damageCollision;
+        private IHasHitPoint _hasHitPoint;
+        public DamageCollision DamageCollision => damageCollision;
+        public HitType HitType => hitType;
+
+        private void Awake() => _hasHitPoint = transform.GetComponentInParent<IHasHitPoint>();
 
         public void AddDamage(float damage)
         {
-            _hitPoint.AddDamage(damage);
+            _hasHitPoint ??= transform.GetComponentInParent<IHasHitPoint>();
+            Debug.Log($"Hit: {damage.ToString()}");
+            _hasHitPoint?.AddDamage(damage);
         }
     }
 }

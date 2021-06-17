@@ -4,7 +4,7 @@ using WeaponSystem.Runtime;
 
 namespace WeaponSystem.Weapon.Bullet
 {
-    [Serializable]
+    [Serializable, AddTypeMenu("Projectile")]
     public class ProjectileBullet : IBullet
     {
         [SerializeField] private float bulletSpeed = 500f;

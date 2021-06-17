@@ -1,12 +1,11 @@
 ﻿using UnityEngine;
-using static UnityEngine.Mathf;
 using WeaponSystem.Camera;
 using WeaponSystem.Runtime;
-
+using System;
 
 namespace WeaponSystem.Weapon.Recoil
 {
-    [System.Serializable]
+    [Serializable, AddTypeMenu("")]
     public class PatternRecoil : IRecoil
     {
         [SerializeField] private RecoilPatternData patternData;

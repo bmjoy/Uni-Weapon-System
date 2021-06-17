@@ -7,14 +7,14 @@ namespace WeaponSystem.Editor
 {
     public class RecoilPatternGeneratorWizard : ScriptableWizard
     {
-        [SerializeField] private string weaponName ="New Weapon Recoil Pattern";
+        [SerializeField] private string weaponName ="New GenericWeapon Recoil Pattern";
         [SerializeField] private int len = 35;
         [SerializeField] private float height = 35f;
         [SerializeField] private float maxWidth = 1f;
         [SerializeField] private AnimationCurve horizontalWeightCurve = AnimationCurve.EaseInOut(0f, 0.01f, 1f, 1f);
         private Vector2[] _temp;
 
-        [MenuItem("Weapon System/Recoil Pattern Generator ")]
+        [MenuItem("GenericWeapon System/Recoil Pattern Generator ")]
         public static void CreateWizard()
         {
             DisplayWizard<RecoilPatternGeneratorWizard>("Recoil Pattern Generator ", "Create");

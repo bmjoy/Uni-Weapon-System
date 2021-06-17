@@ -6,7 +6,7 @@ using WeaponSystem.Runtime;
 
 namespace WeaponSystem.Weapon.Recoil
 {
-    [System.Serializable]
+    [System.Serializable, AddTypeMenu("SinRandom")]
     public class SinRandomRecoil : IRecoil
     {
         [SerializeField, Range(1f, 50f)] private float distance = 2f;

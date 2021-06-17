@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace WeaponSystem.Camera
+namespace WeaponSystem
 {
     public static class FovSettings
     {

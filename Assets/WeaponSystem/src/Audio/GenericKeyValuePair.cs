@@ -1,4 +1,4 @@
-﻿namespace AudioSystem
+﻿namespace Audio
 {
     [System.Serializable]
     public class GenericKeyValuePair<TKey, TValue>

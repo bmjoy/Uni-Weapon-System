@@ -3,7 +3,7 @@ using WeaponSystem.Runtime;
 
 namespace WeaponSystem.Input
 {
-    public class CameraInputManager : MonoBehaviour
+    public class SimpleCameraInputBinder : MonoBehaviour
     {
         [SerializeReference, SubclassSelector] private ICameraInput _input = new InputManagerMouseCameraInput();
 

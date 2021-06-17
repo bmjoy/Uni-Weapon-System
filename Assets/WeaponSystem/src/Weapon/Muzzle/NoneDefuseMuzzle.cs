@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using WeaponSystem.Camera;
+using WeaponSystem.Movement;
 using WeaponSystem.Runtime;
 
 namespace WeaponSystem.Weapon.Muzzle
@@ -14,7 +15,7 @@ namespace WeaponSystem.Weapon.Muzzle
         public Vector3 Direction => reference.forward;
         public Quaternion Rotation => reference.rotation;
 
-        public void Defuse()
+        public void Defuse(IPlayerContext context)
         {
             if (Locator<IReferenceCamera>.Instance.IsValid == false) return;
             var forward = Locator<IReferenceCamera>.Instance.Current.Center.forward;

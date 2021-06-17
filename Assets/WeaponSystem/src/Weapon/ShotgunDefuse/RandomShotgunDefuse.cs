@@ -7,7 +7,7 @@ using static UnityEngine.Mathf;
 
 namespace WeaponSystem.Weapon.ShotgunPattern
 {
-    [Serializable]
+    [Serializable, AddTypeMenu("Random")]
     public class RandomShotgunDefuse : IShotgunDefuse
     {
         [SerializeField] private int shotgunPellet = 3;

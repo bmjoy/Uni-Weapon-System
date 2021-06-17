@@ -3,7 +3,7 @@ using WeaponSystem.Runtime;
 
 namespace WeaponSystem.Input
 {
-    public class WeaponInputManager : MonoBehaviour
+    public class SimpleWeaponInputBinder : MonoBehaviour
     {
         [SerializeReference, SubclassSelector] private IWeaponInput input = new InputManagerKeyboardWeaponInput();
 

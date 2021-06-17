@@ -7,7 +7,7 @@ using WeaponSystem.Weapon.Magazine;
 
 namespace WeaponSystem.Weapon.Action.AttackAction
 {
-    [AddTypeMenu("Attack/CompositeAttack")]
+    [AddTypeMenu("Control/Composite")]
     [Serializable]
     public class CompositeAttackAction : IAttackAction
     {
@@ -16,19 +16,19 @@ namespace WeaponSystem.Weapon.Action.AttackAction
         private Animator _animator;
         private static readonly int ModeChange = Animator.StringToHash("ModeChange");
 
-        public void Injection(Transform parent, Animator animator, IMagazine magazine, IPlayerContext context)
+        public void Injection(Transform parent, Animator animator, IMagazine magazine)
         {
             foreach (var attackActionMode in _attackActionModes)
             {
-                attackActionMode.Injection(parent, animator, magazine, context);
+                attackActionMode.Injection(parent, animator, magazine);
             }
             _animator = animator;
         }
 
-        public void Action(bool isAction)
+        public void Action(bool isAction, IPlayerContext context)
         {
             if (Locator<IWeaponInput>.Instance.Current?.IsModeChanged ?? false) OnModeChanged();
-            _attackActionModes[_index].Action(isAction);
+            _attackActionModes[_index].Action(isAction, context);
         }
 
         private void OnModeChanged()

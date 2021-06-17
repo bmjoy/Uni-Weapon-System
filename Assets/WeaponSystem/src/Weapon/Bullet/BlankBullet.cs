@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace WeaponSystem.Weapon.Bullet
 {
-    [Serializable]
+    [Serializable, AddTypeMenu("Blank")]
     public class BlankBullet : IBullet
     {
         // ReSharper disable Unity.PerformanceAnalysis

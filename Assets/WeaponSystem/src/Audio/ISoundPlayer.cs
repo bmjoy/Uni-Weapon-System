@@ -1,4 +1,4 @@
-﻿namespace AudioSystem
+﻿namespace Audio
 {
     public interface ISoundPlayer
     {

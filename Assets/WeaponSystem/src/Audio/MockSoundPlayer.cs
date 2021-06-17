@@ -1,7 +1,7 @@
 using UnityEngine;
 
 
-namespace AudioSystem
+namespace Audio
 {
     public class MockSoundPlayer : MonoBehaviour, ISoundPlayer
     {

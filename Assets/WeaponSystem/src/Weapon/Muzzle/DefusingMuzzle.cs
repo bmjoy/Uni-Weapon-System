@@ -17,10 +17,9 @@ namespace WeaponSystem.Weapon.Muzzle
         public Vector3 Direction => reference.forward;
         public Quaternion Rotation => reference.rotation;
 
-        public void Defuse()
+        public void Defuse(IPlayerContext context)
         {
             var camera = Locator<IReferenceCamera>.Instance.Current.Center;
-            var context = Locator<IPlayerContext>.Instance.Current;
             reference.rotation = Quaternion.LookRotation(camera.forward * 1000f);
 
             if (settings.Length <= 0) return;

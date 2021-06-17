@@ -9,7 +9,7 @@ namespace WeaponSystem.Weapon.Recoil
         void IRecoil.Reset()
         {
 #if DEBUG && UNITY_EDITOR
-            Debug.Log("CountReset!");
+            Debug.Log("Lap!");
 #endif
         }
 

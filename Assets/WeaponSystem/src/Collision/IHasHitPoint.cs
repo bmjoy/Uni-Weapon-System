@@ -1,6 +1,6 @@
 ﻿namespace WeaponSystem.Collision
 {
-    public interface IHitPoint
+    public interface IHasHitPoint
     {
         void AddDamage(float damage);
         void AddRecovery(float hitPoint);

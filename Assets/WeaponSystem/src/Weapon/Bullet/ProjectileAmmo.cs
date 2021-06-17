@@ -14,11 +14,7 @@ namespace WeaponSystem.Weapon.Bullet
         private Vector3 _startPos;
         private void OnDisable() => _lifeTimeCounter = 0f;
 
-        private void OnEnable()
-        {
-            _startPos = transform.position;
-            Debug.Log($"startPos: {_startPos.ToString()}");
-        }
+        private void OnEnable() => _startPos = transform.position;
 
         // Update is called once per frame
         private void Update()

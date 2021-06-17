@@ -3,7 +3,7 @@ using WeaponSystem.Collision;
 
 namespace WeaponSystem.Weapon.Bullet
 {
-    [CreateAssetMenu(fileName = "New Bullet Config", menuName = "Weapon System/New Bullet Config", order = 0)]
+    [CreateAssetMenu(fileName = "New Bullet Config", menuName = "GenericWeapon System/New Bullet Config", order = 0)]
     public class BulletConfig : ScriptableObject
     {
         [SerializeField] private float maxDistance = 300f;
@@ -16,10 +16,7 @@ namespace WeaponSystem.Weapon.Bullet
         {
             foreach (var damage in damages)
             {
-                if (hitType == damage.hitType)
-                {
-                    return damage.damage * GetImpact(distance);
-                }
+                if (hitType == damage.hitType) return damage.damage * GetImpact(distance);
             }
 
             return 0f;

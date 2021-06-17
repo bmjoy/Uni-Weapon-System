@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace WeaponSystem.Weapon.Action.Utils
+namespace WeaponSystem.Weapon.Action
 {
     public interface IFireMode
     {

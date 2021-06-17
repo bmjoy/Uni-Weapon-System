@@ -67,7 +67,7 @@ namespace WeaponSystem.Camera
         }
 
 
-        public UnityEngine.Camera Camera { get; }
+        public UnityEngine.Camera Camera => _camera;
         public Transform Center => _camera.transform;
     }
 }

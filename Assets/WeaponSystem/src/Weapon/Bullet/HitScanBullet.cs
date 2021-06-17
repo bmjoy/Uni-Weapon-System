@@ -1,10 +1,12 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using WeaponSystem.Runtime;
 using static UnityEngine.Physics;
+using Object = UnityEngine.Object;
 
 namespace WeaponSystem.Weapon.Bullet
 {
-    [System.Serializable]
+    [Serializable, AddTypeMenu("HitScan")]
     public class HitScanBullet : IBullet
     {
         [SerializeField] private BulletConfig bulletConfig;

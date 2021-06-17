@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace AudioSystem
+namespace Audio
 {
     [RequireComponent(typeof(AudioSource))]
     public class UnitySoundPlayer : MonoBehaviour, ISoundPlayer

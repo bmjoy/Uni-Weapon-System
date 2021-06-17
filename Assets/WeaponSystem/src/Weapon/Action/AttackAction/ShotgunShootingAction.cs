@@ -1,5 +1,5 @@
 ﻿using System;
-using AudioSystem;
+using Audio;
 using UnityEngine;
 using WeaponSystem.Movement;
 using WeaponSystem.Weapon.Action.AltAttackAction;
@@ -15,7 +15,7 @@ namespace WeaponSystem.Weapon.Action.AttackAction
     [Serializable, AddTypeMenu("Attack/ShotgunShooting")]
     public class ShotgunShootingAction : IAttackAction, IAltAttackAction
     {
-        [SerializeField] private RPMTimer rpm = new RPMTimer(130f);
+        [SerializeField] private FixedRpmTimer fixedRpm = new FixedRpmTimer();
         [SerializeReference, SubclassSelector] private IFireMode _Mode = new FullAuto();
         [SerializeField] private int useAmmoAmount = 1;
         [SerializeReference, SubclassSelector] private IMuzzle _muzzle = new DefusingMuzzle();
@@ -27,34 +27,33 @@ namespace WeaponSystem.Weapon.Action.AttackAction
         private ISoundPlayer _soundPlayer;
         private IMagazine _magazine;
         private Animator _animator;
-        private static readonly int Shot = Animator.StringToHash("ShotAction");
+        private static readonly int Shot = Animator.StringToHash("Shot");
 
-        public void Injection(Transform parent, Animator animator, IMagazine magazine, IPlayerContext context)
+        public void Injection(Transform parent, Animator animator, IMagazine magazine)
         {
             _soundPlayer = parent.GetComponent<ISoundPlayer>();
             _magazine = magazine;
             _animator = animator;
         }
 
-        void IAttackAction.Action(bool isAction) => ShotAction(isAction);
+        void IAttackAction.Action(bool isAction, IPlayerContext context) => ShotAction(isAction, context);
 
-        void IAltAttackAction.Action(bool isAction) => ShotAction(isAction);
+        void IAltAttackAction.Action(bool isAction, IPlayerContext context) => ShotAction(isAction, context);
 
 
-        private void ShotAction(bool isAction)
+        private void ShotAction(bool isAction, IPlayerContext context)
         {
-            rpm.Update();
+            fixedRpm.Update();
             _recoil?.Easing();
 
             if (_magazine?.IsReloading ?? false) return;
 
-            if (rpm.IsValid == false) return;
+            if (fixedRpm.IsValid == false) return;
             if (_Mode.Evaluate(isAction) == false)
             {
                 _recoil?.Reset();
                 return;
             }
-
 
             if (_magazine?.UseAmmo(useAmmoAmount) == false)
             {
@@ -63,13 +62,13 @@ namespace WeaponSystem.Weapon.Action.AttackAction
             }
 
             _soundPlayer?.Play(shotActionSoundName);
-            rpm.CountReset();
+            fixedRpm.Lap();
             _recoil?.Generate();
-            
+
             _animator.SetTrigger(Shot);
 
-            _muzzle.Defuse();
-            
+            _muzzle.Defuse(context);
+
             foreach (var offset in _shotgunDefuse)
             {
                 var muzzleOffset = _muzzle.Rotation * offset;

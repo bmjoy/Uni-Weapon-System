@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace WeaponSystem.Weapon.ShotgunPattern
 {
-    [System.Serializable]
+    [System.Serializable, AddTypeMenu("Pattern")]
     public class PatternShotgunDefuse : IShotgunDefuse
     {
         [SerializeField] private ShotgunDefusePatternData patternData;

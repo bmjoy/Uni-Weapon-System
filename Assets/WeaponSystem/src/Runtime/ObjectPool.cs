@@ -40,10 +40,7 @@ namespace WeaponSystem.Runtime
                     return prefab;
                 }
             }
-
-            Debug.Log(_parent == null);
-
-
+            
             var newPrefab = _parent != null ? Instantiate(_reference, _parent) : Instantiate(_reference);
             _prefabs.Add(newPrefab);
             return newPrefab;

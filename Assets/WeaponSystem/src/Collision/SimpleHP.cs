@@ -1,24 +1,32 @@
+using Unity.Collections;
 using UnityEngine;
-using WeaponSystem.Collision;
+using UnityEngine.Events;
 
-public class SimpleHP : MonoBehaviour, IHitPoint
+namespace WeaponSystem.Collision
 {
-    [SerializeField] private float maxHp;
-    [SerializeField] private float currentHp;
-
-    public void AddDamage(float damage)
+    public class SimpleHP : MonoBehaviour, IHasHitPoint
     {
-        if (damage >= currentHp) Death();
-        currentHp -= damage;
-    }
+        [SerializeField] private float maxHp;
+        [ReadOnly, SerializeField] private float currentHp;
+        public UnityEvent onDie;
 
-    public void AddRecovery(float hitPoint)
-    {
-        currentHp += Mathf.Clamp(hitPoint, 0f, maxHp);
-    }
+        private void OnEnable() => currentHp = maxHp;
 
-    public void Death()
-    {
-        gameObject.SetActive(false);
+        public void AddDamage(float damage)
+        {
+            if (damage >= currentHp)
+            {
+                Death();
+            }
+
+            currentHp -= damage;
+        }
+
+        public void AddRecovery(float hitPoint)
+        {
+            currentHp += Mathf.Clamp(hitPoint, 0f, maxHp);
+        }
+
+        public void Death() => onDie.Invoke();
     }
 }
