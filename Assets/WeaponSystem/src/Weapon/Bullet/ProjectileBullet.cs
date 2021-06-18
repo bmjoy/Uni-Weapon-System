@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using WeaponSystem.Collision;
 using WeaponSystem.Runtime;
 
 namespace WeaponSystem.Weapon.Bullet
@@ -8,16 +9,25 @@ namespace WeaponSystem.Weapon.Bullet
     public class ProjectileBullet : IBullet
     {
         [SerializeField] private float bulletSpeed = 500f;
-        [SerializeField] private Rigidbody bullet;
-        private ObjectPool<Rigidbody> _bulletPool;
+        [SerializeField] private ProjectileAmmo ammo;
+        private ObjectPool<ProjectileAmmo> _ammoPool;
 
-        public void Shot(Vector3 position, Vector3 direction)
+        public void Shot(Vector3 position, Vector3 direction, IObjectPermission permission, IObjectGroup group)
         {
-            _bulletPool ??= new ObjectPool<Rigidbody>(bullet, 10, new GameObject($"{bullet.name} Object Pool").transform);
-            var b = _bulletPool.GetObject(position);
-            b.gameObject.SetActive(true);
-            b.Sleep();
-            b.AddForce(direction * bulletSpeed, ForceMode.VelocityChange);
+            _ammoPool ??= new ObjectPool<ProjectileAmmo>(ammo, 10,
+                new GameObject($"{ammo.name} Object Pool").transform);
+
+            var fireAmmo = _ammoPool.GetObject(position);
+            fireAmmo.gameObject.SetActive(true);
+            
+            Debug.Log($"permission?: {(permission == null).ToString()}");
+            Debug.Log($"group?: {(group == null).ToString()}");
+            // fireAmmo.Rigidbody.Sleep();
+            //
+            //
+            // fireAmmo.ObjectGroup = group;
+            // fireAmmo.ObjectPermission = permission;
+            // fireAmmo.Rigidbody.AddForce(direction * bulletSpeed, ForceMode.VelocityChange);
         }
     }
 }

@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
+using System;
 
 namespace WeaponSystem.Weapon.Recoil
 {
-    [System.Serializable]
+    [Serializable, AddTypeMenu("None")]
     public class NoneRecoil : IRecoil
     {
         // ReSharper disable Unity.PerformanceAnalysis

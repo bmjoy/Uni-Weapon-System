@@ -11,8 +11,7 @@ namespace WeaponSystem.Camera
         TPS
     }
 
-    [RequireComponent(typeof(UnityEngine.Camera))]
-    public class SwitchingCamera : MonoBehaviour, IPlayerCamera
+    public class SwitchingCamera : MonoBehaviour, ICameraRotate
     {
         [SerializeField] private RotateAxis vertical = new RotateAxis(0f, -90f, 90f, true);
         [SerializeField] private RotateAxis horizontal;
@@ -45,17 +44,13 @@ namespace WeaponSystem.Camera
         private void OnEnable()
         {
             Cursor.lockState = CursorLockMode.Locked;
-            Locator<IPlayerCamera>.Instance.Bind(this);
             Locator<ICameraRotate>.Instance.Bind(this);
-            Locator<IReferenceCamera>.Instance.Bind(this);
         }
 
         private void OnDisable()
         {
             Cursor.lockState = CursorLockMode.None;
-            Locator<IPlayerCamera>.Instance.Unbind(this);
             Locator<ICameraRotate>.Instance.Unbind(this);
-            Locator<IReferenceCamera>.Instance.Unbind(this);
         }
 
         private void Update()
@@ -131,14 +126,5 @@ namespace WeaponSystem.Camera
             get => horizontal.Current;
             set => horizontal.Current = value;
         }
-
-        public float FieldOfView
-        {
-            get => _camera.fieldOfView;
-            set => _camera.fieldOfView = Mathf.Clamp(value, 0f, 120f);
-        }
-
-        public UnityEngine.Camera Camera => _camera;
-        public Transform Center => _camera.transform;
     }
 }

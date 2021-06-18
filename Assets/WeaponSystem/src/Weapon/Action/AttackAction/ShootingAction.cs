@@ -1,6 +1,7 @@
 ﻿using System;
-using Audio;
 using UnityEngine;
+using WeaponSystem.Collision;
+using WeaponSystem.Effect;
 using WeaponSystem.Movement;
 using WeaponSystem.Scripts.Runtime;
 using WeaponSystem.Weapon.Action;
@@ -11,7 +12,6 @@ using WeaponSystem.Weapon.Bullet;
 using WeaponSystem.Weapon.Magazine;
 using WeaponSystem.Weapon.Muzzle;
 using WeaponSystem.Weapon.Recoil;
-using Random = UnityEngine.Random;
 
 namespace WeaponSystem
 {
@@ -21,21 +21,22 @@ namespace WeaponSystem
         [SerializeReference, SubclassSelector] private IRpmTimer _rpm = new FixedRpmTimer();
         [SerializeReference, SubclassSelector] private IFireMode _fireMode = new FullAuto();
         [SerializeField] private int useAmmoAmount = 1;
-        [SerializeField] private ParticleSystem muzzleFlash;
         [SerializeReference, SubclassSelector] private IMuzzle _muzzle = new DefusingMuzzle();
         [SerializeReference, SubclassSelector] private IRecoil _recoil = new SinRandomRecoil();
         [SerializeReference, SubclassSelector] private IBullet _bullet = new HitScanBullet();
+        [SerializeField] private string animationTriggerName = "Shot";
 
-        [SerializeField] private string shotActionSoundName = "Shot";
+        [SerializeReference, SubclassSelector] private IEffect _effect;
 
-        private ISoundPlayer _soundPlayer;
+        private IObjectPermission _permission;
+        private IObjectGroup _group;
         private Animator _animator;
-        private static readonly int Shot = Animator.StringToHash("Shot");
         private IMagazine _magazine;
 
         public void Injection(Transform parent, Animator animator, IMagazine magazine)
         {
-            _soundPlayer = parent.GetComponent<ISoundPlayer>();
+            _permission = parent.GetComponent<IObjectPermission>();
+            _group = parent.GetComponent<IObjectGroup>();
             _animator = animator;
             _magazine = magazine;
         }
@@ -67,16 +68,15 @@ namespace WeaponSystem
                 return;
             }
 
-            _soundPlayer?.Play(shotActionSoundName);
-            if (_soundPlayer != null) _soundPlayer.Pitch = Random.Range(.95f, 1f);
             _rpm.Lap();
             _recoil?.Generate();
             _muzzle.Defuse(context);
 
+            _effect?.Play(_muzzle.Position, Quaternion.identity, null);
 
-            _animator.NullCast()?.SetTrigger(Shot);
+            _animator.NullCast()?.SetTrigger(animationTriggerName);
 
-            _bullet?.Shot(_muzzle.Position, _muzzle.Direction);
+            _bullet?.Shot(_muzzle.Position, _muzzle.Direction, _permission, _group);
         }
     }
 }

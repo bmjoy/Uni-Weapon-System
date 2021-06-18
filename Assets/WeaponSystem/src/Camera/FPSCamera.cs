@@ -4,8 +4,7 @@ using WeaponSystem.Runtime;
 
 namespace WeaponSystem.Camera
 {
-    [RequireComponent(typeof(UnityEngine.Camera))]
-    public class FPSCamera : MonoBehaviour,IPlayerCamera
+    public class FPSCamera : MonoBehaviour, ICameraRotate
     {
         [SerializeField] private RotateAxis vertical;
         [SerializeField] private RotateAxis horizontal;
@@ -18,14 +17,12 @@ namespace WeaponSystem.Camera
         {
             Cursor.lockState = CursorLockMode.Locked;
             Locator<ICameraRotate>.Instance.Bind(this);
-            Locator<IReferenceCamera>.Instance.Bind(this);
         }
 
         private void OnDisable()
         {
             Cursor.lockState = CursorLockMode.None;
             Locator<ICameraRotate>.Instance.Unbind(this);
-            Locator<IReferenceCamera>.Instance.Unbind(this);
         }
 
         private void Update()
@@ -38,7 +35,6 @@ namespace WeaponSystem.Camera
         {
             if (playerBody == false || playerBody == _camera.transform)
             {
-
                 _camera.transform.rotation = horizontal[Vector3.up] * vertical[Vector3.left];
             }
             else
@@ -59,15 +55,5 @@ namespace WeaponSystem.Camera
             get => horizontal.Current;
             set => horizontal.Current = value;
         }
-
-        public float FieldOfView
-        {
-            get => _camera.fieldOfView;
-            set => _camera.fieldOfView = value;
-        }
-
-
-        public UnityEngine.Camera Camera => _camera;
-        public Transform Center => _camera.transform;
     }
 }

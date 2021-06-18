@@ -10,12 +10,6 @@ namespace WeaponSystem.Collision
         public HitType hitType;
         public float damage;
 
-        public HitDamage(float damage, HitType hitType)
-        {
-            this.damage = damage;
-            this.hitType = hitType;
-        }
-
         public HitDamage(HitType hitType, float damage = 0f)
         {
             this.damage = damage;

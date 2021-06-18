@@ -11,6 +11,7 @@ namespace WeaponSystem.Weapon.Muzzle
     public class DefusingMuzzle : IMuzzle
     {
         [SerializeField] private Transform reference;
+
         [SerializeField] private AccuracySetting[] settings = {new AccuracySetting()};
 
         public Vector3 Position => reference.position;

@@ -2,16 +2,12 @@
 using WeaponSystem.Input;
 using WeaponSystem.Movement;
 using WeaponSystem.Runtime;
-using WeaponSystem.Scripts.Runtime;
 using WeaponSystem.Weapon.Action.AltAttackAction;
 using WeaponSystem.Weapon.Action.AttackAction;
 using WeaponSystem.Weapon.Magazine;
 
 namespace WeaponSystem.Weapon
 {
-    /// <summary>
-    /// 
-    /// </summary>
     [AddComponentMenu("WeaponSystem/GenericWeapon"), DisallowMultipleComponent]
     public class GenericWeapon : MonoBehaviour
     {
@@ -24,8 +20,6 @@ namespace WeaponSystem.Weapon
         private IMagazine _magazine = new NoneMagazine();
         
         [Space(20)] [SerializeField] private Animator weaponAnimator;
-        private static readonly int TakeOut = Animator.StringToHash("TakeOut");
-        private static readonly int EndUp = Animator.StringToHash("EndUp");
         private IPlayerContext _context;
 
         private void Awake()
@@ -40,18 +34,9 @@ namespace WeaponSystem.Weapon
             var input = Locator<IWeaponInput>.Instance.Current;
             _context = Locator<IPlayerContext>.Instance.Current;
             if (input?.IsReload ?? false) CoroutineHandler.Instance.CoroutineStart(_magazine.Reload());
+            
             _attackAction?.Action(input?.IsAttack ?? false, _context);
             _altAttackAction?.Action(input?.IsAltAttack ?? false, _context);
-        }
-        
-        private void OnEnable()
-        {
-            weaponAnimator.NullCast()?.SetTrigger(TakeOut);
-        }
-
-        private void OnDisable()
-        {
-            weaponAnimator.NullCast()?.SetTrigger(EndUp);
         }
     }
 }

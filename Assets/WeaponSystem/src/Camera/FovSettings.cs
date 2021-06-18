@@ -7,7 +7,7 @@ namespace WeaponSystem
         public static float BaseFov
         {
             get => _baseFov;
-            set => _baseFov = Mathf.Clamp(value, 10f, 100f);
+            set => _baseFov = Mathf.Abs(value);
         }
 
         private static float _baseFov = 60f;

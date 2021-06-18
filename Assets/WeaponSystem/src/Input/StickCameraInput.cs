@@ -5,7 +5,7 @@ using static UnityEngine.Mathf;
 
 namespace WeaponSystem.Input
 {
-    [Serializable]
+    [Serializable, AddTypeMenu("GamePad")]
     public class StickCameraInput : ICameraInput
     {
         [SerializeField] private float sensitivity = 1f;

@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using WeaponSystem.Collision;
 using WeaponSystem.Input;
 using WeaponSystem.Movement;
 using WeaponSystem.Runtime;

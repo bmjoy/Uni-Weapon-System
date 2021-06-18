@@ -1,18 +1,12 @@
 ﻿using System;
 using UnityEngine;
+using WeaponSystem.Collision;
 
 namespace WeaponSystem.Weapon.Bullet
 {
     [Serializable, AddTypeMenu("Blank")]
     public class BlankBullet : IBullet
     {
-        // ReSharper disable Unity.PerformanceAnalysis
-        public void Shot(Vector3 position, Vector3 direction)
-        {
-#if DEBUG
-            Debug.Log($"Shot! Pos: {position.ToString()}, Dir: {direction.ToString()}");
-#endif
-        }
-        
+        public void Shot(Vector3 position, Vector3 direction, IObjectPermission permission, IObjectGroup objectGroup) {}
     }
 }
