@@ -7,18 +7,16 @@ namespace WeaponSystem.Collision
     {
         [SerializeField] private HitType hitType;
         private IHasHitPoint _hasHitPoint;
+        private IObjectGroup _group;
         public HitType HitType => hitType;
-        public IObjectGroup ObjectGroup { get; }
+        public IObjectGroup ObjectGroup => _group;
 
         private void Awake()
         {
             _hasHitPoint = transform.GetComponentInParent<IHasHitPoint>();
+            _group = transform.GetComponentInParent<IObjectGroup>();
         }
 
-        public void AddDamage(float damage)
-        {
-            _hasHitPoint ??= transform.GetComponentInParent<IHasHitPoint>();
-            _hasHitPoint?.AddDamage(damage);
-        }
+        public void AddDamage(float damage) => _hasHitPoint.AddDamage(damage);
     }
 }

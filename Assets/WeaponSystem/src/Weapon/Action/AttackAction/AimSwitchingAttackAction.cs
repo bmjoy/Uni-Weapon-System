@@ -1,6 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using WeaponSystem.Collision;
 using WeaponSystem.Movement;
 using WeaponSystem.Weapon.Magazine;
 
@@ -19,12 +18,17 @@ namespace WeaponSystem.Weapon.Action.AttackAction
         public void Injection(Transform parent, Animator animator, IMagazine magazine)
         {
             _attackAction.Injection(parent, animator, magazine);
-            _attackAction.Injection(parent, animator, magazine);
+            _aimingAttackAction.Injection(parent, animator, magazine);
         }
 
         public void Action(bool isAction, IPlayerContext context)
         {
-            if (context?.IsAiming ?? false) _aimingAttackAction.Action(isAction, context);
+            if (context?.IsAiming ?? false)
+            {
+                _aimingAttackAction.Action(isAction, context);
+                return;
+            }
+
             _attackAction.Action(isAction, context);
         }
     }

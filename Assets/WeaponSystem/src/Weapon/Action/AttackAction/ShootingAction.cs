@@ -36,7 +36,7 @@ namespace WeaponSystem
         public void Injection(Transform parent, Animator animator, IMagazine magazine)
         {
             _permission = parent.GetComponent<IObjectPermission>();
-            _group = parent.GetComponent<IObjectGroup>();
+            _group = parent.GetComponentInParent<IObjectGroup>();
             _animator = animator;
             _magazine = magazine;
         }
@@ -75,7 +75,6 @@ namespace WeaponSystem
             _effect?.Play(_muzzle.Position, Quaternion.identity, null);
 
             _animator.NullCast()?.SetTrigger(animationTriggerName);
-
             _bullet?.Shot(_muzzle.Position, _muzzle.Direction, _permission, _group);
         }
     }

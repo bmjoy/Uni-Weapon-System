@@ -2141,8 +2141,6 @@ GameObject:
   - component: {fileID: 1011759446}
   - component: {fileID: 1011759447}
   - component: {fileID: 1011759448}
-  - component: {fileID: 1011759450}
-  - component: {fileID: 1011759449}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -2228,15 +2226,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20a0adccd248f8247b967ea8b4aff1fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vertical:
-    maxAngle: 90
-    minAngle: -90
-    isClamp: 1
-  horizontal:
+  verticalAxis:
+    maxAngle: 0
+    minAngle: 0
+    isClamp: 0
+  horizontalAxis:
     maxAngle: 0
     minAngle: 0
     isClamp: 0
   playerBody: {fileID: 0}
+  head: {fileID: 1011759443}
 --- !u!114 &1011759447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2244,7 +2243,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1011759442}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4cbc6292c95f4ff8a7ba7841b6c958c0, type: 3}
   m_Name: 
@@ -2261,57 +2260,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 630fdd0260c9e6647bdaa46cdb022268, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selfId: 0
   teamId: 0
   maxHp: 200
   currentHp: 0
   onDie:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &1011759449
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1011759442}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 803b485efcfb6564e9e690a68462f48f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1011759450
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1011759442}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ShowDebugText: 0
-  m_ShowCameraFrustum: 1
-  m_IgnoreTimeScale: 0
-  m_WorldUpOverride: {fileID: 0}
-  m_UpdateMethod: 2
-  m_BlendUpdateMethod: 1
-  m_DefaultBlend:
-    m_Style: 1
-    m_Time: 2
-    m_CustomCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-  m_CustomBlends: {fileID: 0}
-  m_CameraCutEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &1057031192
@@ -2474,7 +2426,9 @@ MonoBehaviour:
       type: {class: AimAction, ns: WeaponSystem.Weapon.Action.AltAttackAction, asm: Assembly-CSharp}
       data:
         duration: 0.1
-        zoomMultiply: -0.5
+        zoomMultiplyList:
+        - 0.7
+        - 0.5
         hipPosition: {fileID: 699742429}
         adsPosition: {fileID: 1906190604}
     00000002:
@@ -2650,7 +2604,7 @@ MonoBehaviour:
       data:
         rpm: 600
     0000000C:
-      type: {class: FullAuto, ns: WeaponSystem.Weapon.Action, asm: Assembly-CSharp}
+      type: {class: SemiAuto, ns: WeaponSystem.Weapon.Action, asm: Assembly-CSharp}
     0000000D:
       type: {class: DefusingMuzzle, ns: WeaponSystem.Weapon.Muzzle, asm: Assembly-CSharp}
       data:
@@ -2785,10 +2739,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selfInteract: 0
-  selfDamage: 1
+  selfDamage: 0
   selfOwned: 0
   teamInteract: 0
-  teamDamage: 1
+  teamDamage: 0
   teamOwned: 0
   enemyInteract: 0
   enemyDamage: 1

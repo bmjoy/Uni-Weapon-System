@@ -19,15 +19,10 @@ namespace WeaponSystem.Weapon.Bullet
 
             var fireAmmo = _ammoPool.GetObject(position);
             fireAmmo.gameObject.SetActive(true);
-            
-            Debug.Log($"permission?: {(permission == null).ToString()}");
-            Debug.Log($"group?: {(group == null).ToString()}");
-            // fireAmmo.Rigidbody.Sleep();
-            //
-            //
-            // fireAmmo.ObjectGroup = group;
-            // fireAmmo.ObjectPermission = permission;
-            // fireAmmo.Rigidbody.AddForce(direction * bulletSpeed, ForceMode.VelocityChange);
+            fireAmmo.Rigidbody.Sleep();
+            fireAmmo.ObjectGroup = group;
+            fireAmmo.ObjectPermission = permission;
+            fireAmmo.Rigidbody.AddForce(direction * bulletSpeed, ForceMode.VelocityChange);
         }
     }
 }

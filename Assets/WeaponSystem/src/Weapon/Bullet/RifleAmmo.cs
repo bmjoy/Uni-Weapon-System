@@ -36,26 +36,26 @@ namespace WeaponSystem.Weapon.Bullet
 
         private void OnCollisionEnter(UnityEngine.Collision target)
         {
-            Debug.Log($"collision {target.transform.name}");
-
+            Debug.Log($"collision: {target.transform.name}");
             if (target.collider.TryGetComponent(out IDamageable damageable))
             {
                 if (damageable.ObjectGroup.SelfId == ObjectGroup.SelfId && ObjectPermission.SelfDamage)
                 {
-                    return;
-                }
-                
-                if (damageable.ObjectGroup.GroupId == ObjectGroup.GroupId && ObjectPermission.TeamDamage)
-                {
-                    return;
-                }
-                
-                if (ObjectPermission.EnemyDamage)
-                {
+                    Debug.Log("Self");
                     damageable.AddDamage(config.GetDamage(damageable.HitType));
                 }
-                
-                damageable.AddDamage(config.GetDamage(damageable.HitType));
+
+                if (damageable.ObjectGroup.GroupId == ObjectGroup.GroupId && ObjectPermission.TeamDamage)
+                {
+                    Debug.Log("Team");
+                    damageable.AddDamage(config.GetDamage(damageable.HitType));
+                }
+
+                if (damageable.ObjectGroup.GroupId != ObjectGroup.GroupId && ObjectPermission.EnemyDamage)
+                {
+                    Debug.Log("Enemy");
+                    damageable.AddDamage(config.GetDamage(damageable.HitType));
+                }
             }
 
             gameObject.SetActive(false);

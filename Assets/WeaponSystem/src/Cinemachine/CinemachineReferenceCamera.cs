@@ -1,5 +1,4 @@
-﻿using System;
-using Cinemachine;
+﻿using Cinemachine;
 using UnityEngine;
 using WeaponSystem.Camera;
 using WeaponSystem.Runtime;
@@ -26,11 +25,18 @@ namespace WeaponSystem.Cinemachine
 
         private void OnDisable() => Locator<IReferenceCamera>.Instance.Unbind(this);
 
+
         private void Start()
         {
             var icmCam = _brain.ActiveVirtualCamera;
             var vCamObj = icmCam.VirtualCameraGameObject;
             _camera = vCamObj.GetComponent<CinemachineVirtualCamera>();
+        }
+
+        private void Update()
+        {
+            var icmCam = _brain.ActiveVirtualCamera;
+            _camera = icmCam.VirtualCameraGameObject.GetComponent<CinemachineVirtualCamera>();
         }
     }
 }

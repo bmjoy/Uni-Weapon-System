@@ -1,8 +1,10 @@
-﻿namespace WeaponSystem.Collision
+﻿using System;
+
+namespace WeaponSystem.Collision
 {
     public interface IObjectGroup
     {
-        int SelfId { get; }
+        Guid SelfId { get; }
         int GroupId { get; }
     }
 }
