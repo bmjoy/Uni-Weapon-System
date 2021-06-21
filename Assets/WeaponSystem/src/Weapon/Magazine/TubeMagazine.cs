@@ -12,9 +12,9 @@ namespace WeaponSystem.Weapon.Magazine
         [SerializeField] private int maxAmount = 8;
 
         private WaitForSeconds _reload;
-        
+
         public int Current { get; private set; }
-        
+
         public bool UseAmmo(int useAmount)
         {
             if (useAmount > Current) return false;
@@ -28,15 +28,19 @@ namespace WeaponSystem.Weapon.Magazine
         public IEnumerator Reload()
         {
             IsReloading = true;
-            
-            while (maxAmount > Current)
+
+            _reload ??= new WaitForSeconds(reloadTime / maxAmount * reloadAmount);
+
+            while (Current <= maxAmount)
             {
-                yield return _reload ??= new WaitForSeconds(reloadTime / maxAmount * reloadAmount);
-                Debug.Log($"Amount: {Current.ToString()}");
+                yield return _reload;
                 Current += reloadAmount;
+                Debug.Log($"Amount: {Current.ToString()}");
             }
 
             IsReloading = false;
         }
+
+        public void Injection(Transform parent, Animator animator, IMagazine magazine) { }
     }
 }

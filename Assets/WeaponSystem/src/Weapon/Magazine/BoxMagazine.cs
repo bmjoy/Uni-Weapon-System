@@ -15,7 +15,7 @@ namespace WeaponSystem.Weapon.Magazine
 
         private WaitForSeconds _tacticalReload;
         private WaitForSeconds _reload;
-        
+
         public int Current => current;
 
         public bool UseAmmo(int useAmount = 1)
@@ -45,5 +45,7 @@ namespace WeaponSystem.Weapon.Magazine
 
             IsReloading = false;
         }
+
+        public void Injection(Transform parent, Animator animator, IMagazine magazine) { }
     }
 }
