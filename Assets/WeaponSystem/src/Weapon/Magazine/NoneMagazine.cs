@@ -1,10 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
-using WeaponSystem.Scripts;
 
 namespace WeaponSystem.Weapon.Magazine
 {
-    [System.Serializable]
+    [Serializable, AddTypeMenu("None")]
     public class NoneMagazine : IMagazine
     {
         private const int MaxValue = 999;
@@ -15,8 +15,6 @@ namespace WeaponSystem.Weapon.Magazine
         public IEnumerator Reload()
         {
             yield break;
-        }
-
-        public void Injection(Transform parent, Animator animator, IMagazine magazine) { }
+        } 
     }
 }

@@ -15,16 +15,24 @@ namespace WeaponSystem.Weapon.Recoil
         [SerializeField] private AnimationCurve horizontalWeightCurve = AnimationCurve.Linear(0f, 0f, 1f, 1f);
         [SerializeField] private AnimationCurve verticalWeightCurve = AnimationCurve.Constant(0f, 1f, 1f);
         [SerializeField] private float easingDuration = .1f;
-        
-        private float _time;
+
+        private float _easeTime;
         private float _hRecoil;
         private float _vRecoil;
 
-        public void Reset() { }
+        public void Reset()
+        {
+            var rotate = Locator<ICameraRotate>.Instance.Current;
+            var spd = 0f;
+            rotate.VerticalOffset =
+                SmoothDampAngle(rotate.VerticalOffset, 0f, ref spd, Time.deltaTime / easingDuration);
+            rotate.HorizontalOffset =
+                SmoothDampAngle(rotate.HorizontalOffset, 0f, ref spd, Time.deltaTime / easingDuration);
+        }
 
         public void Generate()
         {
-            _time = easingDuration;
+            _easeTime = easingDuration;
             _hRecoil = GenerateHorizontalRecoil();
             _vRecoil = GenerateVerticalRecoil();
         }
@@ -35,11 +43,11 @@ namespace WeaponSystem.Weapon.Recoil
 
             if (rotate == null) return;
 
-            if (_time < 0f) return;
+            if (_easeTime < 0f) return;
 
-            rotate.Horizontal += _hRecoil * Time.deltaTime / easingDuration;
-            rotate.Vertical += _vRecoil * Time.deltaTime / easingDuration;
-            _time -= Time.deltaTime;
+            rotate.HorizontalOffset += _hRecoil * Time.deltaTime / easingDuration;
+            rotate.VerticalOffset += _vRecoil * Time.deltaTime / easingDuration;
+            _easeTime -= Time.deltaTime;
         }
 
         private float GenerateHorizontalRecoil()

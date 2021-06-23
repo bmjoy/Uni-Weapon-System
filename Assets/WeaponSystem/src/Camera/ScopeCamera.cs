@@ -9,8 +9,8 @@ namespace WeaponSystem.Camera
 
         public bool IsActive
         {
-            get => gameObject.activeSelf;
-            set => gameObject.SetActive(value);
+            get => _camera.enabled;
+            set => _camera.enabled = value;
         }
 
         public float FieldOfView

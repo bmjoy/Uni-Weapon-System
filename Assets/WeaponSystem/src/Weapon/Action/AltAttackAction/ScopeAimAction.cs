@@ -1,21 +1,30 @@
 ﻿using System;
 using UnityEngine;
-using WeaponSystem.Collision;
+using WeaponSystem.Camera;
 using WeaponSystem.Movement;
+using WeaponSystem.Runtime;
 using WeaponSystem.Weapon.Magazine;
 
 namespace WeaponSystem.Weapon.Action.AltAttackAction
 {
-    [Serializable]
+    [Serializable, AddTypeMenu("ScopeAim")]
     public class ScopeAimAction : IAltAttackAction
     {
-        [SerializeField] private float duration;
+        [SerializeField] private float[] zoomMultiplyList = {.5f, .4f};
+        [SerializeField] private float duration = .2f;
+
+        private int _index;
 
         public void Injection(Transform parent, Animator animator, IMagazine magazine) { }
 
         public void Action(bool isAction, IPlayerContext context)
         {
             context.IsAiming = isAction;
+
+            var scope = Locator<IScopeCamera>.Instance.Current;
+            scope.IsActive = isAction;
         }
+
+        private void OnIndexChange() => _index = _index++ % zoomMultiplyList.Length;
     }
 }

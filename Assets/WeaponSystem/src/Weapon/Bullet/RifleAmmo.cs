@@ -4,12 +4,13 @@ using WeaponSystem.Effect;
 
 namespace WeaponSystem.Weapon.Bullet
 {
-    [AddComponentMenu("WeaponSystem/RifleAmmo"), RequireComponent(typeof(Rigidbody), typeof(Collider))]
+    [RequireComponent(typeof(Rigidbody), typeof(Collider))]
+    [AddComponentMenu("WeaponSystem/RifleAmmo")]
     public class RifleAmmo : ProjectileAmmo
     {
         [SerializeField] private BulletConfig config;
         [SerializeField] private float lifeTime = 1f;
-        [SerializeReference] private IEffect[] hitEffects;
+        [SerializeReference, SubclassSelector] private IEffect[] _hitEffects = {new NoneEffect()};
         private float _lifeTimeCounter;
 
         private Rigidbody _rigidbody;
@@ -36,27 +37,25 @@ namespace WeaponSystem.Weapon.Bullet
 
         private void OnCollisionEnter(UnityEngine.Collision target)
         {
-            Debug.Log($"collision: {target.transform.name}");
             if (target.collider.TryGetComponent(out IDamageable damageable))
             {
                 if (damageable.ObjectGroup.SelfId == ObjectGroup.SelfId && ObjectPermission.SelfDamage)
                 {
-                    Debug.Log("Self");
                     damageable.AddDamage(config.GetDamage(damageable.HitType));
                 }
 
                 if (damageable.ObjectGroup.GroupId == ObjectGroup.GroupId && ObjectPermission.TeamDamage)
                 {
-                    Debug.Log("Team");
                     damageable.AddDamage(config.GetDamage(damageable.HitType));
                 }
 
                 if (damageable.ObjectGroup.GroupId != ObjectGroup.GroupId && ObjectPermission.EnemyDamage)
                 {
-                    Debug.Log("Enemy");
                     damageable.AddDamage(config.GetDamage(damageable.HitType));
                 }
             }
+            
+            
 
             gameObject.SetActive(false);
         }

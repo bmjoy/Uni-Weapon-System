@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace WeaponSystem.Weapon.Magazine
 {
-    [Serializable]
+    [Serializable, AddTypeMenu("Box")]
     public class BoxMagazine : IMagazine
     {
         [SerializeField] private float reloadTime = .5f;
@@ -44,8 +44,6 @@ namespace WeaponSystem.Weapon.Magazine
             }
 
             IsReloading = false;
-        }
-
-        public void Injection(Transform parent, Animator animator, IMagazine magazine) { }
+        } 
     }
 }

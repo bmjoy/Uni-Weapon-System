@@ -7,10 +7,12 @@ namespace WeaponSystem.Camera
     public class CameraRotator : MonoBehaviour, ICameraRotate
     {
         [SerializeField] private RotateAxis verticalAxis;
+        [SerializeField] private RotateAxis verticalOffsetAxis;
         [SerializeField] private RotateAxis horizontalAxis;
+        [SerializeField] private RotateAxis horizontalOffsetAxis;
         [SerializeField] private Transform playerBody;
         [SerializeField] private Transform head;
-        
+
         private void OnEnable()
         {
             Cursor.lockState = CursorLockMode.Locked;
@@ -31,14 +33,20 @@ namespace WeaponSystem.Camera
 
         private void LateUpdate()
         {
+            var horizontalRotate =
+                Quaternion.AngleAxis(horizontalAxis.Current + horizontalOffsetAxis.Current, Vector3.up);
+
+            var verticalRotate =
+                Quaternion.AngleAxis(verticalAxis.Current + verticalOffsetAxis.Current, Vector3.left);
+
             if (playerBody == false || playerBody == head)
             {
-                head.transform.rotation = horizontalAxis[Vector3.up] * verticalAxis[Vector3.left];
+                head.transform.rotation = horizontalRotate * verticalRotate;
             }
             else
             {
-                head.transform.localRotation = verticalAxis[Vector3.left];
-                playerBody.rotation = horizontalAxis[Vector3.up];
+                head.transform.localRotation = verticalRotate;
+                playerBody.rotation = horizontalRotate;
             }
         }
 
@@ -48,10 +56,22 @@ namespace WeaponSystem.Camera
             set => verticalAxis.Current = value;
         }
 
+        public float VerticalOffset
+        {
+            get => verticalOffsetAxis.Current;
+            set => verticalOffsetAxis.Current = value;
+        }
+
         public float Horizontal
         {
             get => horizontalAxis.Current;
             set => horizontalAxis.Current = value;
+        }
+
+        public float HorizontalOffset
+        {
+            get => horizontalOffsetAxis.Current;
+            set => horizontalOffsetAxis.Current = value;
         }
     }
 }

@@ -369,22 +369,22 @@ PrefabInstance:
     - target: {fileID: 1861385123844786128, guid: 6431b78d1ca526247bb968632d7e30d9,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1861385123844786128, guid: 6431b78d1ca526247bb968632d7e30d9,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 2.658
       objectReference: {fileID: 0}
     - target: {fileID: 1861385123844786128, guid: 6431b78d1ca526247bb968632d7e30d9,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1861385123844786128, guid: 6431b78d1ca526247bb968632d7e30d9,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8.059
+      value: 12.2
       objectReference: {fileID: 0}
     - target: {fileID: 1861385123844786128, guid: 6431b78d1ca526247bb968632d7e30d9,
         type: 3}
@@ -1775,7 +1775,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: eb79e3fd0dd669f40a90a984b92a0ccf, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 8602096049182551983, guid: 6431b78d1ca526247bb968632d7e30d9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1867,7 +1867,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &497031854
 MonoBehaviour:
@@ -2006,7 +2006,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &924331744
 MonoBehaviour:
@@ -2114,7 +2114,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1011759442}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.24, z: 0.844}
+  m_LocalPosition: {x: 0, y: 5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4723960008239024}
@@ -2291,6 +2291,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4784353573127966418}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1333997894 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4784353572966355972, guid: 7b0d5458110cd6543861af73f9d99094,
+    type: 3}
+  m_PrefabInstance: {fileID: 4784353573127966418}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1354216667
 GameObject:
   m_ObjectHideFlags: 0
@@ -2368,7 +2374,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1923879632
 Transform:
   m_ObjectHideFlags: 0
@@ -2446,6 +2452,9 @@ MonoBehaviour:
           id: 7
         _shotgunDefuse:
           id: 8
+        _muzzleFlash:
+          id: 9
+        animationTriggerName: 
     00000001:
       type: {class: AimAction, ns: WeaponSystem.Weapon.Action.AltAttackAction, asm: Assembly-CSharp}
       data:
@@ -2588,6 +2597,8 @@ MonoBehaviour:
         asm: Assembly-CSharp}
       data:
         patternData: {fileID: 11400000, guid: efbc0253352038c4889bc223e5f2dd3d, type: 2}
+    00000009:
+      type: {class: NoneEffect, ns: WeaponSystem.Effect, asm: Assembly-CSharp}
 --- !u!1001 &2019089856
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2961,8 +2972,8 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.01
-  far clip plane: 10
-  field of view: 40
+  far clip plane: 1
+  field of view: 60
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -2987,10 +2998,65 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4723960008239024}
     m_Modifications:
+    - target: {fileID: 78636092193105502, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.00013888831
+      objectReference: {fileID: 0}
+    - target: {fileID: 78636092193105502, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.0010914179
+      objectReference: {fileID: 0}
+    - target: {fileID: 78636092193105502, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.7932161e-10
+      objectReference: {fileID: 0}
+    - target: {fileID: 78636092193105502, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7560271
+      objectReference: {fileID: 0}
+    - target: {fileID: 78636092193105502, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.00000018088998
+      objectReference: {fileID: 0}
+    - target: {fileID: 78636092193105502, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.000000019414937
+      objectReference: {fileID: 0}
+    - target: {fileID: 78636092193105502, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.6545403
+      objectReference: {fileID: 0}
+    - target: {fileID: 78636092193105502, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 78636092193105502, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 78636092193105502, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4784353572152877332, guid: 7b0d5458110cd6543861af73f9d99094,
         type: 3}
       propertyPath: m_Name
       value: AKM (VALORANT Like)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877332, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4784353572152877333, guid: 7b0d5458110cd6543861af73f9d99094,
         type: 3}
@@ -3046,6 +3112,528 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _magazine
+      value: Assembly-CSharp WeaponSystem.Weapon.Magazine.NoneMagazine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _magazine.current
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _magazine.maxAmount
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _magazine.reloadTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _magazine.tacticalReloadTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._attackAction._bullet
+      value: Assembly-CSharp WeaponSystem.Weapon.Bullet.HitScanBullet
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._attackAction._recoil
+      value: Assembly-CSharp WeaponSystem.Weapon.Recoil.SinRandomRecoil
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._attackAction._shotSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 185a51fa217708947b78150e1dd5c5a2, type: 3}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._attackAction._bullet.ammo
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._bullet
+      value: Assembly-CSharp WeaponSystem.Weapon.Bullet.ProjectileBullet
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._muzzle
+      value: Assembly-CSharp WeaponSystem.Weapon.Muzzle.DefusingMuzzle
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._attackAction._bullet.tracer
+      value: 
+      objectReference: {fileID: -5570442391959180452, guid: af9c3fa21ab1cfb4fb9709755c6c2c97,
+        type: 3}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._attackAction._bullet.traser
+      value: 
+      objectReference: {fileID: 6755267066675809349, guid: 177c21eeeda1ee7418d4cff402eb6835,
+        type: 3}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._shotSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 2da55b7f472f912499673e9b4f2bad28, type: 3}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._attackAction._recoil.distance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._attackAction._bullet.hitRadius
+      value: 0.025
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._bullet.ammo
+      value: 
+      objectReference: {fileID: 8605308997326038192, guid: 4d03d830d59cb2b4fa207b6c51e49a94,
+        type: 3}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._attackAction._bullet._hitEffect
+      value: Assembly-CSharp WeaponSystem.Effect.NoneEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._attackAction._bullet.bulletSpeed
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._attackAction._recoil.patternData
+      value: 
+      objectReference: {fileID: 11400000, guid: c2e75145805bb0b4aa18764b3456b2f0,
+        type: 2}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._bullet.traser
+      value: 
+      objectReference: {fileID: 6755267066675809349, guid: 177c21eeeda1ee7418d4cff402eb6835,
+        type: 3}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._attackAction._bullet.bulletConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: b33c5bcecd9dd6641874aa8ffa74d129,
+        type: 2}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._muzzle.distance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._attackAction._recoil.easingDuration
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._bullet.hitRadius
+      value: 0.025
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._muzzle.reference
+      value: 
+      objectReference: {fileID: 1333997894}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._attackAction._recoil.horizontalWidth
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._bullet._hitEffect
+      value: Assembly-CSharp WeaponSystem.Effect.NoneEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._bullet.bulletSpeed
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._attackAction._bullet.bulletImpactPower
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._bullet.bulletConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: 98cfe5171aa65914c8666e4c73c82bca,
+        type: 2}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._attackAction._recoil.horizontalFrequency
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._attackAction._bullet.collisionLayer.m_Bits
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._bullet.bulletImpactPower
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._muzzle.settings.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._bullet.collisionLayer.m_Bits
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._attackAction._recoil.verticalWeightCurve.m_PreInfinity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._muzzle.settings.Array.data[0].state
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._attackAction._recoil.verticalWeightCurve.m_PostInfinity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._attackAction._recoil.horizontalWeightCurve.m_PreInfinity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._attackAction._recoil.verticalWeightCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._attackAction._recoil.horizontalWeightCurve.m_PostInfinity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._attackAction._recoil.horizontalWeightCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._attackAction._recoil.verticalWeightCurve.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._attackAction._muzzle.settings.Array.data[0].accuracyDistance
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._attackAction._recoil.horizontalWeightCurve.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._muzzle.settings.Array.data[0].accuracyRadius
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._muzzle.settings.Array.data[0].accuracyDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._attackAction._recoil.verticalWeightCurve.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._attackAction._recoil.verticalWeightCurve.m_Curve.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._attackAction._recoil.verticalWeightCurve.m_Curve.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._attackAction._recoil.horizontalWeightCurve.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._attackAction._recoil.horizontalWeightCurve.m_Curve.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._attackAction._recoil.verticalWeightCurve.m_Curve.Array.data[1].inSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._attackAction._recoil.verticalWeightCurve.m_Curve.Array.data[1].outSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._attackAction._recoil.horizontalWeightCurve.m_Curve.Array.data[0].inSlope
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._attackAction._recoil.horizontalWeightCurve.m_Curve.Array.data[1].inSlope
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._attackAction._recoil.horizontalWeightCurve.m_Curve.Array.data[0].outSlope
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._attackAction._recoil.horizontalWeightCurve.m_Curve.Array.data[1].outSlope
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._attackAction._recoil.horizontalWeightCurve.m_Curve.Array.data[0].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._attackAction._recoil.horizontalWeightCurve.m_Curve.Array.data[1].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._muzzle.settings.Array.data[0].verticalWeightCurve.m_PreInfinity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._muzzle.settings.Array.data[0].verticalWeightCurve.m_PostInfinity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._muzzle.settings.Array.data[0].horizontalWeightCurve.m_PreInfinity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._muzzle.settings.Array.data[0].verticalWeightCurve.m_RotationOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._muzzle.settings.Array.data[0].horizontalWeightCurve.m_PostInfinity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._muzzle.settings.Array.data[0].horizontalWeightCurve.m_RotationOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._muzzle.settings.Array.data[0].verticalWeightCurve.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._muzzle.settings.Array.data[0].horizontalWeightCurve.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._muzzle.settings.Array.data[0].verticalWeightCurve.m_Curve.Array.data[0].time
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._muzzle.settings.Array.data[0].verticalWeightCurve.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._muzzle.settings.Array.data[0].verticalWeightCurve.m_Curve.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._muzzle.settings.Array.data[0].verticalWeightCurve.m_Curve.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._muzzle.settings.Array.data[0].horizontalWeightCurve.m_Curve.Array.data[0].time
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._muzzle.settings.Array.data[0].horizontalWeightCurve.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._muzzle.settings.Array.data[0].horizontalWeightCurve.m_Curve.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._muzzle.settings.Array.data[0].horizontalWeightCurve.m_Curve.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._muzzle.settings.Array.data[0].verticalWeightCurve.m_Curve.Array.data[0].inSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._muzzle.settings.Array.data[0].verticalWeightCurve.m_Curve.Array.data[1].inSlope
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._muzzle.settings.Array.data[0].verticalWeightCurve.m_Curve.Array.data[0].inWeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._muzzle.settings.Array.data[0].verticalWeightCurve.m_Curve.Array.data[0].outSlope
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._muzzle.settings.Array.data[0].verticalWeightCurve.m_Curve.Array.data[1].inWeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._muzzle.settings.Array.data[0].verticalWeightCurve.m_Curve.Array.data[1].outSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._muzzle.settings.Array.data[0].horizontalWeightCurve.m_Curve.Array.data[0].inSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._muzzle.settings.Array.data[0].horizontalWeightCurve.m_Curve.Array.data[1].inSlope
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._muzzle.settings.Array.data[0].verticalWeightCurve.m_Curve.Array.data[0].outWeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._muzzle.settings.Array.data[0].verticalWeightCurve.m_Curve.Array.data[1].outWeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._muzzle.settings.Array.data[0].horizontalWeightCurve.m_Curve.Array.data[0].inWeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._muzzle.settings.Array.data[0].horizontalWeightCurve.m_Curve.Array.data[0].outSlope
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._muzzle.settings.Array.data[0].horizontalWeightCurve.m_Curve.Array.data[1].inWeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._muzzle.settings.Array.data[0].horizontalWeightCurve.m_Curve.Array.data[1].outSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._muzzle.settings.Array.data[0].horizontalWeightCurve.m_Curve.Array.data[0].outWeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._muzzle.settings.Array.data[0].horizontalWeightCurve.m_Curve.Array.data[1].outWeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._muzzle.settings.Array.data[0].verticalWeightCurve.m_Curve.Array.data[0].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._muzzle.settings.Array.data[0].verticalWeightCurve.m_Curve.Array.data[1].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._muzzle.settings.Array.data[0].verticalWeightCurve.m_Curve.Array.data[0].weightedMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._muzzle.settings.Array.data[0].verticalWeightCurve.m_Curve.Array.data[1].weightedMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._muzzle.settings.Array.data[0].horizontalWeightCurve.m_Curve.Array.data[0].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._muzzle.settings.Array.data[0].horizontalWeightCurve.m_Curve.Array.data[1].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._muzzle.settings.Array.data[0].horizontalWeightCurve.m_Curve.Array.data[0].weightedMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572152877338, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: _attackAction._aimingAttackAction._muzzle.settings.Array.data[0].horizontalWeightCurve.m_Curve.Array.data[1].weightedMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572749637135, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.064999856
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784353572749637135, guid: 7b0d5458110cd6543861af73f9d99094,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.335
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b0d5458110cd6543861af73f9d99094, type: 3}

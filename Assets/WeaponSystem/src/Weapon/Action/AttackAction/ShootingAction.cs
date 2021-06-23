@@ -1,4 +1,5 @@
 ﻿using System;
+using Audio;
 using UnityEngine;
 using WeaponSystem.Collision;
 using WeaponSystem.Effect;
@@ -25,13 +26,13 @@ namespace WeaponSystem
         [SerializeReference, SubclassSelector] private IRecoil _recoil = new SinRandomRecoil();
         [SerializeReference, SubclassSelector] private IBullet _bullet = new HitScanBullet();
         [SerializeField] private string animationTriggerName = "Shot";
-
-        [SerializeReference, SubclassSelector] private IEffect _effect;
+        [SerializeReference, SubclassSelector] private IEffect _muzzleFlash = new NoneEffect();
 
         private IObjectPermission _permission;
         private IObjectGroup _group;
         private Animator _animator;
         private IMagazine _magazine;
+        private int _animationTriggerHash;
 
         public void Injection(Transform parent, Animator animator, IMagazine magazine)
         {
@@ -39,6 +40,7 @@ namespace WeaponSystem
             _group = parent.GetComponentInParent<IObjectGroup>();
             _animator = animator;
             _magazine = magazine;
+            _animationTriggerHash = Animator.StringToHash(animationTriggerName);
         }
 
         void IAttackAction.Action(bool isAction, IPlayerContext context) => ShotAction(isAction, context);
@@ -48,7 +50,7 @@ namespace WeaponSystem
         private void ShotAction(bool isAction, IPlayerContext context)
         {
             _rpm.Update();
-            _recoil.Easing();
+            _recoil?.Easing();
 
             if (_magazine?.IsReloading ?? false) return;
 
@@ -71,10 +73,10 @@ namespace WeaponSystem
             _rpm.Lap();
             _recoil?.Generate();
             _muzzle.Defuse(context);
+            
+            _muzzleFlash?.Play(_muzzle.Position, Quaternion.identity, null);
 
-            _effect?.Play(_muzzle.Position, Quaternion.identity, null);
-
-            _animator.NullCast()?.SetTrigger(animationTriggerName);
+            _animator.NullCast()?.SetTrigger(_animationTriggerHash);
             _bullet?.Shot(_muzzle.Position, _muzzle.Direction, _permission, _group);
         }
     }

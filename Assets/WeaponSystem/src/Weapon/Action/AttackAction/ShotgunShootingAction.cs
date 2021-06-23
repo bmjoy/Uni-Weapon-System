@@ -1,7 +1,9 @@
 ﻿using System;
 using UnityEngine;
 using WeaponSystem.Collision;
+using WeaponSystem.Effect;
 using WeaponSystem.Movement;
+using WeaponSystem.Scripts.Runtime;
 using WeaponSystem.Weapon.Action.AltAttackAction;
 using WeaponSystem.Weapon.Action.Utils;
 using WeaponSystem.Weapon.Bullet;
@@ -22,11 +24,14 @@ namespace WeaponSystem.Weapon.Action.AttackAction
         [SerializeReference, SubclassSelector] private IRecoil _recoil = new SinRandomRecoil();
         [SerializeReference, SubclassSelector] private IBullet _bullet = new HitScanBullet();
         [SerializeReference, SubclassSelector] private IShotgunDefuse _shotgunDefuse = new RandomShotgunDefuse();
-
+        [SerializeReference, SubclassSelector] private IEffect _muzzleFlash = new NoneEffect();
+        [SerializeField] private string animationTriggerName;
+        
         private IObjectPermission _permission;
         private IObjectGroup _group;
         private IMagazine _magazine;
         private Animator _animator;
+        private int _animationTriggerHash;
         
         public void Injection(Transform parent, Animator animator, IMagazine magazine)
         {
@@ -34,6 +39,7 @@ namespace WeaponSystem.Weapon.Action.AttackAction
             _group = parent.GetComponentInParent<IObjectGroup>();
             _magazine = magazine;
             _animator = animator;
+            _animationTriggerHash = Animator.StringToHash(animationTriggerName);
         }
 
         void IAttackAction.Action(bool isAction, IPlayerContext context) => ShotAction(isAction, context);
@@ -64,6 +70,9 @@ namespace WeaponSystem.Weapon.Action.AttackAction
             _rpm.Lap();
             _recoil?.Generate();
             _muzzle.Defuse(context);
+            
+            _animator.NullCast()?.SetTrigger(_animationTriggerHash);
+            _muzzleFlash?.Play(_muzzle.Position, Quaternion.LookRotation(_muzzle.Direction), null);
 
             foreach (var offset in _shotgunDefuse)
             {

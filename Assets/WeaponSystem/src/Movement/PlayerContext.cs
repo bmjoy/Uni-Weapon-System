@@ -1,27 +1,18 @@
-﻿using WeaponSystem.Movement;
+﻿using UnityEngine;
+using WeaponSystem.Movement;
+using WeaponSystem.Runtime;
 
 namespace WeaponSystem
 {
     [System.Serializable]
-    public class PlayerInputContext : IPlayerContext
+    public class PlayerInputContext : MonoBehaviour, IPlayerContext
     {
-        public PlayerMovementState State { get; }
+        public PlayerMovementState State => _state;
+        private PlayerMovementState _state;
+        public bool IsAiming { get; set; }
 
-        public bool IsAiming
-        {
-            get => isAiming;
-            set => isAiming = value;
-        }
+        private void OnEnable() => Locator<IPlayerContext>.Instance.Bind(this);
 
-        public PlayerMovementState movementState;
-        public bool isAiming;
-
-        public static PlayerInputContext Default => new PlayerInputContext(PlayerMovementState.Rest, false);
-
-        public PlayerInputContext(PlayerMovementState movementState, bool isAiming)
-        {
-            this.movementState = movementState;
-            this.isAiming = isAiming;
-        }
+        private void OnDisable() => Locator<IPlayerContext>.Instance.Unbind(this);
     }
 }

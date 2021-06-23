@@ -7,8 +7,12 @@ namespace WeaponSystem.Cinemachine
 {
     public class CinemachineReferenceCamera : MonoBehaviour, IReferenceCamera
     {
+        [SerializeField] private int updateVCamFrameRate = 50;
+
         private CinemachineBrain _brain;
         private CinemachineVirtualCamera _camera;
+
+        private int _frameCount;
 
         public float FieldOfView
         {
@@ -35,6 +39,8 @@ namespace WeaponSystem.Cinemachine
 
         private void Update()
         {
+            _frameCount++;
+            if (_frameCount % updateVCamFrameRate != 0) return;
             var icmCam = _brain.ActiveVirtualCamera;
             _camera = icmCam.VirtualCameraGameObject.GetComponent<CinemachineVirtualCamera>();
         }

@@ -1,26 +1,13 @@
-﻿using UnityEngine;
-using System;
+﻿using System;
 
 namespace WeaponSystem.Weapon.Recoil
 {
     [Serializable, AddTypeMenu("None")]
     public class NoneRecoil : IRecoil
     {
-        // ReSharper disable Unity.PerformanceAnalysis
-        void IRecoil.Reset()
-        {
-#if DEBUG && UNITY_EDITOR
-            Debug.Log("Lap!");
-#endif
-        }
+        void IRecoil.Reset() { }
 
-        // ReSharper disable Unity.PerformanceAnalysis
-        void IRecoil.Generate()
-        {
-#if DEBUG && UNITY_EDITOR
-            Debug.Log("Generate!");
-#endif
-        }
+        void IRecoil.Generate() { }
 
         public void Easing() { }
     }

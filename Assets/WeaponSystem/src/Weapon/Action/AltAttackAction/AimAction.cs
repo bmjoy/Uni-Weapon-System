@@ -11,7 +11,6 @@ namespace WeaponSystem.Weapon.Action.AltAttackAction
 {
     /// <summary>
     /// FPSでエイムできるようにするアクションです。
-    /// Aim時は親のオブジェクトの中心に合わせるように
     /// </summary>
     [Serializable, AddTypeMenu("Aim")]
     public class AimAction : IAltAttackAction
@@ -44,6 +43,6 @@ namespace WeaponSystem.Weapon.Action.AltAttackAction
             if (UnityEngine.Input.GetKeyDown(KeyCode.LeftShift)) OnIndexChange();
         }
 
-        public void OnIndexChange() => _index = (++_index) % zoomMultiplyList.Count;
+        public void OnIndexChange() => _index = ++_index % zoomMultiplyList.Count;
     }
 }

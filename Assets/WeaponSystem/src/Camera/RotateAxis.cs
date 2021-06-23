@@ -10,9 +10,6 @@ namespace WeaponSystem.Camera
         [SerializeField] private float minAngle;
         [SerializeField] private bool isClamp;
         private float _current;
-
-        public Quaternion this[Vector3 axis] => Quaternion.AngleAxis(_current, axis);
-        
         public float Current
         {
             get => _current;

@@ -2,7 +2,7 @@
 
 namespace WeaponSystem.Runtime
 {
-    public sealed class Locator<T> : Singleton<Locator<T>>
+    public sealed class Locator<T>
     {
         public static Locator<T> Instance => _instance.Value;
         private static Lazy<Locator<T>> _instance = new Lazy<Locator<T>>(() => new Locator<T>());
@@ -17,6 +17,7 @@ namespace WeaponSystem.Runtime
 
         public void Unbind(T item)
         {
+            if (IsValid == false) return;
             if (Current.Equals(item) == false) return;
             Current = default;
         }

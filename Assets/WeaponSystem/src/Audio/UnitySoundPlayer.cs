@@ -9,17 +9,20 @@ namespace Audio
     {
         [Serializable]
         public class UnityAudioKeyValuePair : GenericKeyValuePair<string, AudioClip> { }
-        
+
         [SerializeField] private UnityAudioKeyValuePair[] audioClips;
 
         private AudioSource _audioSrc;
-        private void Awake() => _audioSrc = GetComponent<AudioSource>();
+
+        private void Awake()
+        {
+            _audioSrc = GetComponent<AudioSource>();
+        }
 
         public void Play(string soundName)
         {
             var clip = audioClips.FirstOrDefault(s => s.Key == soundName);
             if (clip == null) return;
-            // Stop();
             _audioSrc.PlayOneShot(clip.Value);
         }
 
