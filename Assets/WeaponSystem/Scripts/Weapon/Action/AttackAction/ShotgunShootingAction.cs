@@ -5,7 +5,6 @@ using WeaponSystem.Effect;
 using WeaponSystem.Movement;
 using WeaponSystem.Scripts.Runtime;
 using WeaponSystem.Weapon.Action.AltAttackAction;
-using WeaponSystem.Weapon.Action.Utils;
 using WeaponSystem.Weapon.Bullet;
 using WeaponSystem.Weapon.Magazine;
 using WeaponSystem.Weapon.Muzzle;
@@ -21,7 +20,7 @@ namespace WeaponSystem.Weapon.Action.AttackAction
         [SerializeReference, SubclassSelector] private IFireMode _mode = new FullAuto();
         [SerializeField] private int useAmmoAmount = 1;
         [SerializeReference, SubclassSelector] private IMuzzle _muzzle = new DefusingMuzzle();
-        [SerializeReference, SubclassSelector] private IRecoil _recoil = new SinRandomRecoil();
+        [SerializeReference, SubclassSelector] private IRecoil _recoil = new NoneRecoil();
         [SerializeReference, SubclassSelector] private IBullet _bullet = new HitScanBullet();
         [SerializeReference, SubclassSelector] private IShotgunDefuse _shotgunDefuse = new RandomShotgunDefuse();
         [SerializeReference, SubclassSelector] private IEffect _muzzleFlash = new NoneEffect();

@@ -33,11 +33,9 @@ namespace WeaponSystem.Camera
 
         private void LateUpdate()
         {
-            var horizontalRotate =
-                Quaternion.AngleAxis(horizontalAxis.Current + horizontalOffsetAxis.Current, Vector3.up);
+            var horizontalRotate = Quaternion.AngleAxis(Horizontal + HorizontalOffset, Vector3.up);
 
-            var verticalRotate =
-                Quaternion.AngleAxis(verticalAxis.Current + verticalOffsetAxis.Current, Vector3.left);
+            var verticalRotate = Quaternion.AngleAxis(Vertical + VerticalOffset, Vector3.left);
 
             if (playerBody == false || playerBody == head)
             {

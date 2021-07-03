@@ -28,7 +28,7 @@ namespace WeaponSystem.Weapon.Muzzle
 
             foreach (var setting in settings)
             {
-                if (setting.state == context.State)
+                if (setting?.state == context.State)
                 {
                     reference.rotation =
                         Quaternion.LookRotation(camera.rotation * setting.Defuse + camera.forward * setting.Distance);

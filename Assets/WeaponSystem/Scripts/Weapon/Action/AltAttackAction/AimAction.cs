@@ -21,13 +21,19 @@ namespace WeaponSystem.Weapon.Action.AltAttackAction
         [SerializeField] private List<float> zoomMultiplyList = new List<float> {.7f};
         [SerializeField] private Transform hipPosition;
         [SerializeField] private Transform adsPosition;
+        [SerializeField] private string aimParamName;
+        
+        private Animator _animator;
         private Transform _transform;
+        private int _aimParamCache;
         private int _index;
 
         public void Injection(Transform parent, Animator animator, IMagazine magazine)
         {
             _transform = parent;
             _transform.localPosition = hipPosition.localPosition;
+            _animator = animator;
+            _aimParamCache = Animator.StringToHash(aimParamName);
         }
 
         public void Action(bool isAction, IPlayerContext context)
@@ -41,8 +47,12 @@ namespace WeaponSystem.Weapon.Action.AltAttackAction
             Locator<IReferenceCamera>.Instance.Current.FieldOfView = Lerp(fromFov, toFov, Time.deltaTime / duration);
             _transform.localPosition = Vector3.Slerp(_transform.localPosition, -pos, Time.deltaTime / duration);
             if (UnityEngine.Input.GetKeyDown(KeyCode.LeftShift)) OnIndexChange();
+            _animator.SetBool(_aimParamCache, isAction);
         }
 
-        public void OnIndexChange() => _index = ++_index % zoomMultiplyList.Count;
+        public void OnIndexChange()
+        {
+            _index = ++_index % zoomMultiplyList.Count;
+        }
     }
 }

@@ -16,7 +16,6 @@ namespace WeaponSystem.Collision
         [SerializeField] private bool enemyDamage;
         [SerializeField] private bool enemyOwned;
 
-
         public bool SelfInteract => selfInteract;
         public bool SelfDamage => selfDamage;
         public bool SelfOwned => selfOwned;

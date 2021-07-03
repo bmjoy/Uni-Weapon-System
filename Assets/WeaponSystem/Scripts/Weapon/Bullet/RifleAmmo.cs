@@ -10,16 +10,21 @@ namespace WeaponSystem.Weapon.Bullet
     {
         [SerializeField] private BulletConfig config;
         [SerializeField] private float lifeTime = 1f;
-        [SerializeReference, SubclassSelector] private IEffect[] _hitEffects = {new NoneEffect()};
+
+        [SerializeField] private HitEffectConfig hitEffect;
         private float _lifeTimeCounter;
 
         private Rigidbody _rigidbody;
+
 
         public override IObjectPermission ObjectPermission { get; set; }
         public override IObjectGroup ObjectGroup { get; set; }
         public override void AddForce(Vector3 force) => _rigidbody.AddForce(force, ForceMode.VelocityChange);
 
-        private void Awake() => _rigidbody = GetComponent<Rigidbody>();
+        private void Awake()
+        {
+            _rigidbody = GetComponent<Rigidbody>();
+        }
 
         private void OnEnable() => _rigidbody.Sleep();
 
@@ -39,6 +44,11 @@ namespace WeaponSystem.Weapon.Bullet
 
         private void OnCollisionEnter(UnityEngine.Collision target)
         {
+            Debug.Log("hit");
+            var contact = target.contacts[0];
+
+            hitEffect.Play(target.transform, contact.point, contact.normal);
+
             if (target.collider.TryGetComponent(out IDamageable damageable))
             {
                 if (damageable.ObjectGroup.SelfId == ObjectGroup.SelfId && ObjectPermission.SelfDamage)

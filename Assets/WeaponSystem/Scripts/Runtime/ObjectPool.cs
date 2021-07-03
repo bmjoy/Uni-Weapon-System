@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using JetBrains.Annotations;
 using UnityEngine;
 using static System.Linq.Enumerable;
 using static UnityEngine.Object;
@@ -14,7 +13,7 @@ namespace WeaponSystem.Runtime
 
         private ObjectPool() { }
 
-        public ObjectPool(TComponent reference, int preInstantiate = 10, [CanBeNull] Transform parent = null)
+        public ObjectPool(TComponent reference, int preInstantiate = 10, Transform parent = null)
         {
             _reference = reference;
 
@@ -80,6 +79,8 @@ namespace WeaponSystem.Runtime
             transform.rotation = rotation;
             return prefab;
         }
+        
+        
 
         public void Clear()
         {

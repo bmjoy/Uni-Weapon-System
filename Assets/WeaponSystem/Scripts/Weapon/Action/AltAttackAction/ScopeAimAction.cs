@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Events;
 using WeaponSystem.Camera;
 using WeaponSystem.Movement;
 using WeaponSystem.Runtime;
@@ -12,6 +13,7 @@ namespace WeaponSystem.Weapon.Action.AltAttackAction
     {
         [SerializeField] private float[] zoomMultiplyList = {.5f, .4f};
         [SerializeField] private float duration = .2f;
+        public UnityEvent onScopeMultiplyChanged;
 
         private int _index;
 
@@ -27,6 +29,10 @@ namespace WeaponSystem.Weapon.Action.AltAttackAction
             if (UnityEngine.Input.GetKeyDown(KeyCode.LeftShift)) OnIndexChange();
         }
 
-        private void OnIndexChange() => _index = _index++ % zoomMultiplyList.Length;
+        private void OnIndexChange()
+        {
+            onScopeMultiplyChanged.Invoke();
+            _index = _index++ % zoomMultiplyList.Length;
+        }
     }
 }

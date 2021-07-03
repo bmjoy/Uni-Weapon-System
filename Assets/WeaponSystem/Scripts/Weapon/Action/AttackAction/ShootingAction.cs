@@ -1,5 +1,4 @@
 ﻿using System;
-using Audio;
 using UnityEngine;
 using WeaponSystem.Collision;
 using WeaponSystem.Effect;
@@ -8,7 +7,6 @@ using WeaponSystem.Scripts.Runtime;
 using WeaponSystem.Weapon.Action;
 using WeaponSystem.Weapon.Action.AltAttackAction;
 using WeaponSystem.Weapon.Action.AttackAction;
-using WeaponSystem.Weapon.Action.Utils;
 using WeaponSystem.Weapon.Bullet;
 using WeaponSystem.Weapon.Magazine;
 using WeaponSystem.Weapon.Muzzle;
@@ -23,9 +21,9 @@ namespace WeaponSystem
         [SerializeReference, SubclassSelector] private IFireMode _fireMode = new FullAuto();
         [SerializeField] private int useAmmoAmount = 1;
         [SerializeReference, SubclassSelector] private IMuzzle _muzzle = new DefusingMuzzle();
-        [SerializeReference, SubclassSelector] private IRecoil _recoil = new SinRandomRecoil();
+        [SerializeReference, SubclassSelector] private IRecoil _recoil = new NoneRecoil();
         [SerializeReference, SubclassSelector] private IBullet _bullet = new HitScanBullet();
-        [SerializeField] private string animationTriggerName = "Shot";
+        [SerializeField] private string shootingAnimParamName = "Shot";
         [SerializeReference, SubclassSelector] private IEffect _muzzleFlash = new NoneEffect();
 
         private IObjectPermission _permission;
@@ -33,6 +31,7 @@ namespace WeaponSystem
         private Animator _animator;
         private IMagazine _magazine;
         private int _animationTriggerHash;
+        private Transform _muzzleFalshRoot;
 
         public void Injection(Transform parent, Animator animator, IMagazine magazine)
         {
@@ -40,7 +39,8 @@ namespace WeaponSystem
             _group = parent.GetComponentInParent<IObjectGroup>();
             _animator = animator;
             _magazine = magazine;
-            _animationTriggerHash = Animator.StringToHash(animationTriggerName);
+            _animationTriggerHash = Animator.StringToHash(shootingAnimParamName);
+            _muzzleFalshRoot = new GameObject("Muzzle Flash pool").transform;
         }
 
         void IAttackAction.Action(bool isAction, IPlayerContext context) => ShotAction(isAction, context);
@@ -51,6 +51,7 @@ namespace WeaponSystem
         {
             _rpm.Update();
             _recoil?.Easing();
+
 
             if (_magazine?.IsReloading ?? false) return;
 
@@ -70,13 +71,14 @@ namespace WeaponSystem
                 return;
             }
 
+            _animator.NullCast()?.SetBool(_animationTriggerHash, false);
             _rpm.Lap();
             _recoil?.Generate();
             _muzzle.Defuse(context);
-            
-            _muzzleFlash?.Play(_muzzle.Position, Quaternion.identity, null);
 
-            _animator.NullCast()?.SetTrigger(_animationTriggerHash);
+            _muzzleFlash?.Play(_muzzle.Position, Quaternion.identity, _muzzleFalshRoot);
+
+            _animator.NullCast()?.SetBool(_animationTriggerHash, true);
             _bullet?.Shot(_muzzle.Position, _muzzle.Direction, _permission, _group);
         }
     }

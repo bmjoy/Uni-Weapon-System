@@ -15,26 +15,10 @@ namespace WeaponSystem.Effect
         public void Play(Vector3 position, Quaternion rotate, Transform parent)
         {
             if (IsValid == false) return;
-            particle.Play();
-        }
-
-        public void StopOrPlay(Vector3 position, Quaternion rotate, Transform parent)
-        {
-            if (IsValid == false) return;
-            if (particle.isPlaying)
-            {
-                Stop();
-            }
-            else
-            {
-                Play(position, rotate, parent);
-            }
-        }
-
-        public void Stop()
-        {
-            if (IsValid == false) return;
-            if (particle) particle.Stop();
+            _particlePool ??= new ObjectPool<ParticleSystem>(particle, 10, parent);
+            var effect = _particlePool.GetObject(position, rotate, parent);
+            effect.gameObject.SetActive(true);
+            effect.Play();
         }
     }
 }

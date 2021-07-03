@@ -1,6 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using WeaponSystem.Collision;
 using WeaponSystem.Input;
 using WeaponSystem.Movement;
 using WeaponSystem.Runtime;
@@ -13,9 +12,10 @@ namespace WeaponSystem.Weapon.Action.AttackAction
     public class CompositeAttackAction : IAttackAction
     {
         [SerializeReference, SubclassSelector] private IAttackAction[] _attackActionModes;
+        [SerializeField] private string modeChangeAnimParam = "isModeChange";
         private int _index;
         private Animator _animator;
-        private static readonly int ModeChange = Animator.StringToHash("ModeChange");
+        private int _modeChangeHash;
 
         public void Injection(Transform parent, Animator animator, IMagazine magazine)
         {
@@ -23,6 +23,8 @@ namespace WeaponSystem.Weapon.Action.AttackAction
             {
                 attackActionMode.Injection(parent, animator, magazine);
             }
+
+            _modeChangeHash = Animator.StringToHash(modeChangeAnimParam);
             _animator = animator;
         }
 
@@ -34,8 +36,9 @@ namespace WeaponSystem.Weapon.Action.AttackAction
 
         private void OnModeChanged()
         {
-            _index = (_index + 1) % _attackActionModes.Length;
-            _animator.SetTrigger(ModeChange);
+            _index = (++_index) % _attackActionModes.Length;
+            _animator.SetBool(_modeChangeHash, true);
+            _animator.SetBool(_modeChangeHash, false);
         }
     }
 }

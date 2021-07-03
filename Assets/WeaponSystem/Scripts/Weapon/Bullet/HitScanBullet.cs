@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using WeaponSystem.Collision;
 using WeaponSystem.Effect;
 using WeaponSystem.Runtime;
+using WeaponSystem.Scripts.Runtime;
 using static UnityEngine.Physics;
 
 namespace WeaponSystem.Weapon.Bullet
@@ -15,7 +17,7 @@ namespace WeaponSystem.Weapon.Bullet
         [SerializeField] private float bulletImpactPower = 10f;
         [SerializeField] private Tracer tracer;
         [SerializeField] private LayerMask collisionLayer = AllLayers;
-        [SerializeReference, SubclassSelector] private IEffect _hitEffect = new NoneEffect();
+        [SerializeField] private HitEffectConfig hitEffect;
         private ObjectPool<Tracer> _tracerPool;
 
         public void Shot(Vector3 position, Vector3 direction, IObjectPermission permission, IObjectGroup group)
@@ -25,10 +27,14 @@ namespace WeaponSystem.Weapon.Bullet
 
             var t = _tracerPool.GetObject();
             t.StartPoint = position;
-            t.EndPoint = direction * bulletConfig.MaxDistance + position;
 
-            if (SphereCast(ray, hitRadius, out RaycastHit hit, bulletConfig.MaxDistance, collisionLayer) ==
-                false) return;
+            if (SphereCast(ray, hitRadius, out RaycastHit hit, bulletConfig.MaxDistance, collisionLayer) == false)
+            {
+                t.EndPoint = direction * bulletConfig.MaxDistance + position;
+                return;
+            }
+
+            hitEffect.NullCast()?.Play(hit.transform, hit.point, hit.normal);
 
             t.EndPoint = hit.point;
 
@@ -36,8 +42,6 @@ namespace WeaponSystem.Weapon.Bullet
             {
                 rigidbody.AddForce(-hit.normal * bulletImpactPower, ForceMode.Impulse);
             }
-
-            _hitEffect?.Play(hit.point, Quaternion.LookRotation(hit.normal), null);
 
             if (group == null || permission == null) return;
 

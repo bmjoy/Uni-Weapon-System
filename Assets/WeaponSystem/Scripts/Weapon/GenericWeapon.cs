@@ -17,7 +17,7 @@ namespace WeaponSystem.Weapon
         private IAltAttackAction _altAttackAction = new NoneAltAttackAction();
 
         [Space(20)] [SerializeReference, SubclassSelector]
-        private IMagazine _magazine = new NoneMagazine();
+        private IMagazine _magazine = new BoxMagazine();
 
         [Space(20)] [SerializeField] private Animator weaponAnimator;
         private IPlayerContext _context;
@@ -33,7 +33,7 @@ namespace WeaponSystem.Weapon
         {
             var input = Locator<IWeaponInput>.Instance.Current;
             _context = Locator<IPlayerContext>.Instance.Current;
-            if (input?.IsReload ?? false) CoroutineHandler.Instance.CoroutineStart(_magazine.Reload());
+            if (_magazine.IsReloading == false && (input?.IsReload ?? false)) StartCoroutine(_magazine.Reload());
 
             _attackAction?.Action(input?.IsAttack ?? false, _context);
             _altAttackAction?.Action(input?.IsAltAttack ?? false, _context);
