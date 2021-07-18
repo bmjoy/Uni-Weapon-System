@@ -1,9 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
+using AudioSystem;
+using ObjectPool;
 using UnityEngine;
 using WeaponSystem.Collision;
 using WeaponSystem.Effect;
-using WeaponSystem.Runtime;
+using WeaponSystem.Scripts.Debug;
 using WeaponSystem.Scripts.Runtime;
 using static UnityEngine.Physics;
 
@@ -17,26 +18,33 @@ namespace WeaponSystem.Weapon.Bullet
         [SerializeField] private float bulletImpactPower = 10f;
         [SerializeField] private Tracer tracer;
         [SerializeField] private LayerMask collisionLayer = AllLayers;
-        [SerializeField] private HitEffectConfig hitEffect;
-        private ObjectPool<Tracer> _tracerPool;
+        [SerializeField] private HitEffectCueSheet hitEffect;
+        private IObjectPool<Tracer> _tracerPool;
 
         public void Shot(Vector3 position, Vector3 direction, IObjectPermission permission, IObjectGroup group)
         {
-            _tracerPool ??= new ObjectPool<Tracer>(tracer, 10, new GameObject($"{tracer.name} Object Pool").transform);
+            _tracerPool ??= new ObjectPool<Tracer>(tracer, 15);
             var ray = new Ray(position, direction);
 
-            var t = _tracerPool.GetObject();
-            t.StartPoint = position;
+            var current = _tracerPool.GetObject();
+            current.gameObject.SetActive(true);
+            current.StartPoint = position;
 
             if (SphereCast(ray, hitRadius, out RaycastHit hit, bulletConfig.MaxDistance, collisionLayer) == false)
             {
-                t.EndPoint = direction * bulletConfig.MaxDistance + position;
+                current.EndPoint = direction * bulletConfig.MaxDistance + position;
                 return;
             }
 
-            hitEffect.NullCast()?.Play(hit.transform, hit.point, hit.normal);
+            hit.transform.ToString().Log();
 
-            t.EndPoint = hit.point;
+
+            if (hit.transform.TryGetComponent(out IObjectMaterial material))
+            {
+                hitEffect.NullCast()?.Play(material.GetMaterial(hit.point), hit.point, hit.normal, hit.transform);
+            }
+
+            current.EndPoint = hit.point;
 
             if (hit.collider.TryGetComponent(out Rigidbody rigidbody))
             {

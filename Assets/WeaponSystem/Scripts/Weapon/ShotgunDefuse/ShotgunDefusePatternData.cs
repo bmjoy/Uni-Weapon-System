@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace WeaponSystem.Weapon.ShotgunPattern
 {
-    [CreateAssetMenu(fileName = "New ShotgunDefusePatternData", menuName = "GenericWeapon System/New ShotgunDefusePatternData", order = 0)]
+    [CreateAssetMenu(fileName = "New ShotgunDefusePatternData", menuName = "WeaponSystem/New ShotgunDefusePatternData", order = 0)]
     public class ShotgunDefusePatternData : ScriptableObject, IEnumerable<Vector3>
     {
         [SerializeField] private Vector2[] pattern;

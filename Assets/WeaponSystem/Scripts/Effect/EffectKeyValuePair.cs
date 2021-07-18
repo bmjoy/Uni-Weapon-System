@@ -1,5 +1,5 @@
-﻿using Cinemachine;
-using UnityEngine;
+﻿using UnityEngine;
+using WeaponSystem.Scripts.Attribute;
 
 namespace WeaponSystem.Effect
 {

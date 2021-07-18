@@ -6,7 +6,7 @@ using static UnityEngine.Mathf;
 namespace WeaponSystem.Input
 {
     [Serializable]
-    public class InputManagerMouseCameraInput : ICameraInput
+    public class UnityMouseCameraInput : ICameraInput
     {
         [SerializeField, Range(0.01f, 100f)] private float sensitivity = 10f;
         [SerializeField] private bool isInvert;

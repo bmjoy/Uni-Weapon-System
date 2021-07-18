@@ -5,7 +5,7 @@ namespace WeaponSystem.Input
 {
     public class SimpleCameraInputBinder : MonoBehaviour
     {
-        [SerializeReference, SubclassSelector] private ICameraInput _input = new InputManagerMouseCameraInput();
+        [SerializeReference, SubclassSelector] private ICameraInput _input = new UnityMouseCameraInput();
 
         private void Update() => Locator<ICameraInput>.Instance.Bind(_input);
     }

@@ -14,7 +14,7 @@ namespace WeaponSystem.Editor
         [SerializeField] private AnimationCurve horizontalWeightCurve = AnimationCurve.EaseInOut(0f, 0.01f, 1f, 1f);
         private Vector2[] _temp;
 
-        [MenuItem("GenericWeapon System/Recoil Pattern Generator ")]
+        [MenuItem("WeaponSystem/Recoil Pattern Generator ")]
         public static void CreateWizard()
         {
             DisplayWizard<RecoilPatternGeneratorWizard>("Recoil Pattern Generator ", "Create");

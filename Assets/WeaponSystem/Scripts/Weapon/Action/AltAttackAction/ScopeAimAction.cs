@@ -21,11 +21,7 @@ namespace WeaponSystem.Weapon.Action.AltAttackAction
 
         public void Action(bool isAction, IPlayerContext context)
         {
-            context.IsAiming = isAction;
-
-            var scope = Locator<IScopeCamera>.Instance.Current;
-            scope.IsActive = isAction;
-
+            context.IsAiming = isAction; 
             if (UnityEngine.Input.GetKeyDown(KeyCode.LeftShift)) OnIndexChange();
         }
 

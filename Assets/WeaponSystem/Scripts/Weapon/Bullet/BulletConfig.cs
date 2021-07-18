@@ -3,7 +3,7 @@ using WeaponSystem.Collision;
 
 namespace WeaponSystem.Weapon.Bullet
 {
-    [CreateAssetMenu(fileName = "New Bullet Config", menuName = "GenericWeapon System/New Bullet Config", order = 0)]
+    [CreateAssetMenu(fileName = "New Bullet Config", menuName = "WeaponSystem/New Bullet Config", order = 0)]
     public class BulletConfig : ScriptableObject
     {
         [SerializeField] private float maxDistance = 300f;

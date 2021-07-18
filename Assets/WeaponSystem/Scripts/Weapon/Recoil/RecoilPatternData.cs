@@ -2,7 +2,7 @@
 
 namespace WeaponSystem.Weapon.Recoil
 {
-    [CreateAssetMenu(fileName = "New Recoil Pattern", menuName = "GenericWeapon System/New Recoil Pattern" + "", order = 0)]
+    [CreateAssetMenu(fileName = "New Recoil Pattern", menuName = "WeaponSystem/New Recoil Pattern" + "", order = 0)]
     public class RecoilPatternData : ScriptableObject
     {
         [SerializeField] public Vector2[] pattern = new Vector2[35];

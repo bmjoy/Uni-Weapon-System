@@ -1,9 +1,8 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace WeaponSystem.Effect
 {
-    public class ShurikenDisableController : MonoBehaviour
+    public class ParticleDisableController : MonoBehaviour
     {
         private ParticleSystem _particleSystem;
         private void Awake() => _particleSystem = GetComponent<ParticleSystem>();

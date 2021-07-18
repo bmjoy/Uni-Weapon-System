@@ -30,8 +30,8 @@ namespace WeaponSystem
         private IObjectGroup _group;
         private Animator _animator;
         private IMagazine _magazine;
-        private int _animationTriggerHash;
-        private Transform _muzzleFalshRoot;
+        private int? _animationTriggerHash;
+        private Transform _muzzleFlashRoot;
 
         public void Injection(Transform parent, Animator animator, IMagazine magazine)
         {
@@ -39,8 +39,8 @@ namespace WeaponSystem
             _group = parent.GetComponentInParent<IObjectGroup>();
             _animator = animator;
             _magazine = magazine;
-            _animationTriggerHash = Animator.StringToHash(shootingAnimParamName);
-            _muzzleFalshRoot = new GameObject("Muzzle Flash pool").transform;
+
+            _muzzleFlashRoot = new GameObject("Muzzle Flash pool").transform;
         }
 
         void IAttackAction.Action(bool isAction, IPlayerContext context) => ShotAction(isAction, context);
@@ -71,14 +71,23 @@ namespace WeaponSystem
                 return;
             }
 
-            _animator.NullCast()?.SetBool(_animationTriggerHash, false);
+            if (shootingAnimParamName != string.Empty)
+            {
+                _animationTriggerHash ??= Animator.StringToHash(shootingAnimParamName);
+                _animator.NullCast()?.SetBool(_animationTriggerHash!.Value, false);
+            }
+
             _rpm.Lap();
             _recoil?.Generate();
             _muzzle.Defuse(context);
 
-            _muzzleFlash?.Play(_muzzle.Position, Quaternion.identity, _muzzleFalshRoot);
-
-            _animator.NullCast()?.SetBool(_animationTriggerHash, true);
+            _muzzleFlash?.Play(_muzzle.Position, Quaternion.identity, _muzzleFlashRoot);
+            
+            if (shootingAnimParamName != string.Empty)
+            {
+                _animationTriggerHash ??= Animator.StringToHash(shootingAnimParamName);
+                _animator.NullCast()?.SetBool(_animationTriggerHash!.Value, true);
+            }
             _bullet?.Shot(_muzzle.Position, _muzzle.Direction, _permission, _group);
         }
     }

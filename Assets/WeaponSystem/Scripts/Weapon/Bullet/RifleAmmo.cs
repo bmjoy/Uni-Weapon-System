@@ -1,3 +1,4 @@
+using AudioSystem;
 using UnityEngine;
 using WeaponSystem.Collision;
 using WeaponSystem.Effect;
@@ -9,45 +10,25 @@ namespace WeaponSystem.Weapon.Bullet
     public class RifleAmmo : ProjectileAmmo
     {
         [SerializeField] private BulletConfig config;
-        [SerializeField] private float lifeTime = 1f;
-
-        [SerializeField] private HitEffectConfig hitEffect;
-        private float _lifeTimeCounter;
-
+        [SerializeField] private HitEffectCueSheet hitEffect;
         private Rigidbody _rigidbody;
-
 
         public override IObjectPermission ObjectPermission { get; set; }
         public override IObjectGroup ObjectGroup { get; set; }
         public override void AddForce(Vector3 force) => _rigidbody.AddForce(force, ForceMode.VelocityChange);
 
-        private void Awake()
-        {
-            _rigidbody = GetComponent<Rigidbody>();
-        }
+        private void Awake() => _rigidbody = GetComponent<Rigidbody>();
 
         private void OnEnable() => _rigidbody.Sleep();
 
-        private void OnDisable() => _lifeTimeCounter = 0f;
-
-        // Update is called once per frame
-        private void Update()
-        {
-            if (_lifeTimeCounter < lifeTime)
-            {
-                _lifeTimeCounter += Time.deltaTime;
-                return;
-            }
-
-            gameObject.SetActive(false);
-        }
-
         private void OnCollisionEnter(UnityEngine.Collision target)
         {
-            Debug.Log("hit");
             var contact = target.contacts[0];
-
-            hitEffect.Play(target.transform, contact.point, contact.normal);
+            
+            if (target.transform.TryGetComponent(out IObjectMaterial material))
+            {
+                hitEffect.Play(material.GetMaterial(contact.point), contact.point, contact.normal, target.transform);
+            }
 
             if (target.collider.TryGetComponent(out IDamageable damageable))
             {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using WeaponSystem.Weapon.Muzzle;
 
 namespace WeaponSystem.Weapon.Magazine
 {
@@ -13,13 +14,15 @@ namespace WeaponSystem.Weapon.Magazine
 
         private WaitForSeconds _reload;
 
+        public void Injection(Animator animator) { }
+
+        public IAmmoHolder AmmoHolder { get; set; }
         public int Current { get; private set; }
 
         public bool UseAmmo(int useAmount)
         {
             if (useAmount > Current) return false;
             Current -= useAmount;
-
             return true;
         }
 
@@ -31,14 +34,14 @@ namespace WeaponSystem.Weapon.Magazine
 
             _reload ??= new WaitForSeconds(reloadTime / maxAmount * reloadAmount);
 
-            while (Current <= maxAmount)
+            while (Current <= maxAmount && AmmoHolder.Remaining > 0)
             {
                 yield return _reload;
-                Current += reloadAmount;
+                Current += AmmoHolder.GetAmmo(reloadAmount);
                 Debug.Log($"Amount: {Current.ToString()}");
             }
 
             IsReloading = false;
-        } 
+        }
     }
 }

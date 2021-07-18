@@ -3,7 +3,7 @@
 namespace WeaponSystem.Input
 {
     [System.Serializable]
-    public class InputManagerKeyboardWeaponInput : IWeaponInput
+    public class UnityKeyboardWeaponInput : IWeaponInput
     {
         [SerializeField] private KeyCode[] attackKey = new KeyCode[] {KeyCode.Mouse0};
 
