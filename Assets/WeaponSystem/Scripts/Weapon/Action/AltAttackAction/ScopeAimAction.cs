@@ -1,9 +1,8 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.Events;
-using WeaponSystem.Camera;
-using WeaponSystem.Movement;
-using WeaponSystem.Runtime;
+using WeaponSystem.Scripts.Camera;
+using WeaponSystem.Scripts.Movement;
+using WeaponSystem.Weapon.Action.Utils;
 using WeaponSystem.Weapon.Magazine;
 
 namespace WeaponSystem.Weapon.Action.AltAttackAction
@@ -11,24 +10,40 @@ namespace WeaponSystem.Weapon.Action.AltAttackAction
     [Serializable, AddTypeMenu("ScopeAim")]
     public class ScopeAimAction : IAltAttackAction
     {
-        [SerializeField] private float[] zoomMultiplyList = {.5f, .4f};
+        [SerializeField] private ScopeCameraBase scopeCamera;
+        [SerializeField] private Transform hipPosition;
+        [SerializeField] private Transform aimPosition;
+        [SerializeField] private float fov;
         [SerializeField] private float duration = .2f;
-        public UnityEvent onScopeMultiplyChanged;
+        [SerializeField] private SecondBasedTimer scopedTime;
 
-        private int _index;
+        private Transform _parent;
 
-        public void Injection(Transform parent, Animator animator, IMagazine magazine) { }
+        public void Injection(Transform parent, Animator animator, IMagazine magazine)
+        {
+            _parent = parent;
+            _parent.localPosition = hipPosition.localPosition;
+        }
 
         public void Action(bool isAction, IPlayerContext context)
         {
-            context.IsAiming = isAction; 
-            if (UnityEngine.Input.GetKeyDown(KeyCode.LeftShift)) OnIndexChange();
-        }
+            context.IsAiming = isAction;
 
-        private void OnIndexChange()
-        {
-            onScopeMultiplyChanged.Invoke();
-            _index = _index++ % zoomMultiplyList.Length;
+            // move position
+            var position = isAction ? aimPosition.localPosition : hipPosition.localPosition;
+            _parent.localPosition = Vector3.Slerp(_parent.localPosition, -position, Time.deltaTime / duration);
+
+
+            scopeCamera.IsActive = scopedTime.IsValid;
+            // scoped time
+            if (isAction == false)
+            {
+                scopedTime.Lap();
+                return;
+            }
+
+            scopeCamera.FieldOfView = fov;
+            scopedTime.Update();
         }
     }
 }

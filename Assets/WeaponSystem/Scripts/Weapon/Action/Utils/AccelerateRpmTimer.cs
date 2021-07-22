@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using WeaponSystem.Scripts.Debug;
 
 namespace WeaponSystem.Weapon.Action.Utils
 {
@@ -28,7 +29,7 @@ namespace WeaponSystem.Weapon.Action.Utils
             _time += _intervalCounter;
             _intervalCounter = 0f;
 
-            Debug.Log($"time: {rpm.Evaluate(_time).ToString()}");
+            $"time: {rpm.Evaluate(_time).ToString()}".Log();
         }
     }
 }

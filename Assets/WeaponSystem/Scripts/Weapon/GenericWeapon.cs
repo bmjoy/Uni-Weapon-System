@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using WeaponSystem.Input;
-using WeaponSystem.Movement;
 using WeaponSystem.Runtime;
+using WeaponSystem.Scripts.Movement;
 using WeaponSystem.Scripts.Weapon.Magazine;
 using WeaponSystem.Weapon.Action.AltAttackAction;
 using WeaponSystem.Weapon.Action.AttackAction;

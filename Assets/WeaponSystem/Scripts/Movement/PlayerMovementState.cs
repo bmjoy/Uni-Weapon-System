@@ -1,4 +1,4 @@
-﻿namespace WeaponSystem
+﻿namespace WeaponSystem.Scripts.Movement
 {
     public enum PlayerMovementState
     {

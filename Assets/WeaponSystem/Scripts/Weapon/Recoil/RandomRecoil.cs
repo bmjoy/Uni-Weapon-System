@@ -18,7 +18,7 @@ namespace WeaponSystem.Weapon.Recoil
         public void Reset()
         {
             if (_easeTime > 0) return;
-            var rotate = Locator<ICameraRotate>.Instance.Current;
+            var rotate = Locator<ICameraFixedStar>.Instance.Current;
             if (rotate == null) return;
             
 
@@ -36,7 +36,7 @@ namespace WeaponSystem.Weapon.Recoil
 
         public void Easing()
         {
-            var rotate = Locator<ICameraRotate>.Instance.Current;
+            var rotate = Locator<ICameraFixedStar>.Instance.Current;
             if (rotate == null) return;
             if (_easeTime < 0f) return;
             rotate.VerticalOffset += _verticalRecoil;

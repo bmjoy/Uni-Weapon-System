@@ -8,12 +8,11 @@ namespace WeaponSystem.Weapon.Magazine
     [Serializable, AddTypeMenu("None")]
     public class NoneMagazine : IMagazine
     {
-        private const int MaxValue = 999;
         public void Injection(Animator animator) { }
 
         public IAmmoHolder AmmoHolder { get; set; }
-        public int Current => MaxValue;
-        public bool UseAmmo(int useAmount) => true;
+        public int Current => AmmoHolder.Remaining;
+        public bool UseAmmo(int useAmount) => AmmoHolder.GetAmmo(useAmount) > 0;
         public bool IsReloading => false;
 
         public IEnumerator Reload()

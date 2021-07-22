@@ -1,6 +1,6 @@
 ﻿namespace WeaponSystem.Camera
 {
-    public interface ICameraRotate
+    public interface ICameraFixedStar
     {
         float Vertical { get; set; }
         float VerticalOffset { get; set; }

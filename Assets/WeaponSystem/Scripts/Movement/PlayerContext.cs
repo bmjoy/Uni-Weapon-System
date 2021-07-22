@@ -1,23 +1,27 @@
-﻿using System;
-using UnityEngine;
-using WeaponSystem.Movement;
+﻿using UnityEngine;
 using WeaponSystem.Runtime;
 
-namespace WeaponSystem
+namespace WeaponSystem.Scripts.Movement
 {
-    [Serializable]
-    public class PlayerMoveBaseContext : MonoBehaviour, IPlayerContext
+    public class PlayerContext : MonoBehaviour, IPlayerContext
     {
         [SerializeField] private float restSpeedThreshold = .1f;
         [SerializeField] private float walkSpeedThreshold = 6f;
-        public PlayerMovementState State => _state;
-        private PlayerMovementState _state;
+        public PlayerMovementState State => state;
+        [SerializeField] private PlayerMovementState state;
+        [SerializeField] private bool grounded;
+
         public bool IsAiming { get; set; }
-        
+
         public float Speed { get; set; }
         public bool IsCrouch { get; set; }
-        public bool IsGrounded { get; set; }
-        
+
+        public bool IsGrounded
+        {
+            get => grounded;
+            set => grounded = value;
+        }
+
         private void OnEnable() => Locator<IPlayerContext>.Instance.Bind(this);
 
         private void OnDisable() => Locator<IPlayerContext>.Instance.Unbind(this);
@@ -26,27 +30,29 @@ namespace WeaponSystem
         {
             if (IsGrounded == false)
             {
-                _state = PlayerMovementState.Air;
+                state = PlayerMovementState.Air;
                 return;
             }
 
             if (IsCrouch)
             {
-                _state = PlayerMovementState.Crouch;
+                state = PlayerMovementState.Crouch;
                 return;
             }
 
             if (Speed > walkSpeedThreshold)
             {
-                _state = PlayerMovementState.Sprint;
+                state = PlayerMovementState.Sprint;
+                return;
             }
 
             if (Speed > restSpeedThreshold)
             {
-                _state = PlayerMovementState.Walk;
+                state = PlayerMovementState.Walk;
+                return;
             }
 
-            _state = PlayerMovementState.Rest;
+            state = PlayerMovementState.Rest;
         }
     }
 }

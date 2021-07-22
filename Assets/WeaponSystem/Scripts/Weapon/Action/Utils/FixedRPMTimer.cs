@@ -4,7 +4,7 @@ using System;
 namespace WeaponSystem.Weapon.Action.Utils
 {
     [Serializable, AddTypeMenu("Fixed")]
-    public class FixedRpmTimer : WeaponSystem.IRpmTimer
+    public class FixedRpmTimer : IRpmTimer
     {
         [SerializeField, Range(10f, 2000f)] private float rpm = 600f;
         private const float Minute = 60f;

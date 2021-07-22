@@ -1,4 +1,4 @@
-﻿using AudioSystem;
+﻿using AudioSystem.ObjectMaterial;
 using UnityEngine;
 using WeaponSystem.Collision;
 using WeaponSystem.Effect;
@@ -7,38 +7,49 @@ using WeaponSystem.Effect;
 namespace WeaponSystem.Weapon.Bullet
 {
     [RequireComponent(typeof(ConstantForce), typeof(Collider))]
-    public class RocketAmmo : ProjectileAmmo
+    public class ExplosionAmmo : ProjectileAmmo
     {
-        [SerializeField] private float radius;
-        [SerializeField] private float force = 2f;
-        [SerializeField] private HitEffectCueSheet hitEffect;
+        // damage
+        [SerializeField] private float explosionRadius;
+        [SerializeField] private float explosionForce = 20f;
         [SerializeField] private BulletConfig config;
+
+        // effect
+        [SerializeReference, SubclassSelector] private IEffect _explosionEffect = new NoneEffect();
+        [SerializeField] private HitEffectCueSheet hitEffect;
+
+
+        private Transform _self;
+        private ConstantForce _force;
         public override IObjectPermission ObjectPermission { get; set; }
         public override IObjectGroup ObjectGroup { get; set; }
 
         public override void AddForce(Vector3 force) => _force.force = force;
 
-        private ConstantForce _force;
-
-        private void Awake() => _force = GetComponent<ConstantForce>();
+        private void Awake()
+        {
+            _self = transform;
+            _force = GetComponent<ConstantForce>();
+        }
 
         private void OnCollisionEnter(UnityEngine.Collision target)
         {
-            var contact = target.contacts[0];
-            
-            if (target.transform.TryGetComponent(out IObjectMaterial material))
-            {
-                hitEffect.Play(material.GetMaterial(contact.point), contact.point, contact.normal, target.transform);
-            }
-            
             Collider[] colliders = { };
-            Physics.OverlapSphereNonAlloc(transform.position, radius, colliders);
+            Physics.OverlapSphereNonAlloc(_self.position, explosionRadius, colliders);
 
+            CheckColliders(colliders);
+            PlayEffect(target);
+
+            gameObject.SetActive(false);
+        }
+
+        void CheckColliders(Collider[] colliders)
+        {
             foreach (var c in colliders)
             {
                 if (c.TryGetComponent(out Rigidbody rigidbody))
                 {
-                    rigidbody.AddExplosionForce(force, transform.position, radius);
+                    rigidbody.AddExplosionForce(explosionForce, transform.position, explosionRadius);
                 }
 
                 if (c.TryGetComponent(out IDamageable damageable))
@@ -60,5 +71,19 @@ namespace WeaponSystem.Weapon.Bullet
                 }
             }
         }
+
+        void PlayEffect(UnityEngine.Collision target)
+        {
+            if (hitEffect == null) return;
+            var contact = target.contacts[0];
+            if (target.transform.TryGetComponent(out IObjectMaterial material))
+            {
+                hitEffect.Play(material.GetMaterial(contact.point), contact.point, contact.normal, target.transform);
+            }
+
+            _explosionEffect?.Play(_self.position, Quaternion.identity, target.transform);
+        }
+
+        private void OnDrawGizmos() => Gizmos.DrawWireSphere(transform.position, explosionRadius);
     }
 }

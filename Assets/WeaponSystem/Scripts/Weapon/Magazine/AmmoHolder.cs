@@ -4,10 +4,12 @@ using WeaponSystem.Weapon.Muzzle;
 
 namespace WeaponSystem.Scripts.Weapon.Magazine
 {
-    [Serializable]
+    [Serializable, AddTypeMenu("Standard")]
     public class AmmoHolder : IAmmoHolder
     {
         [SerializeField] private int remaining = 120;
+
+        public bool IsEmpty => remaining <= 0;
 
         public int Remaining
         {

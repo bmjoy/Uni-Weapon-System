@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using WeaponSystem.Collision;
-using WeaponSystem.Movement;
+using WeaponSystem.Scripts.Movement;
 using WeaponSystem.Weapon.Magazine;
 
 namespace WeaponSystem.Weapon.Action.AttackAction

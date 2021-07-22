@@ -4,25 +4,25 @@ using WeaponSystem.Runtime;
 
 namespace WeaponSystem.Camera
 {
-    public class CameraRotator : MonoBehaviour, ICameraRotate
+    public class CameraFixedStar : MonoBehaviour, ICameraFixedStar
     {
-        [SerializeField] private RotateAxis verticalAxis;
-        [SerializeField] private RotateAxis verticalOffsetAxis;
-        [SerializeField] private RotateAxis horizontalAxis;
-        [SerializeField] private RotateAxis horizontalOffsetAxis;
+        [SerializeField] private AngleAxis verticalAxis;
+        [SerializeField] private AngleAxis verticalOffsetAxis;
+        [SerializeField] private AngleAxis horizontalAxis;
+        [SerializeField] private AngleAxis horizontalOffsetAxis;
         [SerializeField] private Transform playerBody;
         [SerializeField] private Transform head;
 
         private void OnEnable()
         {
             Cursor.lockState = CursorLockMode.Locked;
-            Locator<ICameraRotate>.Instance.Bind(this);
+            Locator<ICameraFixedStar>.Instance.Bind(this);
         }
 
         private void OnDisable()
         {
             Cursor.lockState = CursorLockMode.None;
-            Locator<ICameraRotate>.Instance.Unbind(this);
+            Locator<ICameraFixedStar>.Instance.Unbind(this);
         }
 
         private void Update()

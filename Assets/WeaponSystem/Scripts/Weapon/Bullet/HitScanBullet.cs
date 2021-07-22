@@ -1,5 +1,6 @@
 ﻿using System;
 using AudioSystem;
+using AudioSystem.ObjectMaterial;
 using ObjectPool;
 using UnityEngine;
 using WeaponSystem.Collision;
@@ -35,9 +36,6 @@ namespace WeaponSystem.Weapon.Bullet
                 current.EndPoint = direction * bulletConfig.MaxDistance + position;
                 return;
             }
-
-            hit.transform.ToString().Log();
-
 
             if (hit.transform.TryGetComponent(out IObjectMaterial material))
             {

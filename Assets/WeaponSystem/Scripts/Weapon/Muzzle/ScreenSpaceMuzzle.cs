@@ -1,8 +1,8 @@
 ﻿using System;
 using UnityEngine;
 using WeaponSystem.Camera;
-using WeaponSystem.Movement;
 using WeaponSystem.Runtime;
+using WeaponSystem.Scripts.Movement;
 using Random = UnityEngine.Random;
 
 namespace WeaponSystem.Weapon.Muzzle

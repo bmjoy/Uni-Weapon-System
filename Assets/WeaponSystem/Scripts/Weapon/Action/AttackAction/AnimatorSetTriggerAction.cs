@@ -1,6 +1,6 @@
 ﻿using System;
 using UnityEngine;
-using WeaponSystem.Movement;
+using WeaponSystem.Scripts.Movement;
 using WeaponSystem.Scripts.Runtime;
 using WeaponSystem.Weapon.Action.AltAttackAction;
 using WeaponSystem.Weapon.Action.Utils;

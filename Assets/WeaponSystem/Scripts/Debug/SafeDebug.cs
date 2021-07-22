@@ -5,6 +5,8 @@ namespace WeaponSystem.Scripts.Debug
     public static class SafeDebug
     {
         public static bool IsLog { get; set; } = true;
+
+        public static bool IsLogWarning { get; set; } = true;
         public static bool IsError { get; set; } = true;
         public static bool IsException { get; set; } = true;
         public static bool IsAssertion { get; set; } = true;

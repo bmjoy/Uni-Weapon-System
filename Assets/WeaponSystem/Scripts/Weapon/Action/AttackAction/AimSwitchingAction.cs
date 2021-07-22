@@ -1,6 +1,6 @@
 ﻿using System;
 using UnityEngine;
-using WeaponSystem.Movement;
+using WeaponSystem.Scripts.Movement;
 using WeaponSystem.Weapon.Magazine;
 
 namespace WeaponSystem.Weapon.Action.AttackAction
@@ -10,7 +10,7 @@ namespace WeaponSystem.Weapon.Action.AttackAction
     /// Valorantのヴァンダルのような動作を実現するためのクラス
     /// </summary>
     [Serializable, AddTypeMenu("Control/AimSwitching")]
-    public class AimSwitchingAttackAction : IAttackAction
+    public class AimSwitchingAction : IAttackAction
     {
         [SerializeReference, SubclassSelector] private IAttackAction _attackAction = new NoneAttackAction();
         [SerializeReference, SubclassSelector] private IAttackAction _aimingAttackAction = new NoneAttackAction();

@@ -1,19 +1,20 @@
 ﻿using UnityEngine;
-using WeaponSystem;
-using WeaponSystem.Movement;
 using WeaponSystem.Runtime;
 
-public class DebugPlayerInputContext : MonoBehaviour, IPlayerContext
+namespace WeaponSystem.Scripts.Movement
 {
-    [SerializeField] private PlayerMovementState state;
-    public PlayerMovementState State => state;
-    public bool isAiming;
-
-    public bool IsAiming
+    public class DebugPlayerInputContext : MonoBehaviour, IPlayerContext
     {
-        get => isAiming;
-        set => isAiming = value;
-    }
+        [SerializeField] private PlayerMovementState state;
+        public PlayerMovementState State => state;
+        public bool isAiming;
 
-    private void Start() => Locator<IPlayerContext>.Instance.Bind(this);
+        public bool IsAiming
+        {
+            get => isAiming;
+            set => isAiming = value;
+        }
+
+        private void Start() => Locator<IPlayerContext>.Instance.Bind(this);
+    }
 }

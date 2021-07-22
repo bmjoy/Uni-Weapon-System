@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using WeaponSystem.Scripts.Movement;
 using static UnityEngine.Mathf;
 using static UnityEngine.Random;
 

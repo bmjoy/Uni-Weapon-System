@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.Mathf;
 using WeaponSystem.Camera;
-using WeaponSystem.Movement;
 using WeaponSystem.Runtime;
+using WeaponSystem.Scripts.Movement;
 using WeaponSystem.Weapon.Magazine;
 
 namespace WeaponSystem.Weapon.Action.AltAttackAction
@@ -39,17 +39,16 @@ namespace WeaponSystem.Weapon.Action.AltAttackAction
             duration = Abs(duration);
             context.IsAiming = isAction;
 
-
+            scopeIndex = scopeIndex % sights.Count;
             var currentSight = sights[scopeIndex];
 
-            scopeIndex = scopeIndex % sights.Count;
             for (int i = 0; i < sights.Count; i++)
             {
                 sights[i].gameObject.SetActive(i == scopeIndex);
             }
 
             var pos = isAction ? sights[scopeIndex].AimPoint.localPosition : hipPosition.localPosition;
-            var toFov = isAction ? FovSettings.BaseFov * sights[scopeIndex].ZoomMultiple : FovSettings.BaseFov;
+            var toFov = isAction ? FovSettings.BaseFov * sights[scopeIndex].ZoomMultiples : FovSettings.BaseFov;
             var fromFov = Locator<IReferenceCamera>.Instance.Current.FieldOfView;
             Locator<IReferenceCamera>.Instance.Current.FieldOfView =
                 Lerp(fromFov, toFov, Time.deltaTime / currentSight.Duration);

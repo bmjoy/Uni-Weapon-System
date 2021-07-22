@@ -2,7 +2,7 @@
 using UnityEngine;
 using WeaponSystem.Collision;
 using WeaponSystem.Effect;
-using WeaponSystem.Movement;
+using WeaponSystem.Scripts.Movement;
 using WeaponSystem.Scripts.Runtime;
 using WeaponSystem.Weapon.Action.AltAttackAction;
 using WeaponSystem.Weapon.Bullet;

@@ -19,7 +19,7 @@ namespace WeaponSystem.Weapon.Recoil
             _index = 0;
 
             if (_easeTime > 0) return;
-            var rotate = Locator<ICameraRotate>.Instance.Current;
+            var rotate = Locator<ICameraFixedStar>.Instance.Current;
             if (rotate == null) return;
 
             rotate.HorizontalOffset = Mathf.Lerp(rotate.HorizontalOffset, 0f, Time.deltaTime / duration);
@@ -34,7 +34,7 @@ namespace WeaponSystem.Weapon.Recoil
 
         public void Easing()
         {
-            var rotate = Locator<ICameraRotate>.Instance.Current;
+            var rotate = Locator<ICameraFixedStar>.Instance.Current;
             if (_easeTime < 0f) return;
             if (rotate == null) return;
             rotate.HorizontalOffset += patternData[_index].x * power * Time.deltaTime;

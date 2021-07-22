@@ -1,15 +1,15 @@
 ﻿using System;
 using UnityEngine;
 using WeaponSystem.Input;
-using WeaponSystem.Movement;
 using WeaponSystem.Runtime;
+using WeaponSystem.Scripts.Movement;
 using WeaponSystem.Weapon.Magazine;
 
 namespace WeaponSystem.Weapon.Action.AttackAction
 {
-    [AddTypeMenu("Control/Composite")]
+    [AddTypeMenu("Control/Selectable")]
     [Serializable]
-    public class CompositeAttackAction : IAttackAction
+    public class SelectableAction : IAttackAction
     {
         [SerializeReference, SubclassSelector] private IAttackAction[] _attackActionModes;
         [SerializeField] private string modeChangeAnimParam = "isModeChange";
@@ -36,7 +36,7 @@ namespace WeaponSystem.Weapon.Action.AttackAction
 
         private void OnModeChanged()
         {
-            _index = (++_index) % _attackActionModes.Length;
+            _index = ++_index % _attackActionModes.Length;
             _animator.SetBool(_modeChangeHash, true);
             _animator.SetBool(_modeChangeHash, false);
         }

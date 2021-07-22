@@ -1,26 +1,30 @@
 ﻿using UnityEngine;
+using WeaponSystem.Camera;
 using WeaponSystem.Runtime;
 
-namespace WeaponSystem.Camera
+namespace WeaponSystem.Scripts.Camera
 {
-    public class ScopeCamera : MonoBehaviour, IScopeCamera
+    public class ScopeCamera : ScopeCameraBase
     {
-        private UnityEngine.Camera _camera;
+        [SerializeField] private UnityEngine.Camera overrideCamera;
 
-        public bool IsActive
+        public override float FieldOfView
         {
-            get => _camera.enabled;
-            set => _camera.enabled = value;
+            get => overrideCamera.fieldOfView;
+            set => overrideCamera.fieldOfView = Mathf.Abs(value);
         }
 
-        public float FieldOfView
+        public override bool IsActive
         {
-            get => _camera.fieldOfView;
-            set => _camera.fieldOfView = value;
+            get => overrideCamera.gameObject.activeSelf;
+            set
+            {
+                var depth = Locator<IReferenceCamera>.Instance.Current?.Camera.depth + 1 ?? overrideCamera.depth;
+                overrideCamera.depth = depth;
+                overrideCamera.gameObject.SetActive(value);
+            }
         }
 
-        private void Awake() => _camera = GetComponent<UnityEngine.Camera>();
-        private void OnEnable() => Locator<IScopeCamera>.Instance.Bind(this);
-        private void OnDisable() => Locator<IScopeCamera>.Instance.Unbind(this);
+        private void Awake() => overrideCamera = GetComponent<UnityEngine.Camera>();
     }
 }

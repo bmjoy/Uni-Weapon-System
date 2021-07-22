@@ -1,4 +1,4 @@
-﻿using WeaponSystem.Movement;
+﻿using WeaponSystem.Scripts.Movement;
 
 namespace WeaponSystem.Weapon.Action.AttackAction
 {

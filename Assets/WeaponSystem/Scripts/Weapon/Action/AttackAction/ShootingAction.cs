@@ -2,7 +2,8 @@
 using UnityEngine;
 using WeaponSystem.Collision;
 using WeaponSystem.Effect;
-using WeaponSystem.Movement;
+using WeaponSystem.Scripts.Debug;
+using WeaponSystem.Scripts.Movement;
 using WeaponSystem.Scripts.Runtime;
 using WeaponSystem.Weapon.Action;
 using WeaponSystem.Weapon.Action.AltAttackAction;
@@ -78,16 +79,18 @@ namespace WeaponSystem
             }
 
             _rpm.Lap();
+            DebugDisplay.Log($"{Time.time.ToString()}: Fire");
             _recoil?.Generate();
             _muzzle.Defuse(context);
 
             _muzzleFlash?.Play(_muzzle.Position, Quaternion.identity, _muzzleFlashRoot);
-            
+
             if (shootingAnimParamName != string.Empty)
             {
                 _animationTriggerHash ??= Animator.StringToHash(shootingAnimParamName);
                 _animator.NullCast()?.SetBool(_animationTriggerHash!.Value, true);
             }
+
             _bullet?.Shot(_muzzle.Position, _muzzle.Direction, _permission, _group);
         }
     }

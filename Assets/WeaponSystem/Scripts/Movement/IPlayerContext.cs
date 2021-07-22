@@ -1,4 +1,4 @@
-﻿namespace WeaponSystem.Movement
+﻿namespace WeaponSystem.Scripts.Movement
 {
     public interface IPlayerContext
     {
