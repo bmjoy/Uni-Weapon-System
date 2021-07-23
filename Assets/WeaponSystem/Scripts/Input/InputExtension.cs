@@ -13,7 +13,7 @@ namespace WeaponSystem.Input
         {
             foreach (var keyCode in keyCodes)
             {
-                if (keyCode.IsKeyPressed())return true;
+                if (keyCode.IsKeyPressed()) return true;
             }
 
             return false;

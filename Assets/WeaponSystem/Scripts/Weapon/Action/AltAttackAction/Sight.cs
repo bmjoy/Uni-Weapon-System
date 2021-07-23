@@ -4,7 +4,7 @@ namespace WeaponSystem.Weapon.Action.AltAttackAction
 {
     public class Sight : MonoBehaviour
     {
-        [SerializeField] private SightSetting[] _settings = new[] {new SightSetting()};
+        [SerializeField] private SightSetting[] settings = new[] {new SightSetting()};
         [SerializeField] private int zoomMultipleIndex;
         [SerializeField] private Transform aimPoint;
         [SerializeField] private float duration = .1f;
@@ -14,7 +14,7 @@ namespace WeaponSystem.Weapon.Action.AltAttackAction
         public float Duration => duration;
 
         public Transform AimPoint => aimPoint;
-        public float ZoomMultiples => _settings[zoomMultipleIndex = zoomMultipleIndex % _settings.Length].fovMultiple;
+        public float ZoomMultiples => settings[zoomMultipleIndex = zoomMultipleIndex % settings.Length].fovMultiple;
 
         private void OnEnable()
         {

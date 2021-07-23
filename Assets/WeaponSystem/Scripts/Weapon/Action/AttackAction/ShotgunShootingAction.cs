@@ -19,7 +19,7 @@ namespace WeaponSystem.Weapon.Action.AttackAction
         [SerializeReference] private IRpmTimer _rpm = new Utils.FixedRpmTimer();
         [SerializeReference, SubclassSelector] private IFireMode _mode = new FullAuto();
         [SerializeField] private int useAmmoAmount = 1;
-        [SerializeReference, SubclassSelector] private IMuzzle _muzzle = new DefusingMuzzle();
+        [SerializeReference, SubclassSelector] private IMuzzle _muzzle = new SpreadMuzzle();
         [SerializeReference, SubclassSelector] private IRecoil _recoil = new NoneRecoil();
         [SerializeReference, SubclassSelector] private IBullet _bullet = new HitScanBullet();
         [SerializeReference, SubclassSelector] private IShotgunDefuse _shotgunDefuse = new RandomShotgunDefuse();

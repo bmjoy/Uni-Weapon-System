@@ -2,6 +2,7 @@
 using UnityEngine;
 using WeaponSystem.Collision;
 using WeaponSystem.Effect;
+using WeaponSystem.Scripts.Debug;
 
 
 namespace WeaponSystem.Weapon.Bullet
@@ -35,39 +36,23 @@ namespace WeaponSystem.Weapon.Bullet
         private void OnCollisionEnter(UnityEngine.Collision target)
         {
             Collider[] colliders = { };
-            Physics.OverlapSphereNonAlloc(_self.position, explosionRadius, colliders);
+            Physics.OverlapSphereNonAlloc(transform.position, explosionRadius, colliders);
+            
+            
 
             CheckColliders(colliders);
-            PlayEffect(target);
-
-            gameObject.SetActive(false);
+            // gameObject.SetActive(false);
         }
 
         void CheckColliders(Collider[] colliders)
         {
             foreach (var c in colliders)
             {
+                c.name.Log();
+                
                 if (c.TryGetComponent(out Rigidbody rigidbody))
                 {
                     rigidbody.AddExplosionForce(explosionForce, transform.position, explosionRadius);
-                }
-
-                if (c.TryGetComponent(out IDamageable damageable))
-                {
-                    if (damageable.ObjectGroup.SelfId == ObjectGroup.SelfId && ObjectPermission.SelfDamage)
-                    {
-                        damageable.AddDamage(config.GetDamage(damageable.HitType));
-                    }
-
-                    if (damageable.ObjectGroup.GroupId == ObjectGroup.GroupId && ObjectPermission.TeamDamage)
-                    {
-                        damageable.AddDamage(config.GetDamage(damageable.HitType));
-                    }
-
-                    if (damageable.ObjectGroup.GroupId != ObjectGroup.GroupId && ObjectPermission.EnemyDamage)
-                    {
-                        damageable.AddDamage(config.GetDamage(damageable.HitType));
-                    }
                 }
             }
         }

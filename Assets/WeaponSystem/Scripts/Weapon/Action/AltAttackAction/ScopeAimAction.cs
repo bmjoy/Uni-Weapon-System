@@ -13,7 +13,7 @@ namespace WeaponSystem.Weapon.Action.AltAttackAction
         [SerializeField] private ScopeCameraBase scopeCamera;
         [SerializeField] private Transform hipPosition;
         [SerializeField] private Transform aimPosition;
-        [SerializeField] private float fov;
+        [SerializeField] private float zoomMultiply = .3f;
         [SerializeField] private float duration = .2f;
         [SerializeField] private SecondBasedTimer scopedTime;
 
@@ -42,7 +42,7 @@ namespace WeaponSystem.Weapon.Action.AltAttackAction
                 return;
             }
 
-            scopeCamera.FieldOfView = fov;
+            scopeCamera.FieldOfView = FovSettings.BaseFov * zoomMultiply;
             scopedTime.Update();
         }
     }

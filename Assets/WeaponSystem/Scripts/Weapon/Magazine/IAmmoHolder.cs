@@ -1,6 +1,5 @@
 ﻿namespace WeaponSystem.Weapon.Muzzle
 {
-    
     public interface IAmmoHolder
     {
         bool IsEmpty { get; }

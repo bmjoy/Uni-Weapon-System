@@ -11,34 +11,35 @@ namespace WeaponSystem.Scripts.Movement
     public class SimpleWalker : MonoBehaviour
     {
         // RequireComponent
-        [Header("Require Component")]
-        [SerializeField] private CharacterController controller;
+        [Header("Require Component")] [SerializeField]
+        private CharacterController controller;
+
         [SerializeField] private PlayerContext context;
-        
+
 
         // rotation && direction
-        [Header("Rotation & Direction")] 
-        [SerializeField] private Vector3 referenceUp = -gravity.normalized;
+        [Header("Rotation & Direction")] [SerializeField]
+        private Vector3 referenceUp = -gravity.normalized;
+
         [SerializeField] private Transform rotateReference;
         [SerializeField] private Transform[] characterBodies;
-        
+
         // height
-        [Header("Height")]
-        [SerializeField] private float standHeight = 1.6f;
+        [Header("Height")] [SerializeField] private float standHeight = 1.6f;
         [SerializeField] private float crouchHeight = .7f;
         [SerializeField] private float crouchDuration = .1f;
 
         // speed
-        [Header("Speed")]
-        [SerializeField] private float walkSpeed = 7f;
+        [Header("Speed")] [SerializeField] private float walkSpeed = 7f;
         [SerializeField] private float sprintSpeed = 10f;
         [SerializeField] private float crouchSpeed = 2.5f;
         [SerializeField] private float aimSpeed = 5f;
         [SerializeField] private float jumpPower;
 
         // ground check
-        [Header("Ground Check")]
-        [SerializeField] private LayerMask layerMask = AllLayers;
+        [Header("Ground Check")] [SerializeField]
+        private LayerMask layerMask = AllLayers;
+
         [SerializeField] private float groundOffset = .1f;
 
         public Vector3 ReferenceUp
@@ -60,7 +61,7 @@ namespace WeaponSystem.Scripts.Movement
             {
                 var input = Locator<IMovementInput>.Instance.Current;
                 if (input?.IsCrouch ?? false) return crouchSpeed;
-                if (context.IsAiming) return aimSpeed;
+                if (context != null && context.IsAiming) return aimSpeed;
                 if (input?.IsSprint ?? false) return sprintSpeed;
                 return walkSpeed;
             }
@@ -71,20 +72,25 @@ namespace WeaponSystem.Scripts.Movement
         {
             var input = Locator<IMovementInput>.Instance.Current;
             var grounded = Grounded;
-            context.IsGrounded = grounded;
+
 
             // movement
             var horizontal = input?.Horizontal ?? 0f;
             var vertical = input?.Vertical ?? 0f;
-
+            ContextUpdate(input, grounded);
             Move(new Vector3(horizontal, 0f, vertical), CurrentSpeed);
             JumpOrFall(true, false);
             // crouch or standing
-            context.IsCrouch = input?.IsCrouch ?? false;
+
             var height = input?.IsCrouch ?? false ? crouchHeight : standHeight;
             controller.height = Mathf.Lerp(controller.height, height, Time.deltaTime / crouchDuration);
         }
 
+        void ContextUpdate(IMovementInput input, bool grounded)
+        {
+            context.IsGrounded = grounded;
+            context.IsCrouch = input?.IsCrouch ?? false;
+        }
 
         private void Update()
         {
@@ -104,11 +110,9 @@ namespace WeaponSystem.Scripts.Movement
 
         void JumpOrFall(bool isJump, bool isGrounded)
         {
-            // if (isGrounded && isJump) { }
-            //
-            // if (isGrounded) return;
             controller.Move(gravity * Time.deltaTime);
         }
+
 
         private void OnDrawGizmos()
         {

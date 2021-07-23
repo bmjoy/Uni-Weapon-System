@@ -3,9 +3,9 @@
     public enum PlayerMovementState
     {
         Rest,
+        Crouch,
         Walk,
         Sprint,
-        Crouch,
         Air,
     }
 }

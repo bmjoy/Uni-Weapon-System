@@ -33,6 +33,7 @@ namespace WeaponSystem.Weapon
             _context = Locator<IPlayerContext>.Instance.Current;
             _altAttackAction?.Injection(transform, weaponAnimator, _magazine);
             _attackAction?.Injection(transform, weaponAnimator, _magazine);
+
             _magazine?.Injection(weaponAnimator);
         }
 

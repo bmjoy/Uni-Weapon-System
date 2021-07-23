@@ -1,6 +1,6 @@
 ﻿using UnityEditor;
 using UnityEngine;
-using WeaponSystem.Scripts.Attribute;
+using AudioSystem.Runtime;
 using static UnityEditor.EditorGUI;
 
 namespace AudioSystem.Editor
@@ -8,7 +8,7 @@ namespace AudioSystem.Editor
     [CustomPropertyDrawer(typeof(TagFieldAttribute))]
     public class TagFieldDrawer : PropertyDrawer
     {
-        private const float HSpace = 2;
+        const float HSpace = 2;
 
         private string _tagValue = string.Empty;
 

@@ -15,14 +15,10 @@ namespace WeaponSystem.Weapon.Action.Utils
         private float _time;
 
         public bool IsValid => _intervalCounter > Minute / rpm.Evaluate(_time);
-
-
+        
         public void Update() => _intervalCounter += IsValid ? 0f : Time.deltaTime;
 
-        public void Reset()
-        {
-            _time = Mathf.Lerp(_time, 0f, Time.deltaTime / resetDuration);
-        }
+        public void Reset() => _time = Mathf.Lerp(_time, 0f, Time.deltaTime / resetDuration);
 
         public void Lap()
         {

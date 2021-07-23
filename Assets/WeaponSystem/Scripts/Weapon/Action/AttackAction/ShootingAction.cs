@@ -21,7 +21,7 @@ namespace WeaponSystem
         [SerializeReference, SubclassSelector] private IRpmTimer _rpm = new Weapon.Action.Utils.FixedRpmTimer();
         [SerializeReference, SubclassSelector] private IFireMode _fireMode = new FullAuto();
         [SerializeField] private int useAmmoAmount = 1;
-        [SerializeReference, SubclassSelector] private IMuzzle _muzzle = new DefusingMuzzle();
+        [SerializeReference, SubclassSelector] private IMuzzle _muzzle = new SpreadMuzzle();
         [SerializeReference, SubclassSelector] private IRecoil _recoil = new NoneRecoil();
         [SerializeReference, SubclassSelector] private IBullet _bullet = new HitScanBullet();
         [SerializeField] private string shootingAnimParamName = "Shot";

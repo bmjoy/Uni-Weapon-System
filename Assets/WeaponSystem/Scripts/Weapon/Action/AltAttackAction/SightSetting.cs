@@ -4,9 +4,9 @@ using UnityEngine;
 namespace WeaponSystem.Weapon.Action.AltAttackAction
 {
     [Serializable]
-    public struct SightSetting
+    public class SightSetting
     {
-        public float fovMultiple;
+        public float fovMultiple = .9f;
         public Transform referencePoint;
     }
 }
