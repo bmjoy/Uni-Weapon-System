@@ -1,6 +1,6 @@
 ﻿using UnityEditor;
 using UnityEngine;
-using WeaponSystem.Scripts.Debug;
+using WeaponSystem.Core.Debug;
 using static UnityEngine.GUILayout;
 
 namespace WeaponSystem.Editor

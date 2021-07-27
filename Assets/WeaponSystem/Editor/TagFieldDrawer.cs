@@ -1,6 +1,6 @@
 ﻿using UnityEditor;
 using UnityEngine;
-using WeaponSystem.Scripts.Attribute;
+using WeaponSystem.Attribute;
 using static UnityEditor.EditorGUI;
 
 namespace WeaponSystem.Editor

@@ -1,10 +1,10 @@
 ﻿using UnityEditor;
 using UnityEngine;
-using WeaponSystem.Weapon.ShotgunPattern;
+using WeaponSystem.Core.Weapon.ShotgunDefuse;
 
 namespace WeaponSystem.Editor
 {
-    [CustomEditor(typeof(ShotgunDefusePatternData))]
+    [CustomEditor(typeof(ShotgunPatternDefuse))]
     public class ShotgunDefusePatternDataInspector : UnityEditor.Editor
     {
         private float _scale = 10f;
@@ -13,7 +13,7 @@ namespace WeaponSystem.Editor
         {
             base.OnInspectorGUI();
 
-            var pattern = (ShotgunDefusePatternData) target;
+            var pattern = (ShotgunPatternDefuse) target;
             EditorGUILayout.LabelField("Shotgun Defuse Graph");
             
             var rect = GUILayoutUtility.GetRect(100f, 100f);

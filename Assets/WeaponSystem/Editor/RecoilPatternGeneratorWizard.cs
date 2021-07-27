@@ -1,6 +1,6 @@
 ﻿using UnityEditor;
 using UnityEngine;
-using WeaponSystem.Weapon.Recoil;
+using WeaponSystem.Core.Weapon.Recoil;
 using Random = UnityEngine.Random;
 
 namespace WeaponSystem.Editor
