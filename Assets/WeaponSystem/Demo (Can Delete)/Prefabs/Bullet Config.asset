@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dca04eb58a48457e998606a29a387421, type: 3}
-  m_Name: New Bullet Config
+  m_Name: Bullet Config
   m_EditorClassIdentifier: 
   maxDistance: 300
   damageExtinctionCurve:
@@ -39,18 +39,18 @@ MonoBehaviour:
     m_RotationOrder: 4
   damages:
   - hitType: 0
-    damage: 20
+    damage: 33
   - hitType: 1
-    damage: 15
+    damage: 19
   - hitType: 2
-    damage: 14
+    damage: 15
   - hitType: 3
-    damage: 13
+    damage: 15
   - hitType: 4
-    damage: 13
+    damage: 15
   - hitType: 5
-    damage: 13
+    damage: 15
   - hitType: 6
-    damage: 15
+    damage: 19
   - hitType: 7
-    damage: 15
+    damage: 19
