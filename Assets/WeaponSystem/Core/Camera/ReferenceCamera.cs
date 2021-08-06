@@ -20,12 +20,12 @@ namespace WeaponSystem.Core.Camera
             set => _fovMultiple = Abs(value);
         }
 
-        private float _fovMultiple;
+        private float _fovMultiple = 1f;
 
         private void LateUpdate() => _camera.fieldOfView = FovMultiple * FieldOfView;
 
         public override UnityEngine.Camera Camera => _camera;
 
-        public override Transform Center => Camera.transform;
+        public override Transform Center => transform;
     }
 }

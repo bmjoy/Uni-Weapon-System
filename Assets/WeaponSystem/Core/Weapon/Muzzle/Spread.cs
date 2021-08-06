@@ -19,7 +19,7 @@ namespace WeaponSystem.Core.Weapon.Muzzle
         [SerializeField] private AnimationCurve horizontalWeightCurve = Constant(0f, 1f, 1f);
 
         public PlayerMovementState State => state;
-        
+
         public Vector3 Defuse(bool isAim)
         {
             var defuse = new Vector3(Range(-1f, 1f), Range(-1f, 1f));

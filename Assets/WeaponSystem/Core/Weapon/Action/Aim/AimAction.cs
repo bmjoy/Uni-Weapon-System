@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using WeaponSystem.Core.Camera;
+using WeaponSystem.Core.Debug;
 using WeaponSystem.Core.Movement;
 using WeaponSystem.Core.Runtime;
 using WeaponSystem.Core.Utils.FireMode;
@@ -31,18 +32,31 @@ namespace WeaponSystem.Core.Weapon.Action.Aim
         private IFireMode _singleClick = new SemiAuto();
         private Transform _self;
 
+        private bool _isAim;
+
         public void Injection(Transform parent, IMagazine magazine)
         {
             _self = parent;
-            _self.localPosition = hipPosition.localPosition;
-            sightIndex = sightIndex % sights.Count;
-            SetSight();
+            _self.localPosition = -hipPosition.localPosition;
+            for (int i = 0; i < sights.Count; i++)
+            {
+                sights[i].gameObject.SetActive(i == sightIndex);
+            }
         }
 
         public void Action(bool isAction, IPlayerContext context)
         {
             duration = Abs(duration);
             context.IsAiming = isAction;
+            _isAim = isAction;
+            if (isAction)
+            {
+                onAimIn.Invoke();
+            }
+            else
+            {
+                onAimOut.Invoke();
+            }
 
             var currentSight = sights[sightIndex];
 
@@ -57,23 +71,22 @@ namespace WeaponSystem.Core.Weapon.Action.Aim
             referenceCamera.FovMultiple = Lerp(from, to, Time.deltaTime / currentSight.Duration);
 
             _self.localPosition = Vector3.Slerp(_self.localPosition, -position, Time.deltaTime / currentSight.Duration);
+            sightIndex = sightIndex % sights.Count;
         }
 
         public void AltAction(bool isAltAction, IPlayerContext context)
         {
-            sightIndex = sightIndex % sights.Count;
+            if (_isAim == false) return;
             if (_singleClick.Evaluate(isAltAction) == false) return;
+            sights[sightIndex].ZoomChange();
             onSightChange.Invoke();
-            sightIndex = ++sightIndex % sights.Count;
-            SetSight();
         }
 
-        private void SetSight()
+        public void SightChange(int index)
         {
-            for (int i = 0; i < sights.Count; i++)
-            {
-                sights[i].gameObject.SetActive(i == sightIndex);
-            }
+            sightIndex = index % sights.Count;
+
+            for (int i = 0; i < sights.Count; i++) sights[i].gameObject.SetActive(i == sightIndex);
         }
     }
 }

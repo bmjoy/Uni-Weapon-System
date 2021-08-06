@@ -1,10 +1,11 @@
 ﻿using System;
-using EffectSystem;
-using ObjectPool;
 using UnityEngine;
 using UnityEngine.Events;
 using WeaponSystem.Core.Collision;
+using WeaponSystem.Core.Collision.ObjectMaterial;
+using WeaponSystem.Core.Weapon.Bullet.Ammo;
 using static UnityEngine.Physics;
+using Object = UnityEngine.Object;
 
 namespace WeaponSystem.Core.Weapon.Bullet
 {
@@ -14,32 +15,38 @@ namespace WeaponSystem.Core.Weapon.Bullet
         [SerializeField] private BulletConfig bulletConfig;
         [SerializeField] private float hitRadius = .025f;
         [SerializeField] private float bulletImpactPower = 10f;
-        [SerializeField] private Tracer tracer;
         [SerializeField] private LayerMask collisionLayer = AllLayers;
-        private IObjectPool<Tracer> _tracerPool;
+        [SerializeField] private Tracer tracer;
 
-        public UnityEvent onHit;
+        public UnityEvent<ObjectInfo> onHit;
         public UnityEvent<RaycastHit> onSelfHit;
         public UnityEvent<RaycastHit> onFriendlyHit;
         public UnityEvent<RaycastHit> onEnemyHit;
 
         public void Shot(Vector3 position, Vector3 direction, IObjectPermission permission, IObjectGroup group)
         {
-            _tracerPool ??= new ObjectPool<Tracer>(tracer, 15);
             var ray = new Ray(position, direction);
-
-            var current = _tracerPool.GetObject();
-            current.gameObject.SetActive(true);
-            current.StartPoint = position;
-
+            
             if (SphereCast(ray, hitRadius, out RaycastHit hit, bulletConfig.MaxDistance, collisionLayer) == false)
             {
-                current.EndPoint = direction * bulletConfig.MaxDistance + position;
+                if (tracer != null)
+                {
+                    Object.Instantiate(tracer, position, Quaternion.identity).SetPosition(position, direction * 1000f);
+                }
+
                 return;
             }
+            
+            if (tracer != null)
+            {
+                Object.Instantiate(tracer, position, Quaternion.identity).SetPosition(position, hit.point);
+            }
 
-            onHit.Invoke();
-            current.EndPoint = hit.point;
+            var info = hit.collider.TryGetComponent(out IObjectMaterial material)
+                ? new ObjectInfo(material, hit.transform, hit.normal)
+                : new ObjectInfo(null, hit.transform, hit.normal);
+
+            onHit.Invoke(info);
 
             if (hit.collider.TryGetComponent(out Rigidbody rigidbody))
             {
@@ -50,22 +57,34 @@ namespace WeaponSystem.Core.Weapon.Bullet
 
             if (hit.collider.TryGetComponent(out IDamageable damageable))
             {
-                if (damageable.ObjectGroup.SelfId == group.SelfId && permission.SelfDamage)
+                if (damageable.ObjectGroup.SelfId == group.SelfId)
                 {
                     onSelfHit.Invoke(hit);
-                    damageable.AddDamage(bulletConfig.GetDamage(damageable.HitType, hit.distance));
+
+                    if (permission.SelfDamage)
+                    {
+                        damageable.AddDamage(bulletConfig.GetDamage(damageable.HitType, hit.distance));
+                    }
                 }
 
-                if (damageable.ObjectGroup.GroupId == group.GroupId && permission.TeamDamage)
+                if (damageable.ObjectGroup.GroupId == group.GroupId)
                 {
-                    onSelfHit.Invoke(hit);
-                    damageable.AddDamage(bulletConfig.GetDamage(damageable.HitType, hit.distance));
+                    onFriendlyHit.Invoke(hit);
+
+                    if (permission.TeamDamage)
+                    {
+                        damageable.AddDamage(bulletConfig.GetDamage(damageable.HitType, hit.distance));
+                    }
                 }
 
-                if (damageable.ObjectGroup.GroupId != group.GroupId && permission.EnemyDamage)
+                if (damageable.ObjectGroup.GroupId != group.GroupId)
                 {
-                    onSelfHit.Invoke(hit);
-                    damageable.AddDamage(bulletConfig.GetDamage(damageable.HitType, hit.distance));
+                    onEnemyHit.Invoke(hit);
+
+                    if (permission.EnemyDamage)
+                    {
+                        damageable.AddDamage(bulletConfig.GetDamage(damageable.HitType, hit.distance));
+                    }
                 }
             }
         }

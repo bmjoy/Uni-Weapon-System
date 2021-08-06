@@ -3,12 +3,12 @@ using WeaponSystem.Core.Movement;
 
 namespace WeaponSystem.Core.Weapon.Muzzle
 {
-    [CreateAssetMenu]
-    public class SpreadSetting : ScriptableObject
+    [CreateAssetMenu(menuName = "WeaponSystem/New Spread Setting")]
+    public class SpreadSetting : SpreadSettingBase
     {
         [SerializeField] private Spread[] spreads;
 
-        public Spread this[PlayerMovementState state]
+        public override Spread this[PlayerMovementState state]
         {
             get
             {

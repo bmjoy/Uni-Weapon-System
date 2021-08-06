@@ -1,11 +1,8 @@
 using UnityEngine;
-using WeaponSystem.Core.Input;
 using WeaponSystem.Core.Runtime;
 
 namespace WeaponSystem.Core.Camera
 {
-    
-    
     public class CameraFixedStar : MonoBehaviour, ICameraFixedStar
     {
         [SerializeField] private AngleAxis verticalAxis;
@@ -28,12 +25,6 @@ namespace WeaponSystem.Core.Camera
         }
 
         private void Awake() => _self = transform;
-
-        private void Update()
-        {
-            verticalAxis.Current += Locator<ICameraInput>.Instance.Current?.Vertical ?? 0f;
-            horizontalAxis.Current += Locator<ICameraInput>.Instance.Current?.Horizontal ?? 0f;
-        }
 
         private void LateUpdate()
         {

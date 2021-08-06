@@ -9,7 +9,7 @@ namespace WeaponSystem.Core.Collision
         [SerializeField] private float maxHp;
         [ReadOnly, SerializeField] private float currentHp;
 
-        public UnityEvent onTakeDamage;
+        public UnityEvent<float, float> onTakeDamage;
         public UnityEvent onDie;
 
         private void OnEnable() => currentHp = maxHp;
@@ -19,10 +19,12 @@ namespace WeaponSystem.Core.Collision
             if (damage >= currentHp)
             {
                 Death();
+                currentHp = 0f;
                 return;
             }
-            onTakeDamage.Invoke();
+
             currentHp -= damage;
+            onTakeDamage.Invoke(damage, currentHp);
         }
 
         public void AddRecovery(float hitPoint) => currentHp += Mathf.Clamp(hitPoint, 0f, maxHp);

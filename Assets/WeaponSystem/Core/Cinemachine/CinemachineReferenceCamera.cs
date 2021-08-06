@@ -16,9 +16,11 @@ namespace WeaponSystem.Core.Cinemachine
 
         public override float FovMultiple
         {
-            get => _camera.m_Lens.FieldOfView / FieldOfView;
-            set => _camera.m_Lens.FieldOfView = FieldOfView * Mathf.Abs(value);
+            get => _fovMultiple;
+            set => _fovMultiple = Mathf.Abs(value);
         }
+
+        private float _fovMultiple = 1f;
 
         public override UnityEngine.Camera Camera => _brain.OutputCamera;
         public override Transform Center => transform;
@@ -28,7 +30,7 @@ namespace WeaponSystem.Core.Cinemachine
         private void OnEnable() => Locator<ReferenceCameraBase>.Instance.Bind(this);
 
         private void OnDisable() => Locator<ReferenceCameraBase>.Instance.Unbind(this);
-        
+
         private void Update()
         {
             _frameCount++;

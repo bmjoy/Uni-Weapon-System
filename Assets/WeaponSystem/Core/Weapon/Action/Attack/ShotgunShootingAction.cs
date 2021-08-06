@@ -40,7 +40,6 @@ namespace WeaponSystem.Core.Weapon.Action.Attack
 
         public void Action(bool isAction, IPlayerContext context) => Shot(isAction, context);
 
-
         private void Shot(bool isAction, IPlayerContext context)
         {
             _rpm.Update();
@@ -74,9 +73,6 @@ namespace WeaponSystem.Core.Weapon.Action.Attack
             }
         }
 
-        public void AltAction(bool isAltAction, IPlayerContext context)
-        {
-            
-        }
+        public void AltAction(bool isAltAction, IPlayerContext context) { }
     }
 }

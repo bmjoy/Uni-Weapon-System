@@ -6,9 +6,6 @@ namespace WeaponSystem.Core.Camera
     {
         [SerializeField, Range(0f, 170f)] private float fov = 60f;
 
-        private void Update()
-        {
-            ReferenceCameraBase.FieldOfView = fov;
-        }
+        private void Update() => ReferenceCameraBase.FieldOfView = fov;
     }
 }

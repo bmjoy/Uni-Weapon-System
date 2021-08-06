@@ -12,8 +12,9 @@ namespace WeaponSystem.Core.Weapon.Magazine
     {
         [SerializeField] private float reloadTime = .5f;
         [SerializeField] private float tacticalReloadTime = .3f;
-        [SerializeField] private uint maxAmount = 30;
-        [SerializeField, ReadOnly] private uint current;
+        [SerializeField] private uint capacity = 30;
+        [SerializeField, ReadOnly] private uint reaming = 999;
+        [SerializeField] private bool isClosedBolt;
 
         public UnityEvent onTacticalReloadStart;
         public UnityEvent onTacticalReloadEnd;
@@ -25,14 +26,16 @@ namespace WeaponSystem.Core.Weapon.Magazine
 
         public IAmmoHolder AmmoHolder { get; set; }
 
-        public uint Reaming => current;
+        public uint Capacity => capacity;
+        public uint Reaming => reaming;
 
         public bool UseAmmo(uint useAmount = 1)
         {
+            reaming = (uint) Mathf.Clamp(reaming, 0, capacity + (isClosedBolt ? 1 : 0));
             useAmount = (uint) Mathf.Clamp(useAmount, 0, Int32.MaxValue);
-            current = (uint) Mathf.Clamp(current, 0, maxAmount);
+            reaming = (uint) Mathf.Clamp(reaming, 0, capacity);
             if (useAmount > Reaming) return false;
-            current -= useAmount;
+            reaming -= useAmount;
             return true;
         }
 
@@ -41,9 +44,10 @@ namespace WeaponSystem.Core.Weapon.Magazine
 
         public IEnumerator Reload()
         {
-            current = (uint) Mathf.Clamp(current, 0, maxAmount);
-            var reloadAmount = maxAmount - current;
+            reaming = (uint) Mathf.Clamp(reaming, 0, capacity + (isClosedBolt ? 1 : 0));
+            var reloadAmount = capacity - reaming;
             if (AmmoHolder.IsEmpty) yield break;
+            if (reaming >= capacity) yield break;
 
             _isReloading = true;
 
@@ -52,13 +56,13 @@ namespace WeaponSystem.Core.Weapon.Magazine
                 onTacticalReloadStart.Invoke();
                 yield return _tacticalReload ??= new WaitForSeconds(tacticalReloadTime);
                 onTacticalReloadEnd.Invoke();
-                current += AmmoHolder.GetAmmo(reloadAmount) + 1;
+                reaming += AmmoHolder.GetAmmo(reloadAmount) + (uint) (isClosedBolt ? 1 : 0);
             }
             else
             {
                 onEmptyReloadStart.Invoke();
                 yield return _reload ??= new WaitForSeconds(reloadTime);
-                current += AmmoHolder.GetAmmo(reloadAmount);
+                reaming += AmmoHolder.GetAmmo(reloadAmount);
                 onEmptyReloadEnd.Invoke();
             }
 

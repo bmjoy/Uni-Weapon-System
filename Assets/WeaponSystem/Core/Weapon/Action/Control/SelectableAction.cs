@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 using WeaponSystem.Core.Movement;
+using WeaponSystem.Core.Utils.FireMode;
 using WeaponSystem.Core.Weapon.Magazine;
 
 namespace WeaponSystem.Core.Weapon.Action.Control
@@ -12,6 +13,7 @@ namespace WeaponSystem.Core.Weapon.Action.Control
     {
         [SerializeReference, SubclassSelector] private IWeaponAction[] _attackActionModes = {new NoneAction()};
         public UnityEvent onSelect;
+        private SemiAuto _singleClick;
         private int _index;
 
         public void Injection(Transform parent, IMagazine magazine)
@@ -29,8 +31,12 @@ namespace WeaponSystem.Core.Weapon.Action.Control
 
         public void AltAction(bool isAltAction, IPlayerContext context)
         {
-            onSelect.Invoke();
+            _singleClick ??= new SemiAuto();
+            
+            if (_singleClick.Evaluate(isAltAction) ==false) return;
+            
             _index = ++_index % _attackActionModes.Length;
+            onSelect.Invoke();
         }
     }
 }

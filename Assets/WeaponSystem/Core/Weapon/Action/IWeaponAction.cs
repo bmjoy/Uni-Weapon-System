@@ -11,9 +11,9 @@ namespace WeaponSystem.Core.Weapon.Action
         /// 独自にWeaponクラスを作成するときはAwake(), Start(), OnEnable()でコールしてください
         /// </summary>
         void Injection(Transform parent, IMagazine magazine);
-        
-        
+
         void Action(bool isAction, IPlayerContext context);
+        
         void AltAction(bool isAltAction, IPlayerContext context);
     }
 }

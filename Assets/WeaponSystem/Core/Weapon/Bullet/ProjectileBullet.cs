@@ -1,7 +1,9 @@
 ﻿using System;
-using ObjectPool;
 using UnityEngine;
+using UnityEngine.Events;
 using WeaponSystem.Core.Collision;
+using WeaponSystem.Core.ObjectPool;
+using WeaponSystem.Core.Weapon.Bullet.Ammo;
 
 namespace WeaponSystem.Core.Weapon.Bullet
 {
@@ -12,6 +14,8 @@ namespace WeaponSystem.Core.Weapon.Bullet
         [SerializeField] private ProjectileAmmo ammo;
         private IObjectPool<ProjectileAmmo> _ammoPool;
 
+        public UnityEvent<ObjectInfo> onHit;
+        
         public void Shot(Vector3 position, Vector3 direction, IObjectPermission permission, IObjectGroup group)
         {
             _ammoPool ??= new ObjectPool<ProjectileAmmo>(ammo, 10);

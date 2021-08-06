@@ -5,54 +5,27 @@ namespace WeaponSystem.Core.Movement
 {
     public class PlayerContext : MonoBehaviour, IPlayerContext
     {
-        [SerializeField] private float restSpeedThreshold = .1f;
-        [SerializeField] private float walkSpeedThreshold = 6f;
-        public PlayerMovementState State => state;
-        [SerializeField] private PlayerMovementState state;
-        [SerializeField] private bool grounded;
-
-        public bool IsAiming { get; set; }
-
-        public float Speed { get; set; }
-        public bool IsCrouch { get; set; }
-
-        public bool IsGrounded
-        {
-            get => grounded;
-            set => grounded = value;
-        }
-
         private void OnEnable() => Locator<IPlayerContext>.Instance.Bind(this);
 
         private void OnDisable() => Locator<IPlayerContext>.Instance.Unbind(this);
 
-        private void Update()
+        public bool IsMove { get; set; } = false;
+        public bool IsGrounded { get; set; } = false;
+        public bool IsSprint { get; set; } = false;
+        public bool IsCrouch { get; set; } = false;
+
+        public PlayerMovementState State
         {
-            if (IsGrounded == false)
+            get
             {
-                state = PlayerMovementState.Air;
-                return;
+                if (IsGrounded == false) return PlayerMovementState.Air;
+                if (IsSprint == false) return PlayerMovementState.Sprint;
+                if (IsMove) return PlayerMovementState.Walk;
+                if (IsCrouch) return PlayerMovementState.Crouch;
+                return PlayerMovementState.Rest;
             }
-
-            if (IsCrouch)
-            {
-                state = PlayerMovementState.Crouch;
-                return;
-            }
-
-            if (Speed > walkSpeedThreshold)
-            {
-                state = PlayerMovementState.Sprint;
-                return;
-            }
-
-            if (Speed > restSpeedThreshold)
-            {
-                state = PlayerMovementState.Walk;
-                return;
-            }
-
-            state = PlayerMovementState.Rest;
         }
+
+        public bool IsAiming { get; set; }
     }
 }
