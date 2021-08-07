@@ -3,9 +3,10 @@ using UnityEngine;
 using UnityEngine.Events;
 using WeaponSystem.Core.Collision;
 using WeaponSystem.Core.Collision.ObjectMaterial;
+using WeaponSystem.Core.ObjectPool;
+using WeaponSystem.Core.Runtime;
 using WeaponSystem.Core.Weapon.Bullet.Ammo;
 using static UnityEngine.Physics;
-using Object = UnityEngine.Object;
 
 namespace WeaponSystem.Core.Weapon.Bullet
 {
@@ -23,23 +24,27 @@ namespace WeaponSystem.Core.Weapon.Bullet
         public UnityEvent<RaycastHit> onFriendlyHit;
         public UnityEvent<RaycastHit> onEnemyHit;
 
+        private IObjectPool<Tracer> _tracerPool;
+
         public void Shot(Vector3 position, Vector3 direction, IObjectPermission permission, IObjectGroup group)
         {
             var ray = new Ray(position, direction);
-            
+
             if (SphereCast(ray, hitRadius, out RaycastHit hit, bulletConfig.MaxDistance, collisionLayer) == false)
             {
                 if (tracer != null)
                 {
-                    Object.Instantiate(tracer, position, Quaternion.identity).SetPosition(position, direction * 1000f);
+                    _tracerPool ??= Locator<IObjectPoolFactory>.Instance.Current.CreatePool(tracer, 10);
+                    _tracerPool.GetObject().SetPosition(position, direction * 10000f);
                 }
 
                 return;
             }
-            
+
             if (tracer != null)
             {
-                Object.Instantiate(tracer, position, Quaternion.identity).SetPosition(position, hit.point);
+                _tracerPool ??= Locator<IObjectPoolFactory>.Instance.Current.CreatePool(tracer, 10);
+                _tracerPool.GetObject().SetPosition(position, hit.point);
             }
 
             var info = hit.collider.TryGetComponent(out IObjectMaterial material)
@@ -48,9 +53,12 @@ namespace WeaponSystem.Core.Weapon.Bullet
 
             onHit.Invoke(info);
 
+            var distance = hit.distance;
+
             if (hit.collider.TryGetComponent(out Rigidbody rigidbody))
             {
-                rigidbody.AddForce(-hit.normal * bulletImpactPower, ForceMode.Impulse);
+                rigidbody.AddForce(-hit.normal * (bulletImpactPower * bulletConfig.GetImpact(distance)),
+                    ForceMode.Impulse);
             }
 
             if (group == null || permission == null) return;
@@ -63,7 +71,7 @@ namespace WeaponSystem.Core.Weapon.Bullet
 
                     if (permission.SelfDamage)
                     {
-                        damageable.AddDamage(bulletConfig.GetDamage(damageable.HitType, hit.distance));
+                        damageable.AddDamage(bulletConfig.GetDamage(damageable.HitType, distance));
                     }
                 }
 
@@ -73,7 +81,7 @@ namespace WeaponSystem.Core.Weapon.Bullet
 
                     if (permission.TeamDamage)
                     {
-                        damageable.AddDamage(bulletConfig.GetDamage(damageable.HitType, hit.distance));
+                        damageable.AddDamage(bulletConfig.GetDamage(damageable.HitType, distance));
                     }
                 }
 
@@ -83,7 +91,7 @@ namespace WeaponSystem.Core.Weapon.Bullet
 
                     if (permission.EnemyDamage)
                     {
-                        damageable.AddDamage(bulletConfig.GetDamage(damageable.HitType, hit.distance));
+                        damageable.AddDamage(bulletConfig.GetDamage(damageable.HitType, distance));
                     }
                 }
             }
