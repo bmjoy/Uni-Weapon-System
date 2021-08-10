@@ -38,9 +38,7 @@ namespace WeaponSystem.Core.Weapon.Action.Attack
             _magazine = magazine;
         }
 
-        public void Action(bool isAction, IPlayerContext context) => Shot(isAction, context);
-
-        private void Shot(bool isAction, IPlayerContext context)
+        public void Action(bool isAction, ref bool isAim, IPlayerState state)
         {
             _rpm.Update();
             _recoil?.Easing();
@@ -63,7 +61,7 @@ namespace WeaponSystem.Core.Weapon.Action.Attack
 
             _rpm.Lap();
             _recoil?.Generate();
-            _muzzle.Defuse(context);
+            _muzzle.Defuse(state, isAim);
             onFire.Invoke();
 
             foreach (var offset in shotgunDefuse)
@@ -73,6 +71,6 @@ namespace WeaponSystem.Core.Weapon.Action.Attack
             }
         }
 
-        public void AltAction(bool isAltAction, IPlayerContext context) { }
+        public void AltAction(bool isAltAction, IPlayerState state) { }
     }
 }

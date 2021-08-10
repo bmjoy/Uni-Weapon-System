@@ -14,7 +14,7 @@ namespace WeaponSystem.Core.Camera
 
         private void OnDisable() => Locator<ReferenceCameraBase>.Instance.Unbind(this);
 
-        public override float FovMultiple
+        public override float FovScale
         {
             get => _fovMultiple;
             set => _fovMultiple = Abs(value);
@@ -22,7 +22,7 @@ namespace WeaponSystem.Core.Camera
 
         private float _fovMultiple = 1f;
 
-        private void LateUpdate() => _camera.fieldOfView = FovMultiple * FieldOfView;
+        private void LateUpdate() => _camera.fieldOfView = FovScale * FieldOfView;
 
         public override UnityEngine.Camera Camera => _camera;
 

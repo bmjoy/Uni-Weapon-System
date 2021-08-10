@@ -44,10 +44,10 @@ namespace WeaponSystem.Core.Weapon.Action.Aim
             }
         }
 
-        public void Action(bool isAction, IPlayerContext context)
+        public void Action(bool isAction, ref bool isAim, IPlayerState state)
         {
             duration = Abs(duration);
-            context.IsAiming = isAction;
+            isAim = isAction;
             _isAim = isAction;
             if (isAction)
             {
@@ -64,17 +64,17 @@ namespace WeaponSystem.Core.Weapon.Action.Aim
 
             var position = isAction ? sights[sightIndex].AimPoint.localPosition : hipPosition.localPosition;
 
-            var to = isAction ? sights[sightIndex].ZoomMultiples : 1;
+            var to = isAction ? sights[sightIndex].ZoomMultiples : 1f;
 
-            var from = referenceCamera.FovMultiple;
+            var from = referenceCamera.FovScale;
 
-            referenceCamera.FovMultiple = Lerp(from, to, Time.deltaTime / currentSight.Duration);
+            referenceCamera.FovScale = Lerp(from, to, Time.deltaTime / currentSight.Duration);
 
             _self.localPosition = Vector3.Slerp(_self.localPosition, -position, Time.deltaTime / currentSight.Duration);
             sightIndex = sightIndex % sights.Count;
         }
 
-        public void AltAction(bool isAltAction, IPlayerContext context)
+        public void AltAction(bool isAltAction, IPlayerState state)
         {
             if (_isAim == false) return;
             if (_singleClick.Evaluate(isAltAction) == false) return;

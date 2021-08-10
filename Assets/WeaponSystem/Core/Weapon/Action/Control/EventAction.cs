@@ -13,8 +13,8 @@ namespace WeaponSystem.Core.Weapon.Action.Control
         public UnityEvent<bool> onAltAction;
 
         public void Injection(Transform parent, IMagazine magazine) { }
-        public void Action(bool isAction, IPlayerContext context) => onAction.Invoke(isAction);
+        public void Action(bool isAction,ref bool isAim, IPlayerState state) => onAction.Invoke(isAction);
 
-        public void AltAction(bool isAltAction, IPlayerContext context) => onAltAction.Invoke(isAltAction);
+        public void AltAction(bool isAltAction, IPlayerState state) => onAltAction.Invoke(isAltAction);
     }
 }

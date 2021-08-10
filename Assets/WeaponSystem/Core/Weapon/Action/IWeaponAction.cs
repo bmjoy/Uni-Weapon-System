@@ -12,8 +12,8 @@ namespace WeaponSystem.Core.Weapon.Action
         /// </summary>
         void Injection(Transform parent, IMagazine magazine);
 
-        void Action(bool isAction, IPlayerContext context);
-        
-        void AltAction(bool isAltAction, IPlayerContext context);
+        void Action(bool isAction, ref bool isAim, IPlayerState state);
+
+        void AltAction(bool isAltAction, IPlayerState state);
     }
 }

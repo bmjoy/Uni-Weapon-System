@@ -9,7 +9,7 @@ namespace WeaponSystem.Core.Weapon.Action
     public class NoneAction : IWeaponAction
     {
         public void Injection(Transform parent, IMagazine magazine) { }
-        public void Action(bool isAction, IPlayerContext context) { }
-        public void AltAction(bool isAltAction, IPlayerContext context) { }
+        public void Action(bool isAction, ref bool isAim, IPlayerState state) { }
+        public void AltAction(bool isAltAction, IPlayerState state) { }
     }
 }

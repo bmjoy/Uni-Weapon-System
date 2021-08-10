@@ -7,9 +7,9 @@ namespace WeaponSystem.InputDemo
     public class SimpleGenericWeaponInput : MonoBehaviour
     {
         [SerializeField] private InputKeys primaryActionKeys = new InputKeys(KeyCode.Mouse0);
-        [SerializeField] private InputKeys primaryAltActionKeys = new InputKeys(KeyCode.LeftShift);
+        [SerializeField] private InputKeys primaryAltActionKeys = new InputKeys(KeyCode.B);
         [SerializeField] private InputKeys secondaryActionKeys = new InputKeys(KeyCode.Mouse1);
-        [SerializeField] private InputKeys secondaryAltActionKeys = new InputKeys(KeyCode.B);
+        [SerializeField] private InputKeys secondaryAltActionKeys = new InputKeys(KeyCode.LeftShift);
         [SerializeField] private InputKeys reloadKeys = new InputKeys(KeyCode.R);
         
         private GenericWeapon _genericWeapon;
@@ -19,9 +19,9 @@ namespace WeaponSystem.InputDemo
         private void Update()
         {
             _genericWeapon.IsPrimaryAction = primaryActionKeys.IsAnyKeyPressed;
-            _genericWeapon.IsPrimaryAltAction = primaryAltActionKeys.IsAnyKeyPressed;
+            _genericWeapon.IsPrimaryAltAction = primaryAltActionKeys.IsAnyKeyDown;
             _genericWeapon.IsSecondaryAction = secondaryActionKeys.IsAnyKeyPressed;
-            _genericWeapon.IsPrimaryAltAction = secondaryAltActionKeys.IsAnyKeyPressed;
+            _genericWeapon.IsSecondaryAltAction = secondaryAltActionKeys.IsAnyKeyDown;
             _genericWeapon.IsReload = reloadKeys.IsAnyKeyDown;
         }
     }

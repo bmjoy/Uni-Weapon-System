@@ -26,16 +26,16 @@ namespace WeaponSystem.Core.Weapon.Action.Aim
         private SemiAuto _singleClick = new SemiAuto();
         private Transform _parent;
         private int _zoomMultiplyIndex = 0;
-        
+
         public void Injection(Transform parent, IMagazine magazine)
         {
             _parent = parent;
             _parent.localPosition = hipPosition.localPosition;
         }
 
-        public void Action(bool isAction, IPlayerContext context)
+        public void Action(bool isAction, ref bool isAim, IPlayerState state)
         {
-            context.IsAiming = isAction;
+            isAim = isAction;
 
             // move position
             var position = isAction ? aimPosition.localPosition : hipPosition.localPosition;
@@ -64,7 +64,7 @@ namespace WeaponSystem.Core.Weapon.Action.Aim
             scopedTime.Update();
         }
 
-        public void AltAction(bool isAltAction, IPlayerContext context)
+        public void AltAction(bool isAltAction, IPlayerState state)
         {
             if (_singleClick.Evaluate(isAltAction) == false) return;
             _zoomMultiplyIndex = ++_zoomMultiplyIndex % zoomMultiplyList.Count;

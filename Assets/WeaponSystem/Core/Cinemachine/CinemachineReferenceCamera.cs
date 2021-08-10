@@ -14,7 +14,7 @@ namespace WeaponSystem.Core.Cinemachine
 
         private int _frameCount;
 
-        public override float FovMultiple
+        public override float FovScale
         {
             get => _fovMultiple;
             set => _fovMultiple = Mathf.Abs(value);

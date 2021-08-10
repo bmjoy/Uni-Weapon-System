@@ -9,6 +9,6 @@ namespace WeaponSystem.Core.Weapon.Muzzle
         public Vector3 Direction { get; }
 
         public Quaternion Rotation { get; }
-        public void Defuse(IPlayerContext context);
+        public void Defuse(IPlayerState state, bool isAim);
     }
 }

@@ -4,8 +4,8 @@ namespace WeaponSystem.Core.Weapon.Action.Aim
 {
     public class Sight : MonoBehaviour
     {
-        [SerializeField] private float[] fovMultiple;
-        [SerializeField] private int zoomMultipleIndex;
+        [SerializeField] private float[] fovScales;
+        [SerializeField] private int fovScaleIndex;
         [SerializeField] private Transform aimPoint;
         [SerializeField] private float duration = .1f;
         [SerializeField] private GameObject[] sightModels;
@@ -13,9 +13,9 @@ namespace WeaponSystem.Core.Weapon.Action.Aim
         public float Duration => duration;
 
         public Transform AimPoint => aimPoint;
-        public float ZoomMultiples => fovMultiple[zoomMultipleIndex % fovMultiple.Length];
+        public float ZoomMultiples => fovScales[fovScaleIndex % fovScales.Length];
 
-        public void ZoomChange() => zoomMultipleIndex = ++zoomMultipleIndex % fovMultiple.Length;
+        public void ZoomChange() => fovScaleIndex = ++fovScaleIndex % fovScales.Length;
 
         private void OnEnable()
         {

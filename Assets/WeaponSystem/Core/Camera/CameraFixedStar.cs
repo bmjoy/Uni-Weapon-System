@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using WeaponSystem.Core.Runtime;
 
@@ -5,11 +6,16 @@ namespace WeaponSystem.Core.Camera
 {
     public class CameraFixedStar : MonoBehaviour, ICameraFixedStar
     {
-        [SerializeField] private AngleAxis verticalAxis;
+        [Header("Rotate Settings")] [SerializeField]
+        private AngleAxis verticalAxis;
+
         [SerializeField] private AngleAxis verticalOffsetAxis;
         [SerializeField] private AngleAxis horizontalAxis;
         [SerializeField] private AngleAxis horizontalOffsetAxis;
         [SerializeField] private Vector3 yaw = Vector3.up;
+
+        public Quaternion FinalRotate { get; set; }
+
         private Transform _self;
 
         private void OnEnable()
@@ -26,12 +32,16 @@ namespace WeaponSystem.Core.Camera
 
         private void Awake() => _self = transform;
 
-        private void LateUpdate()
+        private void Update()
         {
             var horizontal = horizontalAxis[yaw] * horizontalOffsetAxis[yaw];
             var vertical = verticalAxis[Pitch] * verticalOffsetAxis[Pitch];
+            FinalRotate = horizontal * vertical;
+        }
 
-            _self.rotation = horizontal * vertical;
+        private void LateUpdate()
+        {
+            _self.localRotation = FinalRotate;
         }
 
         public Vector3 Yaw

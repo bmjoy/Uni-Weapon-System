@@ -13,15 +13,18 @@ namespace WeaponSystem.Core.Weapon.Magazine
         [SerializeField] private uint reloadAmount = 1;
         [SerializeField] private uint capacity = 8;
         [SerializeField] private uint reaming = 8;
-        public UnityEvent onReload;
+
+        public UnityEvent<uint> onUseAmmo;
+        
         public UnityEvent onReloadStart;
+        public UnityEvent onReload;
         public UnityEvent onReloadEnd;
 
         private WaitForSeconds _reload;
-        
+
         public IAmmoHolder AmmoHolder { get; set; }
 
-        public uint Capacity { get; }
+        public uint Capacity => capacity;
 
         public uint Reaming
         {
@@ -35,6 +38,7 @@ namespace WeaponSystem.Core.Weapon.Magazine
 
             if (useAmount > Reaming) return false;
             Reaming -= useAmount;
+            onUseAmmo.Invoke(Reaming);
             return true;
         }
 
@@ -42,15 +46,21 @@ namespace WeaponSystem.Core.Weapon.Magazine
 
         public IEnumerator Reload()
         {
+            if (reaming >= capacity) yield break;
+
             IsReloading = true;
-            while (Reaming <= capacity && AmmoHolder.Remaining > 0)
+            onReloadStart.Invoke();
+
+            while (Reaming < Capacity)
             {
-                onReload.Invoke();
+                var ammo = AmmoHolder.GetAmmo(1);
+                if (ammo < 1) yield break;
                 yield return _reload ??= new WaitForSeconds(reloadTime);
-                Reaming += AmmoHolder.GetAmmo(reloadAmount);
-                UnityEngine.Debug.Log($"Amount: {Reaming.ToString()}");
+                Reaming++;
+                onReload.Invoke();
             }
 
+            onReloadEnd.Invoke();
             IsReloading = false;
         }
     }

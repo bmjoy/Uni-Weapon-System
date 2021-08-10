@@ -15,6 +15,6 @@ namespace WeaponSystem.Core.Weapon.Muzzle
         public Vector3 Position => reference.position;
         public Vector3 Direction => reference.forward;
         public Quaternion Rotation => reference.rotation;
-        public void Defuse(IPlayerContext context) { }
+        public void Defuse(IPlayerState state, bool isAim) { }
     }
 }

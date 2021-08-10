@@ -8,13 +8,13 @@ namespace WeaponSystem.Core.Weapon.Muzzle
     {
         [SerializeField] private Spread[] spreads;
 
-        public override Spread this[PlayerMovementState state]
+        public override Spread this[PlayerMovementAction action]
         {
             get
             {
                 foreach (var spread in spreads)
                 {
-                    if (spread.State == state) return spread;
+                    if (spread.Action == action) return spread;
                 }
 
                 return Spread.Default;

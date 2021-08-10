@@ -31,6 +31,7 @@ namespace WeaponSystem.Core.Weapon
         public UnityEvent onDraw;
         public UnityEvent onHolster;
 
+        private bool _isAim;
         private bool _isRigidity;
 
         public bool IsPrimaryAction { get; set; }
@@ -39,17 +40,19 @@ namespace WeaponSystem.Core.Weapon
         public bool IsSecondaryAltAction { get; set; }
         public bool IsReload { get; set; }
 
+        public bool IsAim => _isAim;
+
         public IWeaponAction PrimaryAction => _primaryAction;
         public IWeaponAction SecondaryAction => _secondaryAction;
         public IMagazine Magazine => _magazine;
         public IAmmoHolder AmmoHolder => _ammoHolder;
 
-        private IPlayerContext _context;
+        private IPlayerState _state;
 
 
         private void Awake()
         {
-            _context = Locator<IPlayerContext>.Instance.Current;
+            _state = Locator<IPlayerState>.Instance.Current;
             _primaryAction ??= new NoneAction();
             _secondaryAction ??= new NoneAction();
             _primaryAction?.Injection(transform, _magazine);
@@ -59,16 +62,16 @@ namespace WeaponSystem.Core.Weapon
         private void Update()
         {
             if (_isRigidity) return;
-            _context = Locator<IPlayerContext>.Instance.Current;
+            _state = Locator<IPlayerState>.Instance.Current;
 
             if (_magazine.IsReloading == false && IsReload) StartCoroutine(_magazine.Reload());
             _magazine.AmmoHolder = _ammoHolder;
 
-            _primaryAction?.Action(IsPrimaryAction, _context);
-            _primaryAction?.AltAction(IsPrimaryAltAction, _context);
+            _primaryAction?.Action(IsPrimaryAction, ref _isAim, _state);
+            _primaryAction?.AltAction(IsPrimaryAltAction, _state);
 
-            _secondaryAction?.Action(IsSecondaryAction, _context);
-            _secondaryAction?.AltAction(IsSecondaryAltAction, _context);
+            _secondaryAction?.Action(IsSecondaryAction, ref _isAim, _state);
+            _secondaryAction?.AltAction(IsSecondaryAltAction, _state);
         }
 
         public void Holster() => StartCoroutine(HolsterRigidity());

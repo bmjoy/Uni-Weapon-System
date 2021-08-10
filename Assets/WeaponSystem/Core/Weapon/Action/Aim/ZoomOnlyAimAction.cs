@@ -16,18 +16,18 @@ namespace WeaponSystem.Core.Weapon.Action.Aim
     [Serializable, AddTypeMenu("Aim/Zoom")]
     public class ZoomOnlyAimAction : IWeaponAction
     {
-        [SerializeField, Range(0f, 10f)] private float[] zoomMultiplyList = {.9f};
+        [SerializeField, Range(0f, 10f)] private float[] zoomScaleList = {.9f};
         [SerializeField] private float duration = .1f;
         public UnityEvent onZoomIn;
         public UnityEvent onZoomOut;
         public void Injection(Transform parent, IMagazine magazine) { }
 
-        public void Action(bool isAction, IPlayerContext context)
+        public void Action(bool isAction, ref bool isAim, IPlayerState state)
         {
-            context.IsAiming = isAction;
-            var toFov = isAction ? ReferenceCameraBase.FieldOfView * zoomMultiplyList[0] : ReferenceCameraBase.FieldOfView;
-            var fromFov = Locator<ReferenceCameraBase>.Instance.Current.FovMultiple;
-            Locator<ReferenceCameraBase>.Instance.Current.FovMultiple = Lerp(fromFov, toFov, Time.deltaTime / duration);
+            isAim = isAction;
+            var toFov = isAction ? zoomScaleList[0] : 1f;
+            var fromFov = Locator<ReferenceCameraBase>.Instance.Current.FovScale;
+            Locator<ReferenceCameraBase>.Instance.Current.FovScale = Lerp(fromFov, toFov, Time.deltaTime / duration);
 
             if (isAction)
                 onZoomIn.Invoke();
@@ -35,6 +35,6 @@ namespace WeaponSystem.Core.Weapon.Action.Aim
                 onZoomOut.Invoke();
         }
 
-        public void AltAction(bool isAltAction, IPlayerContext context) { }
+        public void AltAction(bool isAltAction, IPlayerState state) { }
     }
 }

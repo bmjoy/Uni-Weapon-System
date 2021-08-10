@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.Events;
+using WeaponSystem.Core.Debug;
 using WeaponSystem.Core.Movement;
 using WeaponSystem.Core.Utils.FireMode;
 using WeaponSystem.Core.Weapon.Magazine;
@@ -24,17 +25,17 @@ namespace WeaponSystem.Core.Weapon.Action.Control
             }
         }
 
-        public void Action(bool isAction, IPlayerContext context)
+        public void Action(bool isAction, ref bool isAim, IPlayerState state)
         {
-            _attackActionModes[_index].Action(isAction, context);
+            _attackActionModes[_index].Action(isAction, ref isAim, state);
         }
 
-        public void AltAction(bool isAltAction, IPlayerContext context)
+        public void AltAction(bool isAltAction, IPlayerState state)
         {
             _singleClick ??= new SemiAuto();
-            
-            if (_singleClick.Evaluate(isAltAction) ==false) return;
-            
+
+            if (_singleClick.Evaluate(isAltAction) == false) return;
+            "select".Log();
             _index = ++_index % _attackActionModes.Length;
             onSelect.Invoke();
         }

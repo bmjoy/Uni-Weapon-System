@@ -21,17 +21,17 @@ namespace WeaponSystem.Core.Weapon.Action.Control
             _aimingAttackAction.Injection(parent, magazine);
         }
 
-        public void Action(bool isAction, IPlayerContext context)
+        public void Action(bool isAction, ref bool isAim, IPlayerState state)
         {
-            if (context?.IsAiming ?? false)
+            if (isAim)
             {
-                _aimingAttackAction.Action(isAction, context);
+                _aimingAttackAction.Action(isAction, ref isAim, state);
                 return;
             }
 
-            _attackAction.Action(isAction, context);
+            _attackAction.Action(isAction, ref isAim, state);
         }
 
-        public void AltAction(bool isAltAction, IPlayerContext context) { }
+        public void AltAction(bool isAltAction, IPlayerState state) { }
     }
 }

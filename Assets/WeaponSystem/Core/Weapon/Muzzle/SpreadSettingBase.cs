@@ -5,6 +5,6 @@ namespace WeaponSystem.Core.Weapon.Muzzle
 {
     public abstract class SpreadSettingBase : ScriptableObject
     {
-        public abstract Spread this[PlayerMovementState state] { get; }
+        public abstract Spread this[PlayerMovementAction action] { get; }
     }
 }

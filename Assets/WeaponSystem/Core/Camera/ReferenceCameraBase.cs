@@ -12,7 +12,7 @@ namespace WeaponSystem.Core.Camera
 
         private static float _fieldOfView = 60f;
 
-        public abstract float FovMultiple { get; set; }
+        public abstract float FovScale { get; set; }
 
         public abstract UnityEngine.Camera Camera { get; }
 

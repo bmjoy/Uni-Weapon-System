@@ -1,8 +1,9 @@
 ﻿namespace WeaponSystem.Core.Movement
 {
-    public enum PlayerMovementState
+    public enum PlayerMovementAction
     {
         Rest,
+        Crawl,
         Crouch,
         Walk,
         Sprint,

@@ -16,11 +16,11 @@ namespace WeaponSystem.Core.Weapon.Muzzle
         public Vector3 Direction => reference.forward;
         public Quaternion Rotation => reference.rotation;
 
-        public void Defuse(IPlayerContext context)
+        public void Defuse(IPlayerState state, bool isAim)
         {
             var camera = Locator<ReferenceCameraBase>.Instance.Current.Center;
-            var spread = spreadSetting[context.State];
-            var defuse = camera.rotation * spread.Defuse(context.IsAiming) + camera.forward * spread.Distance;
+            var spread = spreadSetting[state.Action];
+            var defuse = camera.rotation * spread.Defuse(isAim) + camera.forward * spread.Distance;
             reference.rotation = LookRotation(defuse);
         }
     }
