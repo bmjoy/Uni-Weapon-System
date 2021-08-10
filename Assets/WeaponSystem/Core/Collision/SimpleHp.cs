@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 namespace WeaponSystem.Core.Collision
 {
-    public class SimpleHP : MonoBehaviour, IHasHitPoint
+    public class SimpleHp : MonoBehaviour, IHasHitPoint
     {
         [SerializeField] private float maxHp;
         [ReadOnly, SerializeField] private float currentHp;
@@ -27,7 +27,7 @@ namespace WeaponSystem.Core.Collision
             onTakeDamage.Invoke(damage, currentHp);
         }
 
-        public void AddRecovery(float hitPoint) => currentHp += Mathf.Clamp(hitPoint, 0f, maxHp);
+        public void AddRecovery(float hitPoint) => currentHp = Mathf.Clamp(currentHp + hitPoint, 0f, maxHp);
 
         public void Death() => onDie.Invoke();
     }

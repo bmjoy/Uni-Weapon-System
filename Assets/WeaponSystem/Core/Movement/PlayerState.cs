@@ -14,15 +14,15 @@ namespace WeaponSystem.Core.Movement
         public bool IsSprint { get; set; } = false;
         public bool IsCrouch { get; set; } = false;
 
-        public PlayerMovementAction Action
+        public PlayerMovementState State
         {
             get
             {
-                if (IsGrounded == false) return PlayerMovementAction.Air;
-                if (IsSprint == false) return PlayerMovementAction.Sprint;
-                if (IsMove) return PlayerMovementAction.Walk;
-                if (IsCrouch) return PlayerMovementAction.Crouch;
-                return PlayerMovementAction.Rest;
+                if (IsGrounded == false) return PlayerMovementState.Air;
+                if (IsSprint == false) return PlayerMovementState.Sprint;
+                if (IsMove) return PlayerMovementState.Walk;
+                if (IsCrouch) return PlayerMovementState.Crouch;
+                return PlayerMovementState.Rest;
             }
         }
 

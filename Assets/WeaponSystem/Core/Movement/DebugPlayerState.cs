@@ -5,8 +5,8 @@ namespace WeaponSystem.Core.Movement
 {
     public class DebugPlayerState : MonoBehaviour, IPlayerState
     {
-        [SerializeField] private PlayerMovementAction action;
-        public PlayerMovementAction Action => action;
+        [SerializeField] private PlayerMovementState state;
+        public PlayerMovementState State => state;
 
         private void Start() => Locator<IPlayerState>.Instance.Bind(this);
     }

@@ -2,6 +2,6 @@
 {
     public interface IPlayerState
     {
-        PlayerMovementAction Action { get; }
+        PlayerMovementState State { get; }
     }
 }

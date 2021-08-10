@@ -124,6 +124,131 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &40170784
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 40170785}
+  m_Layer: 11
+  m_Name: Muzzle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &40170785
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 40170784}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1791051096}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &291209552
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1791051096}
+    m_Modifications:
+    - target: {fileID: 100000, guid: 75dcb58506746b84db987c4ce01e99b5, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 75dcb58506746b84db987c4ce01e99b5, type: 3}
+      propertyPath: m_Name
+      value: WPN_AKM
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 75dcb58506746b84db987c4ce01e99b5, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: 75dcb58506746b84db987c4ce01e99b5, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 75dcb58506746b84db987c4ce01e99b5, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 100008, guid: 75dcb58506746b84db987c4ce01e99b5, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 100010, guid: 75dcb58506746b84db987c4ce01e99b5, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 100012, guid: 75dcb58506746b84db987c4ce01e99b5, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 100014, guid: 75dcb58506746b84db987c4ce01e99b5, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 75dcb58506746b84db987c4ce01e99b5, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 75dcb58506746b84db987c4ce01e99b5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 75dcb58506746b84db987c4ce01e99b5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 75dcb58506746b84db987c4ce01e99b5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 75dcb58506746b84db987c4ce01e99b5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 75dcb58506746b84db987c4ce01e99b5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 75dcb58506746b84db987c4ce01e99b5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 75dcb58506746b84db987c4ce01e99b5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 75dcb58506746b84db987c4ce01e99b5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 75dcb58506746b84db987c4ce01e99b5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 75dcb58506746b84db987c4ce01e99b5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 75dcb58506746b84db987c4ce01e99b5, type: 3}
+--- !u!4 &291209553 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400002, guid: 75dcb58506746b84db987c4ce01e99b5,
+    type: 3}
+  m_PrefabInstance: {fileID: 291209552}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &383247420
 GameObject:
   m_ObjectHideFlags: 0
@@ -274,12 +399,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70f569b7255458140b927ba10f168715, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  assistIntensity: 0.1
-  distance: 100
-  boxSize: {x: 5, y: 5, z: 5}
-  collisionLayer:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!114 &406870536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -705,8 +824,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f41c4cb0282f418c8331383b926679b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: 4
-  isAiming: 1
+  state: 0
 --- !u!114 &1190505939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -826,8 +944,8 @@ GameObject:
   - component: {fileID: 1791051096}
   - component: {fileID: 1791051097}
   - component: {fileID: 1791051098}
-  m_Layer: 16
-  m_Name: GameObject
+  m_Layer: 11
+  m_Name: AKM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -841,9 +959,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1791051095}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.1, y: -0.1, z: 0.35}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 291209553}
+  - {fileID: 40170785}
   m_Father: {fileID: 1925897586}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -878,46 +998,52 @@ MonoBehaviour:
   references:
     version: 1
     00000000:
-      type: {class: DebugAction, ns: WeaponSystem.Core.Weapon.Action, asm: Assembly-CSharp}
-    00000001:
-      type: {class: SelectableAction, ns: WeaponSystem.Core.Weapon.Action.Control,
-        asm: Assembly-CSharp}
+      type: {class: ShootingAction, ns: WeaponSystem.Core.Weapon.Action.Attack, asm: Assembly-CSharp}
       data:
-        _attackActionModes:
-        - id: 4
-        - id: 5
-        onSelect:
+        _rpm:
+          id: 4
+        _fireMode:
+          id: 5
+        useAmmoAmount: 1
+        _muzzle:
+          id: 6
+        _recoil:
+          id: 7
+        _bullet:
+          id: 8
+        onFire:
           m_PersistentCalls:
             m_Calls: []
+        onAmmoEmpty:
+          m_PersistentCalls:
+            m_Calls: []
+    00000001:
+      type: {class: DebugAction, ns: WeaponSystem.Core.Weapon.Action, asm: Assembly-CSharp}
     00000002:
       type: {class: UnlimitedMagazine, ns: WeaponSystem.Core.Weapon.Magazine, asm: Assembly-CSharp}
     00000003:
       type: {class: UnlimitedAmmoHolder, ns: WeaponSystem.Core.Weapon.AmmoHolder,
         asm: Assembly-CSharp}
     00000004:
-      type: {class: ZoomOnlyAimAction, ns: WeaponSystem.Core.Weapon.Action.Aim, asm: Assembly-CSharp}
+      type: {class: FixedRpmTimer, ns: WeaponSystem.Core.Utils.Timer, asm: Assembly-CSharp}
       data:
-        zoomScaleList:
-        - 0.9
-        duration: 0.1
-        onZoomIn:
-          m_PersistentCalls:
-            m_Calls: []
-        onZoomOut:
-          m_PersistentCalls:
-            m_Calls: []
+        rpm: 600
     00000005:
-      type: {class: ZoomOnlyAimAction, ns: WeaponSystem.Core.Weapon.Action.Aim, asm: Assembly-CSharp}
+      type: {class: Burst, ns: WeaponSystem.Core.Utils.FireMode, asm: Assembly-CSharp}
       data:
-        zoomScaleList:
-        - 0.5
-        duration: 0.1
-        onZoomIn:
-          m_PersistentCalls:
-            m_Calls: []
-        onZoomOut:
-          m_PersistentCalls:
-            m_Calls: []
+        maxCount: 3
+    00000006:
+      type: {class: IdentityMuzzle, ns: WeaponSystem.Core.Weapon.Muzzle, asm: Assembly-CSharp}
+      data:
+        reference: {fileID: 40170785}
+    00000007:
+      type: {class: NoneRecoil, ns: WeaponSystem.Core.Weapon.Recoil, asm: Assembly-CSharp}
+    00000008:
+      type: {class: ProjectileBullet, ns: WeaponSystem.Core.Weapon.Bullet, asm: Assembly-CSharp}
+      data:
+        bulletSpeed: 500
+        ammo: {fileID: 4646947879822424886, guid: 608a47a7beb89c24388dfdcc078688c7,
+          type: 3}
 --- !u!114 &1791051098
 MonoBehaviour:
   m_ObjectHideFlags: 0

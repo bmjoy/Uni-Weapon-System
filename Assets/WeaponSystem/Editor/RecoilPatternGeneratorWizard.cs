@@ -7,7 +7,7 @@ namespace WeaponSystem.Editor
 {
     public class RecoilPatternGeneratorWizard : ScriptableWizard
     {
-        [SerializeField] private string weaponName ="New GenericWeapon Recoil Pattern";
+        [SerializeField] private string weaponName ="New DualActionWeapon Recoil Pattern";
         [SerializeField] private int len = 35;
         [SerializeField] private float height = 35f;
         [SerializeField] private float maxWidth = 1f;

@@ -1,6 +1,6 @@
 ﻿namespace WeaponSystem.Core.Movement
 {
-    public enum PlayerMovementAction
+    public enum PlayerMovementState
     {
         Rest,
         Crawl,

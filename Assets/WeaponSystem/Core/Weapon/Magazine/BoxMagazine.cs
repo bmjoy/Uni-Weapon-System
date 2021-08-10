@@ -8,7 +8,7 @@ using WeaponSystem.Core.Weapon.AmmoHolder;
 namespace WeaponSystem.Core.Weapon.Magazine
 {
     [Serializable, AddTypeMenu("Box")]
-    public class BoxMagazine : IMagazine
+    public class BoxMagazine : MagazineBase
     {
         [SerializeField] private float reloadTime = .5f;
         [SerializeField] private float tacticalReloadTime = .3f;
@@ -24,12 +24,12 @@ namespace WeaponSystem.Core.Weapon.Magazine
         private WaitForSeconds _tacticalReload;
         private WaitForSeconds _reload;
 
-        public IAmmoHolder AmmoHolder { get; set; }
+        public override IAmmoHolder AmmoHolder { get; set; }
 
-        public uint Capacity => capacity;
-        public uint Reaming => reaming;
+        public override uint Capacity => capacity;
+        public override uint Reaming => reaming;
 
-        public bool UseAmmo(uint useAmount = 1)
+        public override bool UseAmmo(uint useAmount = 1)
         {
             reaming = (uint) Mathf.Clamp(reaming, 0, capacity + (isClosedBolt ? 1 : 0));
             useAmount = (uint) Mathf.Clamp(useAmount, 0, Int32.MaxValue);
@@ -39,10 +39,10 @@ namespace WeaponSystem.Core.Weapon.Magazine
             return true;
         }
 
-        public bool IsReloading => _isReloading;
+        public override bool IsReloading => _isReloading;
         private bool _isReloading;
 
-        public IEnumerator Reload()
+        public override IEnumerator Reload()
         {
             reaming = (uint) Mathf.Clamp(reaming, 0, capacity + (isClosedBolt ? 1 : 0));
             var reloadAmount = capacity - reaming;

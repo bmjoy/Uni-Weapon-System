@@ -11,14 +11,14 @@ namespace WeaponSystem.Core.Weapon.Muzzle
     public class Spread
     {
         public static readonly Spread Default = new Spread();
-        [SerializeField] private PlayerMovementAction action = PlayerMovementAction.Rest;
+        [SerializeField] private PlayerMovementState state = PlayerMovementState.Rest;
         [SerializeField, Range(1f, 1000f)] private float distance = 10f;
         [SerializeField, Range(.1f, 100f)] private float radius = 1f;
         [SerializeField, Range(0f, 2f)] private float aimingSpreadMultiple;
         [SerializeField] private AnimationCurve verticalWeightCurve = Constant(0f, 1f, 1f);
         [SerializeField] private AnimationCurve horizontalWeightCurve = Constant(0f, 1f, 1f);
 
-        public PlayerMovementAction Action => action;
+        public PlayerMovementState State => state;
 
         public Vector3 Defuse(bool isAim)
         {

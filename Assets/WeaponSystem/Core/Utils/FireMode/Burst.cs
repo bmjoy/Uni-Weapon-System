@@ -6,24 +6,27 @@ namespace WeaponSystem.Core.Utils.FireMode
     [Serializable, AddTypeMenu("Burst")]
     public class Burst : IFireMode
     {
-        [SerializeField] private int maxCount = 1;
+        [SerializeField] private int maxCount = 3;
         private int _count;
+        private bool _isKeyUp;
 
-        public bool Evaluate(bool isInput)
+        public bool Evaluate(bool input)
         {
-            if (isInput == false)
+            _count = --_count % maxCount;
+            
+            if (input == false)
             {
-                _count = 0;
-                return false;
+                _isKeyUp = true;
+                return _count > 0;
             }
 
-            if (_count < maxCount)
+            if (_isKeyUp)
             {
-                _count++;
-                return true;
+                _count = maxCount;
+                _isKeyUp = false;
             }
 
-            return false;
+            return _count > 0;
         }
     }
 }

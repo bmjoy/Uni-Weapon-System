@@ -12,17 +12,17 @@ namespace WeaponSystem.InputDemo
         [SerializeField] private InputKeys secondaryAltActionKeys = new InputKeys(KeyCode.LeftShift);
         [SerializeField] private InputKeys reloadKeys = new InputKeys(KeyCode.R);
         
-        private GenericWeapon _genericWeapon;
+        private DualActionWeapon _dualActionWeapon;
         
-        private void Awake() => _genericWeapon = GetComponent<GenericWeapon>();
+        private void Awake() => _dualActionWeapon = GetComponent<DualActionWeapon>();
 
         private void Update()
         {
-            _genericWeapon.IsPrimaryAction = primaryActionKeys.IsAnyKeyPressed;
-            _genericWeapon.IsPrimaryAltAction = primaryAltActionKeys.IsAnyKeyDown;
-            _genericWeapon.IsSecondaryAction = secondaryActionKeys.IsAnyKeyPressed;
-            _genericWeapon.IsSecondaryAltAction = secondaryAltActionKeys.IsAnyKeyDown;
-            _genericWeapon.IsReload = reloadKeys.IsAnyKeyDown;
+            _dualActionWeapon.IsPrimaryAction = primaryActionKeys.IsAnyKeyPressed;
+            _dualActionWeapon.IsPrimaryAltAction = primaryAltActionKeys.IsAnyKeyDown;
+            _dualActionWeapon.IsSecondaryAction = secondaryActionKeys.IsAnyKeyPressed;
+            _dualActionWeapon.IsSecondaryAltAction = secondaryAltActionKeys.IsAnyKeyDown;
+            _dualActionWeapon.IsReload = reloadKeys.IsAnyKeyDown;
         }
     }
 }
