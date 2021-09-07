@@ -13,7 +13,7 @@ namespace WeaponSystem.Core.Weapon.Bullet
     [Serializable, AddTypeMenu("HitScan")]
     public class HitScanBullet : IBullet
     {
-        [SerializeField] private BulletConfig bulletConfig;
+        [SerializeField] private BulletDamageProfile bulletDamageProfile;
         [SerializeField] private float hitRadius = .025f;
         [SerializeField] private float bulletImpactPower = 10f;
         [SerializeField] private LayerMask collisionLayer = AllLayers;
@@ -30,7 +30,7 @@ namespace WeaponSystem.Core.Weapon.Bullet
         {
             var ray = new Ray(position, direction);
 
-            if (SphereCast(ray, hitRadius, out RaycastHit hit, bulletConfig.MaxDistance, collisionLayer) == false)
+            if (SphereCast(ray, hitRadius, out RaycastHit hit, bulletDamageProfile.MaxDistance, collisionLayer) == false)
             {
                 if (tracer != null)
                 {
@@ -57,7 +57,7 @@ namespace WeaponSystem.Core.Weapon.Bullet
 
             if (hit.collider.TryGetComponent(out Rigidbody rigidbody))
             {
-                rigidbody.AddForce(-hit.normal * (bulletImpactPower * bulletConfig.GetImpact(distance)),
+                rigidbody.AddForce(-hit.normal * (bulletImpactPower * bulletDamageProfile.GetImpact(distance)),
                     ForceMode.Impulse);
             }
 
@@ -71,7 +71,7 @@ namespace WeaponSystem.Core.Weapon.Bullet
 
                     if (permission.SelfDamage)
                     {
-                        damageable.AddDamage(bulletConfig.GetDamage(damageable.HitType, distance));
+                        damageable.AddDamage(bulletDamageProfile.GetDamage(damageable.BodyType, distance));
                     }
                 }
 
@@ -81,7 +81,7 @@ namespace WeaponSystem.Core.Weapon.Bullet
 
                     if (permission.TeamDamage)
                     {
-                        damageable.AddDamage(bulletConfig.GetDamage(damageable.HitType, distance));
+                        damageable.AddDamage(bulletDamageProfile.GetDamage(damageable.BodyType, distance));
                     }
                 }
 
@@ -91,7 +91,7 @@ namespace WeaponSystem.Core.Weapon.Bullet
 
                     if (permission.EnemyDamage)
                     {
-                        damageable.AddDamage(bulletConfig.GetDamage(damageable.HitType, distance));
+                        damageable.AddDamage(bulletDamageProfile.GetDamage(damageable.BodyType, distance));
                     }
                 }
             }

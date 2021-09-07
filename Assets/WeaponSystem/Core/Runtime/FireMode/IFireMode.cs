@@ -1,4 +1,4 @@
-﻿namespace WeaponSystem.Core.Utils.FireMode
+﻿namespace WeaponSystem.Core.Runtime.FireMode
 {
     public interface IFireMode
     {

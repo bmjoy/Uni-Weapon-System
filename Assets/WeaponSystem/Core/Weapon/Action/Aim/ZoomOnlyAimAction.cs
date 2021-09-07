@@ -7,6 +7,7 @@ using WeaponSystem.Core.Runtime;
 using WeaponSystem.Core.Weapon.Magazine;
 using static UnityEngine.Mathf;
 
+
 namespace WeaponSystem.Core.Weapon.Action.Aim
 {
     /// <summary>
@@ -20,7 +21,9 @@ namespace WeaponSystem.Core.Weapon.Action.Aim
         [SerializeField] private float duration = .1f;
         public UnityEvent onZoomIn;
         public UnityEvent onZoomOut;
+
         public void Injection(Transform parent, IMagazine magazine) { }
+
 
         public void Action(bool isAction, ref bool isAim, IPlayerState state)
         {
@@ -29,12 +32,16 @@ namespace WeaponSystem.Core.Weapon.Action.Aim
             var fromFov = Locator<ReferenceCameraBase>.Instance.Current.FovScale;
             Locator<ReferenceCameraBase>.Instance.Current.FovScale = Lerp(fromFov, toFov, Time.deltaTime / duration);
 
-            if (isAction)
-                onZoomIn.Invoke();
-            else
-                onZoomOut.Invoke();
+            if (isAction) onZoomIn.Invoke();
+            else onZoomOut.Invoke();
         }
 
+
         public void AltAction(bool isAltAction, IPlayerState state) { }
+
+        public void OnHolster(ref bool isAim) { }
+
+
+        public void OnDraw(ref bool isAim) { }
     }
 }

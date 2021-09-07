@@ -5,10 +5,10 @@ namespace WeaponSystem.Core.Collision
     [RequireComponent(typeof(Collider))]
     public class HitBox : MonoBehaviour, IDamageable
     {
-        [SerializeField] private HitType hitType;
+        [SerializeField] private BodyType bodyType;
         private IHasHitPoint _hasHitPoint;
         private IObjectGroup _group;
-        public HitType HitType => hitType;
+        public BodyType BodyType => bodyType;
         public IObjectGroup ObjectGroup => _group;
 
         private void Awake()

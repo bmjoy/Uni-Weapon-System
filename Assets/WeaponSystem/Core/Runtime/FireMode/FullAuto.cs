@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WeaponSystem.Core.Utils.FireMode
+namespace WeaponSystem.Core.Runtime.FireMode
 {
     [Serializable, AddTypeMenu("FullAuto")]
     public class FullAuto : IFireMode

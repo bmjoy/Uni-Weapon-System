@@ -2,7 +2,7 @@
 using UnityEngine;
 using WeaponSystem.Core.Debug;
 
-namespace WeaponSystem.Core.Utils.Timer
+namespace WeaponSystem.Core.Runtime.Timer
 {
     [Serializable, AddTypeMenu("Accelerate")]
     public class AccelerateRpmTimer : IRpmTimer

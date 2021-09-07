@@ -1,7 +1,6 @@
 ﻿using System;
-using UnityEngine;
 
-namespace WeaponSystem.Core.Utils.FireMode
+namespace WeaponSystem.Core.Runtime.FireMode
 {
     [Serializable, AddTypeMenu("SemiAuto")]
     public class SemiAuto : IFireMode

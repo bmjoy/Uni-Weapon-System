@@ -3,8 +3,8 @@ using UnityEngine;
 using UnityEngine.Events;
 using WeaponSystem.Core.Collision;
 using WeaponSystem.Core.Movement;
-using WeaponSystem.Core.Utils.FireMode;
-using WeaponSystem.Core.Utils.Timer;
+using WeaponSystem.Core.Runtime.FireMode;
+using WeaponSystem.Core.Runtime.Timer;
 using WeaponSystem.Core.Weapon.Bullet;
 using WeaponSystem.Core.Weapon.Magazine;
 using WeaponSystem.Core.Weapon.Muzzle;
@@ -67,5 +67,11 @@ namespace WeaponSystem.Core.Weapon.Action.Attack
         }
 
         public void AltAction(bool isAltAction, IPlayerState state) { }
+
+        public void OnHolster(ref bool isAim) {}
+
+
+        public void OnDraw(ref bool isAim) {}
+        
     }
 }

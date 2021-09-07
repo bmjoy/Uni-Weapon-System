@@ -2,7 +2,7 @@
 {
     public interface IDamageable
     {
-        HitType HitType { get; }
+        BodyType BodyType { get; }
         IObjectGroup ObjectGroup { get; }
         void AddDamage(float damage);
     }

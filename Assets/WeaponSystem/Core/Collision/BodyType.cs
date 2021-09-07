@@ -1,7 +1,7 @@
 ﻿namespace WeaponSystem.Core.Collision
 {
     [System.Serializable]
-    public enum HitType
+    public enum BodyType
     {
         Head,
         Chest,

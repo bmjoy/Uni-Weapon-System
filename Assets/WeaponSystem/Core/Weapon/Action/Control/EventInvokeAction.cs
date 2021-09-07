@@ -16,5 +16,10 @@ namespace WeaponSystem.Core.Weapon.Action.Control
         public void Action(bool isAction,ref bool isAim, IPlayerState state) => onAction.Invoke(isAction);
 
         public void AltAction(bool isAltAction, IPlayerState state) => onAltAction.Invoke(isAltAction);
+
+        public void OnHolster(ref bool isAim) {}
+
+
+        public void OnDraw(ref bool isAim) {}
     }
 }

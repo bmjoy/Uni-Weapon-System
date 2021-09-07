@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using WeaponSystem.Core.Movement;
 
+
 namespace WeaponSystem.Core.Weapon.Muzzle
 {
-    [CreateAssetMenu(menuName = "WeaponSystem/New Spread Setting")]
-    public class SpreadSetting : SpreadSettingBase
+    [CreateAssetMenu(menuName = "WeaponSystem/SpreadProfile")]
+    public class SpreadProfile : SpreadSettingBase
     {
         [SerializeField] private Spread[] spreads;
 

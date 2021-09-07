@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace WeaponSystem.Core.Utils.FireMode
+namespace WeaponSystem.Core.Runtime.FireMode
 {
     [Serializable, AddTypeMenu("Burst")]
     public class Burst : IFireMode

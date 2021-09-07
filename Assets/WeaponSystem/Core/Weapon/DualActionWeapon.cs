@@ -8,15 +8,17 @@ using WeaponSystem.Core.Weapon.Action;
 using WeaponSystem.Core.Weapon.AmmoHolder;
 using WeaponSystem.Core.Weapon.Magazine;
 
+
 namespace WeaponSystem.Core.Weapon
 {
     [AddComponentMenu("WeaponSystem/DualActionWeapon"), DisallowMultipleComponent,
      RequireComponent(typeof(IObjectPermission))]
-    public class DualActionWeapon : MonoBehaviour
+    public class DualActionWeapon : MonoBehaviour, IWeapon
     {
         [SerializeReference, SubclassSelector] private IWeaponAction _primaryAction = new NoneAction();
 
-        [Space(20)] [SerializeReference, SubclassSelector] private IWeaponAction _secondaryAction = new NoneAction();
+        [Space(20)] [SerializeReference, SubclassSelector]
+        private IWeaponAction _secondaryAction = new NoneAction();
 
         [Space(20)] [SerializeReference, SubclassSelector]
         private IMagazine _magazine = new UnlimitedMagazine();
@@ -33,16 +35,13 @@ namespace WeaponSystem.Core.Weapon
         private bool _isAim;
         private bool _isRigidity;
 
-        public bool IsPrimaryAction { get; set; }
-        public bool IsPrimaryAltAction { get; set; }
-        public bool IsSecondaryAction { get; set; }
-        public bool IsSecondaryAltAction { get; set; }
-        public bool IsReload { get; set; }
+        private IDualActionWeaponInput _input;
 
-        public bool IsAim => _isAim;
 
         public IWeaponAction PrimaryAction => _primaryAction;
         public IWeaponAction SecondaryAction => _secondaryAction;
+
+        public bool IsAim => _isAim;
         public IMagazine Magazine => _magazine;
         public IAmmoHolder AmmoHolder => _ammoHolder;
 
@@ -56,24 +55,29 @@ namespace WeaponSystem.Core.Weapon
             _secondaryAction ??= new NoneAction();
             _primaryAction?.Injection(transform, _magazine);
             _secondaryAction?.Injection(transform, _magazine);
+            if (_magazine != null) _magazine.AmmoHolder = _ammoHolder;
+            _input = GetComponent<IDualActionWeaponInput>();
         }
+
 
         private void Update()
         {
             if (_isRigidity) return;
+
             _state = Locator<IPlayerState>.Instance.Current;
 
-            if (_magazine.IsReloading == false && IsReload) StartCoroutine(_magazine.Reload());
-            _magazine.AmmoHolder = _ammoHolder;
+            if ((_magazine?.IsReloading ?? false) == false && _input.IsReload) StartCoroutine(_magazine.Reload());
 
-            _primaryAction?.Action(IsPrimaryAction, ref _isAim, _state);
-            _primaryAction?.AltAction(IsPrimaryAltAction, _state);
+            _primaryAction?.Action(_input.IsAction, ref _isAim, _state);
+            _primaryAction?.AltAction(_input.IsAction, _state);
 
-            _secondaryAction?.Action(IsSecondaryAction, ref _isAim, _state);
-            _secondaryAction?.AltAction(IsSecondaryAltAction, _state);
+            _secondaryAction?.Action(_input.IsSecondaryAction, ref _isAim, _state);
+            _secondaryAction?.AltAction(_input.IsSecondaryAltAction, _state);
         }
 
+
         public void Holster() => StartCoroutine(HolsterRigidity());
+
 
         private void OnEnable()
         {
@@ -81,22 +85,31 @@ namespace WeaponSystem.Core.Weapon
             onDraw.Invoke();
         }
 
-        private void OnDisable() => onHolster.Invoke();
 
         private IEnumerator DrawRigidity()
         {
             onDraw.Invoke();
             _isRigidity = true;
+            _primaryAction.OnDraw(ref _isAim);
+            _secondaryAction.OnDraw(ref _isAim);
             yield return new WaitForSeconds(drawRigidityTime);
+
             _isRigidity = false;
         }
+
 
         private IEnumerator HolsterRigidity()
         {
             onHolster.Invoke();
             _isRigidity = true;
+            _primaryAction.OnHolster(ref _isAim);
+            _secondaryAction.OnHolster(ref _isAim);
+            
             yield return new WaitForSeconds(holsterRigidityTime);
+
             _isRigidity = false;
+            onHolster.Invoke();
+
             gameObject.SetActive(false);
         }
     }

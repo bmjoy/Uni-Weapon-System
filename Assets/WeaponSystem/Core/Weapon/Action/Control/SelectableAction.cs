@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using WeaponSystem.Core.Debug;
 using WeaponSystem.Core.Movement;
-using WeaponSystem.Core.Utils.FireMode;
+using WeaponSystem.Core.Runtime.FireMode;
 using WeaponSystem.Core.Weapon.Magazine;
 
 namespace WeaponSystem.Core.Weapon.Action.Control
@@ -39,5 +39,12 @@ namespace WeaponSystem.Core.Weapon.Action.Control
             _index = ++_index % _attackActionModes.Length;
             onSelect.Invoke();
         }
+
+
+        public void OnHolster(ref bool isAim) {}
+
+
+        public void OnDraw(ref bool isAim) {}
+
     }
 }

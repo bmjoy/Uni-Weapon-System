@@ -13,7 +13,7 @@ namespace WeaponSystem.Core.Weapon.Bullet.Ammo
         [SerializeField] private float exprosionForce = 100f;
         [SerializeField] private LayerMask collisionMask = Physics.AllLayers;
         [SerializeField] private bool isSticky;
-        [SerializeField] private BulletConfig config;
+        [SerializeField] private BulletDamageProfile damageProfile;
         private Rigidbody _rigidbody;
 
         public UnityEvent onExprosion;
@@ -56,17 +56,17 @@ namespace WeaponSystem.Core.Weapon.Bullet.Ammo
                 {
                     if (damageable.ObjectGroup.SelfId == ObjectGroup.SelfId && ObjectPermission.SelfDamage)
                     {
-                        damageable.AddDamage(config.GetDamage(damageable.HitType));
+                        damageable.AddDamage(damageProfile.GetDamage(damageable.BodyType));
                     }
 
                     if (damageable.ObjectGroup.GroupId == ObjectGroup.GroupId && ObjectPermission.TeamDamage)
                     {
-                        damageable.AddDamage(config.GetDamage(damageable.HitType));
+                        damageable.AddDamage(damageProfile.GetDamage(damageable.BodyType));
                     }
 
                     if (damageable.ObjectGroup.GroupId != ObjectGroup.GroupId && ObjectPermission.EnemyDamage)
                     {
-                        damageable.AddDamage(config.GetDamage(damageable.HitType));
+                        damageable.AddDamage(damageProfile.GetDamage(damageable.BodyType));
                     }
                 }
 

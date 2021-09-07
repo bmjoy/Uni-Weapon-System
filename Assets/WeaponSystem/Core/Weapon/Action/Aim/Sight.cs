@@ -15,7 +15,7 @@ namespace WeaponSystem.Core.Weapon.Action.Aim
         public Transform AimPoint => aimPoint;
         public float ZoomMultiples => fovScales[fovScaleIndex % fovScales.Length];
 
-        public void ZoomChange() => fovScaleIndex = ++fovScaleIndex % fovScales.Length;
+        public void FovScaleChange() => fovScaleIndex = ++fovScaleIndex % fovScales.Length;
 
         private void OnEnable()
         {

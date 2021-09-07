@@ -1,4 +1,4 @@
-﻿namespace WeaponSystem.Core.Utils.Timer
+﻿namespace WeaponSystem.Core.Runtime.Timer
 {
     public interface IRpmTimer
     {

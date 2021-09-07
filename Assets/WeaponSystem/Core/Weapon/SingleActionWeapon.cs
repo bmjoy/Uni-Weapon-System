@@ -7,9 +7,10 @@ using WeaponSystem.Core.Weapon.Action;
 using WeaponSystem.Core.Weapon.AmmoHolder;
 using WeaponSystem.Core.Weapon.Magazine;
 
+
 namespace WeaponSystem.Core.Weapon
 {
-    public class SingleActionWeapon : MonoBehaviour
+    public class SingleActionWeapon : MonoBehaviour, IWeapon
     {
         [SerializeReference, SubclassSelector] private IWeaponAction _action = new NoneAction();
 
@@ -25,12 +26,11 @@ namespace WeaponSystem.Core.Weapon
         public UnityEvent onDraw;
         public UnityEvent onHolster;
 
+        private ISingleActionWeaponInput _input;
+
         private bool _isAim;
         private bool _isRigidity;
 
-        public bool IsAction { get; set; }
-        public bool IsAltAction { get; set; }
-        public bool IsReload { get; set; }
 
         public bool IsAim => _isAim;
 
@@ -46,21 +46,26 @@ namespace WeaponSystem.Core.Weapon
             _state = Locator<IPlayerState>.Instance.Current;
             _action ??= new NoneAction();
             _action?.Injection(transform, _magazine);
+            _input = GetComponent<ISingleActionWeaponInput>();
         }
+
 
         private void Update()
         {
             if (_isRigidity) return;
+
             _state = Locator<IPlayerState>.Instance.Current;
 
-            if (_magazine.IsReloading == false && IsReload) StartCoroutine(_magazine.Reload());
+            if (_magazine.IsReloading == false && _input.IsReload) StartCoroutine(_magazine.Reload());
             _magazine.AmmoHolder = _ammoHolder;
 
-            _action?.Action(IsAction, ref _isAim, _state);
-            _action?.AltAction(IsAltAction, _state);
+            _action?.Action(_input.IsAction, ref _isAim, _state);
+            _action?.AltAction(_input.IsAltAction, _state);
         }
 
+
         public void Holster() => StartCoroutine(HolsterRigidity());
+
 
         private void OnEnable()
         {
@@ -68,22 +73,32 @@ namespace WeaponSystem.Core.Weapon
             onDraw.Invoke();
         }
 
+
         private void OnDisable() => onHolster.Invoke();
+
 
         private IEnumerator DrawRigidity()
         {
             onDraw.Invoke();
             _isRigidity = true;
-            
+
+            _action.OnDraw(ref _isAim);
+
             yield return new WaitForSeconds(drawRigidityTime);
+
             _isRigidity = false;
         }
+
 
         private IEnumerator HolsterRigidity()
         {
             onHolster.Invoke();
             _isRigidity = true;
+            
+            _action.OnHolster(ref _isAim);
+
             yield return new WaitForSeconds(holsterRigidityTime);
+
             _isRigidity = false;
             gameObject.SetActive(false);
         }

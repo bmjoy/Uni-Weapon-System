@@ -2,13 +2,13 @@
 
 namespace WeaponSystem.Core.Runtime
 {
-    public sealed class Locator<T>
+    public sealed class Locator<T> where T : class
     {
         public static Locator<T> Instance => _instance.Value;
         private static Lazy<Locator<T>> _instance = new Lazy<Locator<T>>(() => new Locator<T>());
-        
-        private Locator () {}
-        
+
+        private Locator() { }
+
         public T Current { get; private set; }
 
         public bool IsValid => Current != null;
@@ -18,8 +18,7 @@ namespace WeaponSystem.Core.Runtime
         public void Unbind(T item)
         {
             if (IsValid == false) return;
-            if (Current.Equals(item) == false) return;
-            Current = default;
+            Current = Current == item ? null : Current;
         }
     }
 }

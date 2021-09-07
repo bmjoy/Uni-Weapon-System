@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace WeaponSystem.Core.Utils.Timer
+namespace WeaponSystem.Core.Runtime.Timer
 {
     [Serializable, AddTypeMenu("Fixed")]
     public class FixedRpmTimer : IRpmTimer

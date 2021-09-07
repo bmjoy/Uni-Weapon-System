@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.Events;
 using WeaponSystem.Core.Camera;
 using WeaponSystem.Core.Movement;
-using WeaponSystem.Core.Utils.FireMode;
-using WeaponSystem.Core.Utils.Timer;
+using WeaponSystem.Core.Runtime.FireMode;
+using WeaponSystem.Core.Runtime.Timer;
 using WeaponSystem.Core.Weapon.Magazine;
 
 namespace WeaponSystem.Core.Weapon.Action.Aim
@@ -16,7 +16,7 @@ namespace WeaponSystem.Core.Weapon.Action.Aim
         [SerializeField] private ScopeCameraBase scopeCamera;
         [SerializeField] private Transform hipPosition;
         [SerializeField] private Transform aimPosition;
-        [SerializeField] private List<float> zoomMultiplyList;
+        [SerializeField] private List<float> fovScales;
         [SerializeField] private float duration = .2f;
         [SerializeField] private SecondBasedTimer scopedTime;
 
@@ -25,7 +25,7 @@ namespace WeaponSystem.Core.Weapon.Action.Aim
 
         private SemiAuto _singleClick = new SemiAuto();
         private Transform _parent;
-        private int _zoomMultiplyIndex = 0;
+        private int _fovScaleIndex = 0;
 
         public void Injection(Transform parent, IMagazine magazine)
         {
@@ -60,14 +60,21 @@ namespace WeaponSystem.Core.Weapon.Action.Aim
                 return;
             }
 
-            scopeCamera.FieldOfView = ReferenceCameraBase.FieldOfView * zoomMultiplyList[_zoomMultiplyIndex];
+            scopeCamera.FieldOfView = ReferenceCameraBase.FieldOfView * fovScales[_fovScaleIndex];
             scopedTime.Update();
         }
 
         public void AltAction(bool isAltAction, IPlayerState state)
         {
             if (_singleClick.Evaluate(isAltAction) == false) return;
-            _zoomMultiplyIndex = ++_zoomMultiplyIndex % zoomMultiplyList.Count;
+            _fovScaleIndex = ++_fovScaleIndex % fovScales.Count;
         }
+
+
+        public void OnHolster(ref bool isAim){}
+
+
+        public void OnDraw(ref bool isAim) {}
+
     }
 }

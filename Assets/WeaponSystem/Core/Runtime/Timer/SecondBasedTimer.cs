@@ -2,7 +2,7 @@
 using UnityEngine;
 using WeaponSystem.Attribute;
 
-namespace WeaponSystem.Core.Utils.Timer
+namespace WeaponSystem.Core.Runtime.Timer
 {
     [Serializable, AddTypeMenu("Second")]
     public class SecondBasedTimer : IRpmTimer

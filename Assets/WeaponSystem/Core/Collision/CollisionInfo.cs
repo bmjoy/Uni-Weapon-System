@@ -13,9 +13,9 @@ namespace WeaponSystem.Core.Collision
 
         public CollisionInfo(IObjectMaterial objectMaterial, Vector3 normal, Transform transform)
         {
-            this.ObjectMaterial = objectMaterial;
-            this.Normal = normal;
-            this.Transform = transform;
+            ObjectMaterial = objectMaterial;
+            Normal = normal;
+            Transform = transform;
         }
     }
 }

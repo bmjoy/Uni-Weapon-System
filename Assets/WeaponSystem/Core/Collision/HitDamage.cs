@@ -5,15 +5,15 @@ namespace WeaponSystem.Core.Collision
     [Serializable]
     public struct HitDamage
     {
-        public static HitDamage None => new HitDamage(HitType.Object);
+        public static HitDamage None => new HitDamage(BodyType.Object);
 
-        public HitType hitType;
+        public BodyType bodyType;
         public float damage;
 
-        public HitDamage(HitType hitType, float damage = 0f)
+        public HitDamage(BodyType bodyType, float damage = 0f)
         {
             this.damage = damage;
-            this.hitType = hitType;
+            this.bodyType = bodyType;
         }
     }
 }
