@@ -19,7 +19,6 @@ namespace WeaponSystem.Core.Weapon.Bullet
         [SerializeField] private LayerMask collisionLayer = AllLayers;
         [SerializeField] private Tracer tracer;
 
-        public UnityEvent<ObjectInfo> onHit;
         public UnityEvent<RaycastHit> onSelfHit;
         public UnityEvent<RaycastHit> onFriendlyHit;
         public UnityEvent<RaycastHit> onEnemyHit;
@@ -46,12 +45,6 @@ namespace WeaponSystem.Core.Weapon.Bullet
                 _tracerPool ??= Locator<IObjectPoolFactory>.Instance.Current.CreatePool(tracer, 10);
                 _tracerPool.GetObject().SetPosition(position, hit.point);
             }
-
-            var info = hit.collider.TryGetComponent(out IObjectMaterial material)
-                ? new ObjectInfo(material, hit.transform, hit.normal)
-                : new ObjectInfo(null, hit.transform, hit.normal);
-
-            onHit.Invoke(info);
 
             var distance = hit.distance;
 

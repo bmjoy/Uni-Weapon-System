@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 
+
 namespace WeaponSystem.Core.Weapon.Action.Aim
 {
     public class Sight : MonoBehaviour
     {
-        [SerializeField] private float[] fovScales;
+        [SerializeField] private float[] fovScales = {.9f};
         [SerializeField] private int fovScaleIndex;
         [SerializeField] private Transform aimPoint;
         [SerializeField] private float duration = .1f;
@@ -17,10 +18,12 @@ namespace WeaponSystem.Core.Weapon.Action.Aim
 
         public void FovScaleChange() => fovScaleIndex = ++fovScaleIndex % fovScales.Length;
 
+
         private void OnEnable()
         {
             foreach (var model in sightModels) model.SetActive(true);
         }
+
 
         private void OnDisable()
         {

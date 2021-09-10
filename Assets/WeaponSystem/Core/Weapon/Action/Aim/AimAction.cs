@@ -48,19 +48,20 @@ namespace WeaponSystem.Core.Weapon.Action.Aim
         public void Action(bool isAction, ref bool isAim, IPlayerState state)
         {
             duration = Abs(duration);
-            isAim = isAction;
+            
             _isAim = isAction;
+            isAim = _isAim;
 
-            if (isAction) { onAimIn.Invoke(); }
+            if (_isAim) { onAimIn.Invoke(); }
             else { onAimOut.Invoke(); }
 
             var currentSight = sights[sightIndex];
 
             var referenceCamera = Locator<ReferenceCameraBase>.Instance.Current;
 
-            var position = isAction ? sights[sightIndex].AimPoint.localPosition : hipPosition.localPosition;
+            var position = _isAim ? sights[sightIndex].AimPoint.localPosition : hipPosition.localPosition;
 
-            var to = isAction ? sights[sightIndex].ZoomMultiples : 1f;
+            var to = _isAim ? sights[sightIndex].ZoomMultiples : 1f;
 
             var from = referenceCamera.FovScale;
 
@@ -81,10 +82,20 @@ namespace WeaponSystem.Core.Weapon.Action.Aim
         }
 
 
-        public void OnHolster(ref bool isAim) { }
+        public void OnHolster(ref bool isAim)
+        {
+            _isAim = false;
+            isAim = _isAim;
+            _self.localPosition = -hipPosition.localPosition;
+        }
 
 
-        public void OnDraw(ref bool isAim) { }
+        public void OnDraw(ref bool isAim)
+        {
+            _isAim = false;
+            isAim = _isAim;
+            _self.localPosition = -hipPosition.localPosition;
+        }
 
 
         public void SightChange(int index)

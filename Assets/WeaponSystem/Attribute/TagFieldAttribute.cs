@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 
+
 namespace WeaponSystem.Attribute
 {
-    public class TagFieldAttribute : PropertyAttribute { }
+    public class TagFieldAttribute : PropertyAttribute
+    {
+    }
 }
